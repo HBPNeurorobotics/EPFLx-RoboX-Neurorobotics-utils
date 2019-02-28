@@ -47,7 +47,7 @@ class SOM_evaluation():
     
     def load_lattice(self):
         # exctract and transform data
-        states = pd.read_csv('NRP_data_robot_positions.csv', delimiter=',',header=0).values
+        states = pd.read_csv(self.csv_file, delimiter=',',header=0).values
         positions = np.array([pd.to_numeric(states[:,0], errors='coerce'), pd.to_numeric(states[:,1], errors='coerce')]).T
         # Reduce the number of data points
         self.pos = positions[slice(0,positions.shape[0],1000),:]
