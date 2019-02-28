@@ -8,11 +8,12 @@ import csv
 
 class SOM_evaluation():
     
-    def __init__(self):
+    def __init__(self, csv_file='robot_positions.csv'):
     
         self.Nn = {}
         self.lattice = {}
         self.pos = {}
+        self.csv_file = csv_file
         import warnings; warnings.filterwarnings('ignore')
 
         
