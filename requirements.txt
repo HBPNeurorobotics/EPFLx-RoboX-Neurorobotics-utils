@@ -1,6 +1,7 @@
-csv
 IPython
 matplotlib
 numpy
+six
 pandas
+wheel
 
