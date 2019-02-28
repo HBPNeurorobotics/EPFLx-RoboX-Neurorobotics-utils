@@ -80,12 +80,12 @@ class SOM_additional():
 
 
 
-    ##############################
+  ##############################
 	###   Load and Save data   ###
 	##############################
     
-	def load_data(self,csv_file):
-		# exctract and transform data
+	def load_data(self, csv_file):
+		# extract and transform data
 		states = pd.read_csv(csv_file, delimiter=',',header=0).values
 		positions = np.array([pd.to_numeric(states[:,0], errors='coerce'), pd.to_numeric(states[:,1], errors='coerce')]).T
 
