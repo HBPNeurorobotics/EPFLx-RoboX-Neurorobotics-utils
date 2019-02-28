@@ -1,0 +1,8 @@
+rospkg==1.0.38
+pyxb==1.2.4
+catkin_pkg==0.2.10
+PyYAML==3.11
+rospkg==1.0.38
+RestrictedPython==3.6.0
+tf==1.0.0
+numpy==1.11.0
