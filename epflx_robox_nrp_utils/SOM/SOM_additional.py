@@ -85,6 +85,7 @@ class SOM_additional():
 		
 		# SHOW (figure)
 		ax.view_init(0,int(trial))
+		sdfsdfsdf=sdfsdfsdfsdfsdf
 		plt.gca().set_aspect('equal', adjustable='box')
 		display.clear_output(wait=True)
 		display.display(plt.gcf())
