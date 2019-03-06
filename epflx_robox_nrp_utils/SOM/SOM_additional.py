@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import pylab as pl
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 
 from mpl_toolkits.mplot3d import axes3d
 
@@ -85,10 +86,12 @@ class SOM_additional():
 		
 		# SHOW (figure)
 		ax.view_init(0,int(trial))
-		sdfsdfsdf=sdfsdfsdfsdfsdf
+
 		plt.gca().set_aspect('equal', adjustable='box')
 		display.clear_output(wait=True)
 		display.display(plt.gcf())
+		#extent = ax.get_window_extent().transformed(fig.dpi_scale_trans.inverted())
+		#fig.savefig('ax2_figure_expanded'+str(int(trial))+'.png', bbox_inches=extent.expanded(0.9, 0.9))
 
 
 
