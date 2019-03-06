@@ -5,6 +5,8 @@ import pandas as pd
 import pylab as pl
 import matplotlib.pyplot as plt
 
+from mpl_toolkits.mplot3d import axes3d
+
 from matplotlib import collections as mc
 from matplotlib import patches
 from IPython import display
