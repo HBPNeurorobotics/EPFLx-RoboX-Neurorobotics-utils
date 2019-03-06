@@ -84,6 +84,7 @@ class SOM_additional():
 		plt.plot(Cx, Cy,'ro',markersize=8.0) # centers
 		
 		# SHOW (figure)
+		ax.view_init(0,int(trial))
 		plt.gca().set_aspect('equal', adjustable='box')
 		display.clear_output(wait=True)
 		display.display(plt.gcf())
