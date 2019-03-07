@@ -49,7 +49,7 @@ class SARSA_additional():
 	########################################################################
 
 	### Main analysis program
-	def run_analysis(self):
+	def run_processing(self):
 		self.test = False
 		self.input = True
 		# SOM pre-processing
@@ -76,12 +76,12 @@ class SARSA_additional():
     
 
 	### Test analysis program
-	def test_analysis(self,goal):
+	def test_analysis(self,goal,test):
 		self.input = False
 		self.s_goal = goal
 		# SOM pre-processing
 		self.upload_positions()
-		self.upload_lattice()
+		self.upload_lattice(test)
 		self.net_details()
 
 		# SOM analyse (to generate maze and reward)
@@ -262,9 +262,9 @@ class SARSA_additional():
 
 			if(idx >= 0):
 				if(actions[idx] == False):  return 0.0
-				else:  return -0.5
-			else:  return -0.5
-		else:  return -0.5
+				else:  return -1.0
+			else:  return -1.0
+		else:  return -1.0
     
 
 
@@ -309,10 +309,10 @@ class SARSA_additional():
 		get_ipython().run_line_magic('matplotlib', 'inline')
 
 		# --- plot
-		fig1 = plt.figure(0,figsize=(8, 6))
+		fig1 = plt.figure(0,figsize=(12, 9))
 		if(self.test):
-			fig1.suptitle('Trial: {}; Episode: {}; Q({},{}): {}'.format(self.Trial,\
-						  self.Run, self.x_position, self.y_position, self.Qdata.round(4)))
+			fig1.suptitle('Trial: {}; Episode: {}; Q({},{}): {}'.format(int(self.Trial),\
+						  int(self.Run), self.x_position, self.y_position, self.Qdata.round(4)))
 		else:
 			fig1.suptitle('Adapted SOM for SARSA implementation. (Reds are punished)')
 
@@ -397,10 +397,10 @@ class SARSA_additional():
 		get_ipython().run_line_magic('matplotlib', 'inline')
 
 		# --- plot
-		fig2 = plt.figure(0,figsize=(8, 6))
+		fig2 = plt.figure(0,figsize=(12, 9))
 		if(self.test):
-			fig2.suptitle('Trial: {}; Episode: {}; Q({},{}): {}'.format(self.Trial,\
-						  self.Run, self.x_position, self.y_position, self.Qdata.round(4)))
+			fig2.suptitle('Trial: {}; Episode: {}; Q({},{}): {}'.format(int(self.Trial),\
+						  int(self.Run), self.x_position, self.y_position, self.Qdata.round(4)))
 		else:
 			fig2.suptitle('Your maze for SARSA implementation.')
 
@@ -485,9 +485,13 @@ class SARSA_additional():
 
 	def latency(self, latency, N_trials, Nn):
 		plt.figure(0,figsize=(16, 9))
+		plt.title('Red line is an expected maximum latency.', fontsize=18)
 		plt.plot(latency[0::1],'b')
+		plt.axhline(y=2*Nn, linewidth=4, color='r')
 		plt.xlim(0,int(N_trials))
-		plt.ylim(0,3*Nn*Nn)
+		plt.ylim(0,Nn*Nn)
+		plt.xlabel('Trial (index number)', fontsize=14)
+		plt.ylabel('Latency (number of episodes)',fontsize=14)
 		plt.show()
 		time.sleep(1)
 		display.clear_output(wait=True)
@@ -500,7 +504,7 @@ class SARSA_additional():
 
 	def upload_positions(self):
 		# exctract and transform data
-		states = pd.read_csv('robot_positions.csv', delimiter=',',header=0).values
+		states = pd.read_csv('NRP_data_robot_positions.csv', delimiter=',',header=0).values
 		positions = np.array([pd.to_numeric(states[:,0], errors='coerce'),\
 							  pd.to_numeric(states[:,1], errors='coerce')]).T
 		# Reduce the number of data points
@@ -509,9 +513,9 @@ class SARSA_additional():
 		return self.pos
 
 
-	def upload_lattice(self):
+	def upload_lattice(self,Lfile="SOM_data_lattice.csv"):
 		# load data of som-lattice from csv 
-		with open("SOM_data_lattice.csv") as f:
+		with open(Lfile) as f:
 			reader = csv.reader(f)
 			next(reader) # skip header
 			data = [r for r in reader]
