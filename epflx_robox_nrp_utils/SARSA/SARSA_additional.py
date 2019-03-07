@@ -500,7 +500,7 @@ class SARSA_additional():
 
 	def upload_positions(self):
 		# exctract and transform data
-		states = pd.read_csv('NRP_data_robot_positions.csv', delimiter=',',header=0).values
+		states = pd.read_csv('robot_positions.csv', delimiter=',',header=0).values
 		positions = np.array([pd.to_numeric(states[:,0], errors='coerce'),\
 							  pd.to_numeric(states[:,1], errors='coerce')]).T
 		# Reduce the number of data points
