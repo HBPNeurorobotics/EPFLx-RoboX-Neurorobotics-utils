@@ -85,7 +85,7 @@ class SOM_additional():
 		plt.plot(Cx, Cy,'ro',markersize=8.0) # centers
 		
 		# SHOW (figure)
-		ax.view_init(0,int(trial))
+		#ax.view_init(0,int(trial))
 		
 		plt.gca().invert_yaxis()
 		ax.axes.get_xaxis().set_visible(False)
