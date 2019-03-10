@@ -6,7 +6,7 @@ import pylab as pl
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 
-from mpl_toolkits.mplot3d import axes3d
+#from mpl_toolkits.mplot3d import axes3d
 
 from matplotlib import collections as mc
 from matplotlib import patches
@@ -37,13 +37,13 @@ class SOM_additional():
 		for i in range(Nn):
 			for j in range(Nn):
 				if i > 0:
-					edges.append([(lattice[i-1,j,0], lattice[i-1,j,1]),
-                                  (lattice[i,j,0], lattice[i,j,1])])
+					edges.append([(lattice[i-1,j,1], lattice[i-1,j,0]),
+                                  (lattice[i,j,1], lattice[i,j,0])])
 				if j > 0:
-					edges.append([(lattice[i,j-1,0], lattice[i,j-1,1]),
-                                      (lattice[i,j,0], lattice[i,j,1])])
+					edges.append([(lattice[i,j-1,1], lattice[i,j-1,0]),
+                                      (lattice[i,j,1], lattice[i,j,0])])
 				
-				centers.append((lattice[i,j,0],lattice[i,j,1]))
+				centers.append((lattice[i,j,1],lattice[i,j,0]))
                 
 		Cx,Cy = zip(*centers)
 		lc2 = mc.LineCollection(edges, colors='red', linewidths=.8)
@@ -85,7 +85,6 @@ class SOM_additional():
 		plt.plot(Cx, Cy,'ro',markersize=8.0) # centers
 		
 		# SHOW (figure)
-		
 		plt.gca().invert_yaxis()
 		ax.axes.get_xaxis().set_visible(False)
 		ax.axes.get_yaxis().set_visible(False)
@@ -93,7 +92,7 @@ class SOM_additional():
 		plt.gca().set_aspect('equal', adjustable='box')
 		display.clear_output(wait=True)
 		display.display(plt.gcf())
-		#extent = ax.get_window_extent().transformed(fig.dpi_scale_trans.inverted())
+		extent = ax.get_window_extent().transformed(fig.dpi_scale_trans.inverted())
 		#fig.savefig('ax2_figure_expanded'+str(int(trial))+'.png', bbox_inches=extent.expanded(0.9, 0.9))
 
 
