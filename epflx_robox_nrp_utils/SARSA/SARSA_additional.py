@@ -367,16 +367,16 @@ class SARSA_additional():
 		if(self.test):
 			# --- goal
 			Gind = self.reward_position[0]*self.Nn + self.reward_position[1]
-			plt.plot(Cx[Gind], Cy[Gind],'o',color='gold',markersize=25.0)
+			plt.plot(Cy[Gind], Cx[Gind],'o',color='gold',markersize=25.0)
 			# --- start
 			Sind = self.start_position[0]*self.Nn + self.start_position[1]
-			plt.plot(Cx[Sind], Cy[Sind],'ro', alpha = 0.4, markersize=25.0)
+			plt.plot(Cy[Sind], Cx[Sind],'ro', alpha = 0.4, markersize=25.0)
 			# --- agent
 			Cind = self.x_position_old*self.Nn + self.y_position_old
-			plt.plot(Cx[Cind], Cy[Cind],'ro',markersize=15.0)
+			plt.plot(Cy[Cind], Cx[Cind],'ro',markersize=15.0)
 			# --- agent-reward
 			if(self.reward_position[0] == self.x_position and self.reward_position[1] == self.y_position): 
-				plt.plot(Cx[Gind], Cy[Gind],'o',color='orange',markersize=25.0)
+				plt.plot(Cy[Gind], Cx[Gind],'o',color='pink',markersize=25.0)
 
 		#----------------------- SETTINGS -----------------------###
 		plt.gca().invert_yaxis()
