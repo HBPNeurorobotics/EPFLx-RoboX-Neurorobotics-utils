@@ -350,17 +350,17 @@ class SARSA_additional():
 			if(actions[i]): Nedges.append(edge)
 			else: Yedges.append(edge)
         
-		lc2 = mc.LineCollection(Nedges, colors='magenta', linewidths=.8)
-		lc3 = mc.LineCollection(Yedges, colors='green', linewidths=.8)
+		#lc2 = mc.LineCollection(Nedges, colors='magenta', linewidths=.8)
+		#lc3 = mc.LineCollection(Yedges, colors='green', linewidths=.8)
 
 		ax.add_collection(lc2)
 		ax.add_collection(lc3)
 
 		# --- states
 		Cx,Cy = zip(*self.centers)
-		for i,center in enumerate(self.centers):
-			if(states[i] == 1.0): plt.plot(Cx[i], Cy[i],'o',color='lime',markersize=8.0)
-			else: plt.plot(Cx[i], Cy[i],'o',color='magenta',markersize=8.0)
+		#for i,center in enumerate(self.centers):
+		#	if(states[i] == 1.0): plt.plot(Cx[i], Cy[i],'o',color='lime',markersize=8.0)
+		#	else: plt.plot(Cx[i], Cy[i],'o',color='magenta',markersize=8.0)
 
 		#------------------------ POINTS ------------------------###
 
