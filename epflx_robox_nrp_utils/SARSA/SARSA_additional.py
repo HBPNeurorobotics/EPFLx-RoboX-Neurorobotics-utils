@@ -379,6 +379,9 @@ class SARSA_additional():
 				plt.plot(Cx[Gind], Cy[Gind],'o',color='orange',markersize=25.0)
 
 		#----------------------- SETTINGS -----------------------###
+		plt.gca().invert_yaxis()
+		ax.axes.get_xaxis().set_visible(False)
+		ax.axes.get_yaxis().set_visible(False)
 		plt.gca().set_aspect('equal', adjustable='box')
 		if(self.test):
 			display.clear_output(wait=True)
