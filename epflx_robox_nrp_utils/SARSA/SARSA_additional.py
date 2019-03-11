@@ -347,7 +347,7 @@ class SARSA_additional():
 		# --- actions
 		Yedges = []; Nedges = []
 		for i,edge in enumerate(self.edges):
-			if(actions[i]): Nedges.append(edge)
+			if(actions[i]): Nedges.append([(edge[0,1],edge[0,0]),(edge[1,1],edge[1,0])])
 			else: Yedges.append(edge)
         
 		lc2 = mc.LineCollection(Nedges, colors='magenta', linewidths=.8)
