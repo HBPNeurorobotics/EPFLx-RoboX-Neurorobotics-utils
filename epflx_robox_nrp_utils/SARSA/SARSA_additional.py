@@ -376,7 +376,7 @@ class SARSA_additional():
 			plt.plot(Cy[Cind], Cx[Cind],'ro',markersize=15.0)
 			# --- agent-reward
 			if(self.reward_position[0] == self.x_position and self.reward_position[1] == self.y_position): 
-				plt.plot(Cy[Gind], Cx[Gind],'o',color='orange',markersize=25.0); time.pause(3)
+				plt.plot(Cy[Gind], Cx[Gind],'o',color='orange',markersize=25.0); time.sleep(3)
 
 		#----------------------- SETTINGS -----------------------###
 		plt.gca().invert_yaxis()
