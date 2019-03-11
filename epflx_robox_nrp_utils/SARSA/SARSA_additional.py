@@ -330,10 +330,10 @@ class SARSA_additional():
 		ax.add_collection(lc1)
 
 		# --- obstracles
-		rect1 = patches.Rectangle((-3.0,-1.0), 1., 2., color='black')
-		rect2 = patches.Rectangle((-3.0, 1.0), 3., 1., color='black')
-		rect3 = patches.Rectangle(( 0.0,-2.0), 2., 1., color='black')
-		rect4 = patches.Rectangle(( 2.0,-2.0), 1., 3., color='black')
+		rect1 = patches.Rectangle((-1.0,-3.0), 2., 1., color='black')
+		rect2 = patches.Rectangle(( 1.0,-3.0), 1., 3., color='black')
+		rect3 = patches.Rectangle((-2.0, 0.0), 1., 2., color='black')
+		rect4 = patches.Rectangle((-2.0, 2.0), 3., 1., color='black')
 
 		ax.add_patch(rect1)
 		ax.add_patch(rect2)
@@ -341,7 +341,7 @@ class SARSA_additional():
 		ax.add_patch(rect4)
 
 		# --- exploration
-		plt.plot(self.pos[:,0], self.pos[:,1],'b.',alpha=0.1)
+		plt.plot(self.pos[:,1], self.pos[:,0],'b.',alpha=0.1)
 
 		#-------------------------- SOM -------------------------###
 		# --- actions
