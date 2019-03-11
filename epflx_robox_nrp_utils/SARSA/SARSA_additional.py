@@ -350,11 +350,11 @@ class SARSA_additional():
 			if(actions[i]): Nedges.append(edge)
 			else: Yedges.append(edge)
         
-		#lc2 = mc.LineCollection(Nedges, colors='magenta', linewidths=.8)
-		#lc3 = mc.LineCollection(Yedges, colors='green', linewidths=.8)
+		lc2 = mc.LineCollection(Nedges, colors='magenta', linewidths=.8)
+		lc3 = mc.LineCollection(Yedges, colors='green', linewidths=.8)
 
-		ax.add_collection(lc2)
-		ax.add_collection(lc3)
+		#ax.add_collection(lc2)
+		#ax.add_collection(lc3)
 
 		# --- states
 		Cx,Cy = zip(*self.centers)
