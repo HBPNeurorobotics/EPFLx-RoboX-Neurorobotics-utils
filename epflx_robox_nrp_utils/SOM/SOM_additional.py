@@ -92,8 +92,6 @@ class SOM_additional():
 		plt.gca().set_aspect('equal', adjustable='box')
 		display.clear_output(wait=True)
 		display.display(plt.gcf())
-		extent = ax.get_window_extent().transformed(fig.dpi_scale_trans.inverted())
-		#fig.savefig('ax2_figure_expanded'+str(int(trial))+'.png', bbox_inches=extent.expanded(0.9, 0.9))
 
 
 
