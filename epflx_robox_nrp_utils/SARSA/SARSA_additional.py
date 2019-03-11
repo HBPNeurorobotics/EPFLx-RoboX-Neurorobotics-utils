@@ -358,9 +358,9 @@ class SARSA_additional():
 
 		# --- states
 		Cx,Cy = zip(*self.centers)
-		#for i,center in enumerate(self.centers):
-		#	if(states[i] == 1.0): plt.plot(Cx[i], Cy[i],'o',color='lime',markersize=8.0)
-		#	else: plt.plot(Cx[i], Cy[i],'o',color='magenta',markersize=8.0)
+		for i,center in enumerate(self.centers):
+			if(states[i] == 1.0): plt.plot(Cy[i], Cx[i],'o',color='lime',markersize=8.0)
+			else: plt.plot(Cy[i], Cx[i],'o',color='magenta',markersize=8.0)
 
 		#------------------------ POINTS ------------------------###
 
