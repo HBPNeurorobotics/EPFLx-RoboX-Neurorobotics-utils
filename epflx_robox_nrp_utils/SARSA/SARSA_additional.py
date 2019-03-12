@@ -581,15 +581,15 @@ class SARSA_additional():
 
 	def print_reward(self,reward):
 		print "Reward structure:"
-		display.display("Reward structure:")
+		display.display('Reward structure:')
 		#print "Down:\n",  reward[:,:,0]
 		#print "Up:\n",    reward[:,:,1] 
 		#print "Right:\n", reward[:,:,2]
 		#print "Left:\n",  reward[:,:,3]
-		display.display(pd.Panel(reward[:,:,0].swapaxes(1,2)).to_frame())
-		display.display(pd.Panel(reward[:,:,1].swapaxes(1,2)).to_frame())
-		display.display(pd.Panel(reward[:,:,2].swapaxes(1,2)).to_frame())
-		display.display(pd.Panel(reward[:,:,3].swapaxes(1,2)).to_frame())
+		display.display(pd.Panel(reward[:,:,0]).to_frame())
+		display.display(pd.Panel(reward[:,:,1]).to_frame())
+		display.display(pd.Panel(reward[:,:,2]).to_frame())
+		display.display(pd.Panel(reward[:,:,3]).to_frame())
 		raw_input('Reward matrix is generated for your maze.\n\nPress Enter to finish... ')
 		clear_output()
 
