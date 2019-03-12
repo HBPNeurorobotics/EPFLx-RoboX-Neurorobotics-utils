@@ -309,7 +309,7 @@ class SARSA_additional():
 		get_ipython().run_line_magic('matplotlib', 'inline')
 
 		# --- plot
-		fig1 = plt.figure(0,figsize=(12, 9))
+		fig1 = plt.figure(0,figsize=(8, 6))
 		if(self.test):
 			fig1.suptitle('Trial: {}; Episode: {}; Q({},{}): {}'.format(int(self.Trial),\
 						  int(self.Run), self.x_position, self.y_position, self.Qdata.round(4)))
@@ -400,7 +400,7 @@ class SARSA_additional():
 		get_ipython().run_line_magic('matplotlib', 'inline')
 
 		# --- plot
-		fig2 = plt.figure(0,figsize=(12, 9))
+		fig2 = plt.figure(0,figsize=(8, 6))
 		if(self.test):
 			fig2.suptitle('Trial: {}; Episode: {}; Q({},{}): {}'.format(int(self.Trial),\
 						  int(self.Run), self.x_position, self.y_position, self.Qdata.round(4)))
