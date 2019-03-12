@@ -7,6 +7,7 @@ from matplotlib import collections as mc
 from matplotlib import patches
 import matplotlib.pyplot as plt
 from matplotlib import patches
+from matplotlib import colors
 import random
 import pylab as pl
 from IPython import display
@@ -615,7 +616,7 @@ class SARSA_additional():
 		stacked.to_csv('SARSA_data_Qvalue.csv', index=False)
         
 	def print_Qvalue(self,Q):
-		print "Q structure:"
+		#print "Q structure:"
 		#print "Up:\n", 
 		#for i in range(Q.shape[0]):
 		#	print ["%12.8f"% (q) for i,q in enumerate(Q[i,:,0])]
@@ -639,15 +640,6 @@ class SARSA_additional():
 		for i in range(Q.shape[0]):
 			for j in range(Q.shape[0]):
 				heatmap[i,j] = max(Q[i,j,:])
-				
-		#print
-		#print "Heat:\n", 
-		#print heatmap
-
-		
-		import pandas as pd
-		import matplotlib.pyplot as plt
-		from matplotlib import colors
 
 		def background_gradient(s, m, M, cmap='PuBu', low=0, high=0):
 			rng = M - m
@@ -658,7 +650,5 @@ class SARSA_additional():
 			return ['background-color: %s' % color for color in c]
 				
 		df = pd.DataFrame(heatmap); df.columns.name = 'Q';
-		#cm = sns.light_palette("green", as_cmap=True)
-		#df = df.style.background_gradient(cmap=cm)
 		df = df.style.apply(background_gradient, cmap='PuBu', m=df.min().min(), M=df.max().max(),low=0,high=0.2)
 		display.display(df)
