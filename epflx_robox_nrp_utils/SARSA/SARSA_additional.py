@@ -616,3 +616,4 @@ class SARSA_additional():
 		print "Left:\n", 
 		for i in range(Q.shape[0]):
 			print ["%12.8f"% (q) for i,q in enumerate(Q[i,:,3])]
+		pd.Panel(Q.swapaxes(1,2)).to_frame().stack().reset_index()
