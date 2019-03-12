@@ -585,7 +585,7 @@ class SARSA_additional():
 		print "Up:\n",    reward[:,:,1] 
 		print "Right:\n", reward[:,:,2]
 		print "Left:\n",  reward[:,:,3]
-		print pd.Panel(reward.swapaxes(1,2)).to_frame().stack().reset_index()
+		print pd.Panel(reward.swapaxes(1,2)).to_frame()
 		raw_input('Reward matrix is generated for your maze.\n\nPress Enter to finish... ')
 		clear_output()
 
