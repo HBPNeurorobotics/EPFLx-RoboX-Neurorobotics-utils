@@ -645,6 +645,6 @@ class SARSA_additional():
 		#print heatmap
 		df = pd.DataFrame(heatmap); df.columns.name = 'Q';
 		cm = sns.light_palette("green", as_cmap=True)
-		df = df.style.background_gradient(cmap=cm)
+		df = df.style.background_gradient(cmap='green')
 		display.display(df)
 				
