@@ -580,15 +580,27 @@ class SARSA_additional():
 		stacked.to_csv('SARSA_data_reward.csv', index=False)
 
 	def print_reward(self,reward):
+		def highlight_max(s):
+			is_max = s == 1.0
+			return ['background-color: yellow' if v else '' for v in is_max]
+		
 		print "Reward structure:"
 		#print "Down:\n",  reward[:,:,0]
 		#print "Up:\n",    reward[:,:,1] 
 		#print "Right:\n", reward[:,:,2]
 		#print "Left:\n",  reward[:,:,3]
-		df = pd.DataFrame(reward[:,:,0]); df.columns.name = 'DOWN '; display.display(df)
-		df = pd.DataFrame(reward[:,:,1]); df.columns.name = 'UP   '; display.display(df)
-		df = pd.DataFrame(reward[:,:,2]); df.columns.name = 'RIGHT'; display.display(df)
-		df = pd.DataFrame(reward[:,:,3]); df.columns.name = 'LEFT '; display.display(df)
+		df = pd.DataFrame(reward[:,:,0]); df.columns.name = 'DOWN '; 
+		df.style.apply(highlight_max); display.display(df)
+		
+		df = pd.DataFrame(reward[:,:,1]); df.columns.name = 'UP   '; 
+		df.style.apply(highlight_max); display.display(df)
+		
+		df = pd.DataFrame(reward[:,:,2]); df.columns.name = 'RIGHT'; 
+		df.style.apply(highlight_max); display.display(df)
+		
+		df = pd.DataFrame(reward[:,:,3]); df.columns.name = 'LEFT '; 
+		df.style.apply(highlight_max); display.display(df)
+		
 		raw_input('Reward matrix is generated for your maze.\n\nPress Enter to finish... ')
 		clear_output()
 
