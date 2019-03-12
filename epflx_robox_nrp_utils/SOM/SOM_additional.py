@@ -118,7 +118,7 @@ class SOM_additional():
 		stacked.to_csv('SOM_data_lattice.csv', index=False)
 
 		
-	def save_lattice(self,lattice):
+	def save_lattice(self,lattice,Nn):
 		# 
 		output = np.zeros((Nn*Nn,4))
 		for i in range(Nn):
