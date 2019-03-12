@@ -581,7 +581,7 @@ class SARSA_additional():
 
 	def print_reward(self,reward):
 		def highlight_max(s):
-			return ['background-color: blue' if (v==-1.0) elif (v==1.0) 'background-color: blue' else '' for v in s]
+			return ['background-color: blue' if (v==-1.0) else 'background-color: green' if (v==1.0) else '' for v in s]
 		
 		print "Reward structure:"
 		#print "Down:\n",  reward[:,:,0]
