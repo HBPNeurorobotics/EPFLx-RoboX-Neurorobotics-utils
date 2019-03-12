@@ -581,7 +581,6 @@ class SARSA_additional():
 
 	def print_reward(self,reward):
 		print "Reward structure:"
-		display.display('Reward structure:')
 		#print "Down:\n",  reward[:,:,0]
 		#print "Up:\n",    reward[:,:,1] 
 		#print "Right:\n", reward[:,:,2]
