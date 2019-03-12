@@ -126,5 +126,5 @@ class SOM_additional():
 				output[i*Nn+j][:] = [i,j,lattice[i,j,0],lattice[i,j,1]] 
 
 		# save to file
-		np.savetxt("foo.csv", output, delimiter=",", header = "Lattice index X,# Lattice index Y,# Coordinate X,# Coordinate Y")
+		np.savetxt('SOM_data_lattice.csv', output, delimiter=",", header = "Lattice index X,# Lattice index Y,# Coordinate X,# Coordinate Y")
 		#stacked.to_csv('SOM_data_lattice.csv', index=False)
