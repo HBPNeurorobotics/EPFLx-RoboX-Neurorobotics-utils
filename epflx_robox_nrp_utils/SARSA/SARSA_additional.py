@@ -219,9 +219,9 @@ class SARSA_additional():
 	def reward_data(self,actions):
 		reward = np.zeros((self.Nn,self.Nn,4))
 		if(self.input):
-			print; print		'====================================================================='
-			self.s_goal = input('   Input goal coordinates (format = [vertical, horizontal]): '); 
-			print 		 '====================================================================='; print
+			print; print		'===================================================================================================='
+			self.s_goal = input('          Input goal coordinates (format = [vertical, horizontal]). Example of input [0,0]: '); 
+			print 		        '===================================================================================================='; print
 		else:
 			self.s_goal = self.s_goal
 
