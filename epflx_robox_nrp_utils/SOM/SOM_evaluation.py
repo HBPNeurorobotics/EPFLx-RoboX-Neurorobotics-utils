@@ -59,12 +59,14 @@ class SOM_evaluation():
             next(reader) # skip header
             data = [r for r in reader]
         # calculate Nn
-        self.Nn = int(math.sqrt(len(data)/2))
+        self.Nn = int(math.sqrt(len(data)))
+        print self.Nn
         # re-create lattice
         self.lattice = np.zeros((self.Nn,self.Nn,2))
         for i,line in enumerate(data):
             #z = line[0]; y = line[1]; x = line[2];
             #self.lattice[x,y,z] = line[3]
+            print type(line[0])
             x = int(line[0]); y = int(line[1]) 
             self.lattice[x,y,0] = line[2]
             self.lattice[x,y,1] = line[3]
