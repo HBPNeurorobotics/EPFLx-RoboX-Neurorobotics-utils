@@ -585,10 +585,10 @@ class SARSA_additional():
 		#print "Up:\n",    reward[:,:,1] 
 		#print "Right:\n", reward[:,:,2]
 		#print "Left:\n",  reward[:,:,3]
-		df = pd.DataFrame(reward[:,:,0]); df.columns.name = 'DOWN';  display.display(df)
-		df = pd.DataFrame(reward[:,:,1]); df.columns.name = 'UP';    display.display(df)
+		df = pd.DataFrame(reward[:,:,0]); df.columns.name = 'DOWN '; display.display(df)
+		df = pd.DataFrame(reward[:,:,1]); df.columns.name = 'UP   '; display.display(df)
 		df = pd.DataFrame(reward[:,:,2]); df.columns.name = 'RIGHT'; display.display(df)
-		df = pd.DataFrame(reward[:,:,3]); df.columns.name = 'LEFT';  display.display(df)
+		df = pd.DataFrame(reward[:,:,3]); df.columns.name = 'LEFT '; display.display(df)
 		raw_input('Reward matrix is generated for your maze.\n\nPress Enter to finish... ')
 		clear_output()
 
