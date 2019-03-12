@@ -581,7 +581,11 @@ class SARSA_additional():
 
 	def print_reward(self,reward):
 		def highlight_max(s):
-			return ['background-color: blue' if (v==-1.0) else 'background-color: green' if (v==1.0) else '' for v in s]
+			return ['background-color: black' if (v==-1.0) else 'background-color: gold' if (v==1.0) else '' for v in s]
+		
+		def color_negative_red(val):
+			color = 'white' if val < 0 else 'black'
+			return 'color: %s' % color
 		
 		print "Reward structure:"
 		#print "Down:\n",  reward[:,:,0]
@@ -589,16 +593,16 @@ class SARSA_additional():
 		#print "Right:\n", reward[:,:,2]
 		#print "Left:\n",  reward[:,:,3]
 		df = pd.DataFrame(reward[:,:,0]); df.columns.name = 'DOWN '; 
-		df = df.style.apply(highlight_max); display.display(df)
+		df = df.style.applymap(color_negative_red).apply(highlight_max); display.display(df)
 		
 		df = pd.DataFrame(reward[:,:,1]); df.columns.name = 'UP   '; 
-		df = df.style.apply(highlight_max); display.display(df)
+		df = df.style.applymap(color_negative_red).apply(highlight_max); display.display(df)
 		
 		df = pd.DataFrame(reward[:,:,2]); df.columns.name = 'RIGHT'; 
-		df = df.style.apply(highlight_max); display.display(df)
+		df = df.style.applymap(color_negative_red).apply(highlight_max); display.display(df)
 		
 		df = pd.DataFrame(reward[:,:,3]); df.columns.name = 'LEFT '; 
-		df = df.style.apply(highlight_max); display.display(df)
+		df = df.style.applymap(color_negative_red).apply(highlight_max); display.display(df)
 		
 		raw_input('Reward matrix is generated for your maze.\n\nPress Enter to finish... ')
 		clear_output()
