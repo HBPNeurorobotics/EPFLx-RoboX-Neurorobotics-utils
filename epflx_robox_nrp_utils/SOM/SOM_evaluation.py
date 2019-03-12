@@ -65,6 +65,10 @@ class SOM_evaluation():
         for i,line in enumerate(data):
             #z = line[0]; y = line[1]; x = line[2];
             #self.lattice[x,y,z] = line[3]
-            x = line[0]; y = line[1]; #x = line[2];
+            x = line[0]; y = line[1]; #x = line[2]; 
+            print line[0]
+            print line[1]
+            print line[2]
+            print line[3]
             self.lattice[x,y,0] = line[2]
             self.lattice[x,y,1] = line[3]
