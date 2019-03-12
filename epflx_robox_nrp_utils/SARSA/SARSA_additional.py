@@ -2,6 +2,7 @@
 
 import pandas as pd
 import numpy as np
+import seaborn as sns
 from matplotlib import collections as mc
 from matplotlib import patches
 import matplotlib.pyplot as plt
@@ -642,6 +643,8 @@ class SARSA_additional():
 		print
 		print "Heat:\n", 
 		print heatmap
-		df = pd.DataFrame(heatmap); df.columns.name = 'Q'; 
+		df = pd.DataFrame(heatmap); df.columns.name = 'Q';
+		cm = sns.light_palette("green", as_cmap=True)
+		df = df.style.background_gradient(cmap=cm)
 		display.display(df)
 				
