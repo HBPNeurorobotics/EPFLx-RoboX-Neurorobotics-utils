@@ -596,7 +596,7 @@ class SARSA_additional():
 		df = df.style.applymap(color_negative_red).apply(highlight_max); display.display(df)
 		
 		df = pd.DataFrame(reward[:,:,1]); df.columns.name = '[  UP   ]'; 
-		df = df.style.applymap(color_negative_red).apply(highlight_max); display.display(df)
+		df = df.style.applymap(color_negative_red).apply(highlight_max).set_properties(subset=['UP'], **{'width': '300px'}); display.display(df)
 		
 		df = pd.DataFrame(reward[:,:,2]); df.columns.name = '[ RIGHT ]'; 
 		df = df.style.applymap(color_negative_red).apply(highlight_max); display.display(df)
