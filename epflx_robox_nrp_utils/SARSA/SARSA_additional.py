@@ -641,6 +641,5 @@ class SARSA_additional():
 				
 		print
 		print "Heat:\n", 
-		for i in range(Q.shape[0]):
-			print ["%12.8f"% (q) for i,q in enumerate(heatmap)]
+		print heatmap
 				
