@@ -220,7 +220,7 @@ class SARSA_additional():
 		reward = np.zeros((self.Nn,self.Nn,4))
 		if(self.input):
 			print; print        '==================================================================================================================='
-			self.s_goal = input('Goal coordinates (format = [vertical,horizontal], example = [0,0]): '); 
+			self.s_goal = input('Goal coordinates (format = [vertical,horizontal], example = [0,0]):'); 
 			print 		    '==================================================================================================================='; print
 		else:
 			self.s_goal = self.s_goal
