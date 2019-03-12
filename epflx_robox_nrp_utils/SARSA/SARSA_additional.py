@@ -633,3 +633,14 @@ class SARSA_additional():
 		print "Left:\n", 
 		for i in range(Q.shape[0]):
 			print ["%12.8f"% (q) for i,q in enumerate(Q[i,:,3])]
+
+		heatmap = np.zeros((Q.shape[0],Q.shape[0]))
+		for i in range(Q.shape[0]):
+			for j in range(Q.shape[0]):
+				heatmap[i,j] = max(Q[i,j,:])
+				
+		print
+		print "Heat:\n", 
+		for i in range(Q.shape[0]):
+			print ["%12.8f"% (q) for i,q in enumerate(heatmap)]
+				
