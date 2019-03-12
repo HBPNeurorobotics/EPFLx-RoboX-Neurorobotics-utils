@@ -642,4 +642,6 @@ class SARSA_additional():
 		print
 		print "Heat:\n", 
 		print heatmap
+		df = pd.DataFrame(heatmap); df.columns.name = 'Q'; 
+		df = df.style.applymap(color_negative_red).apply(highlight_max).set_properties(**{'width': '100px'}); display.display(df)
 				
