@@ -592,7 +592,7 @@ class SARSA_additional():
 		#print "Up:\n",    reward[:,:,1] 
 		#print "Right:\n", reward[:,:,2]
 		#print "Left:\n",  reward[:,:,3]
-		df = pd.DataFrame(reward[:,:,0]); df.columns.name = 'DOWN______'; 
+		df = pd.DataFrame(reward[:,:,0]); df.columns.name = 'DOWN_____'; 
 		df = df.style.applymap(color_negative_red).apply(highlight_max).set_properties(**{'width': '100px'}); display.display(df)
 		
 		df = pd.DataFrame(reward[:,:,1]); df.columns.name = 'UP________'; 
