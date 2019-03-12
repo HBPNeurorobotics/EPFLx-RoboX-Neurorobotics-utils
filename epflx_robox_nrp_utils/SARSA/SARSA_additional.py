@@ -587,11 +587,8 @@ class SARSA_additional():
 			color = 'white' if val < 0 else 'black'
 			return 'color: %s' % color
 		
-		print "Reward structure:"
-		#print "Down:\n",  reward[:,:,0]
-		#print "Up:\n",    reward[:,:,1] 
-		#print "Right:\n", reward[:,:,2]
-		#print "Left:\n",  reward[:,:,3]
+		print "Reward matrix is generated for your maze. Reward structure:"
+		
 		df = pd.DataFrame(reward[:,:,0]); df.columns.name = 'DOWN_____'; 
 		df = df.style.applymap(color_negative_red).apply(highlight_max).set_properties(**{'width': '100px'}); display.display(df)
 		
@@ -604,7 +601,7 @@ class SARSA_additional():
 		df = pd.DataFrame(reward[:,:,3]); df.columns.name = 'LEFT______'; 
 		df = df.style.applymap(color_negative_red).apply(highlight_max).set_properties(**{'width': '100px'}); display.display(df)
 		
-		raw_input('Reward matrix is generated for your maze.\n\nPress Enter to finish... ')
+		raw_input('Press Enter to finish... ')
 		clear_output()
 
 	### Q-VALUE
