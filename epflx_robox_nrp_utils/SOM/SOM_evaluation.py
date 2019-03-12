@@ -67,6 +67,6 @@ class SOM_evaluation():
             #z = line[0]; y = line[1]; x = line[2];
             #self.lattice[x,y,z] = line[3]
             print type(line[0])
-            x = int(line[0]); y = int(line[1]) 
+            x = int(float(line[0])); y = int(float(line[1]))
             self.lattice[x,y,0] = line[2]
             self.lattice[x,y,1] = line[3]
