@@ -220,7 +220,7 @@ class SARSA_additional():
 		reward = np.zeros((self.Nn,self.Nn,4))
 		if(self.input):
 			print; print        '==================================================================================================================='
-			self.s_goal = input('Goal coordinates (format = [vertical,horizontal], example = [0,0]):'); 
+			self.s_goal = input('Goal coordinates (format = [vertical,horizontal], example = [0,0]): '); 
 			print 		    '==================================================================================================================='; print
 		else:
 			self.s_goal = self.s_goal
@@ -388,6 +388,7 @@ class SARSA_additional():
 			display.display(plt.gcf())
 		else:
 			plt.show()
+			print '==================================================================================================================='
 			#raw_input('Maze created based on your SOM solution. Visualization mode 1.\n\nPress Enter to continue... ')
 			#display.clear_output(wait=True)
 
