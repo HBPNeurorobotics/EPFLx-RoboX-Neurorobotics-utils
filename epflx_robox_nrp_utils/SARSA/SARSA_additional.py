@@ -575,7 +575,7 @@ class SARSA_additional():
 	def save_reward(self,reward):
 		# convert it to stacked format using Pandas
 		stacked = pd.Panel(reward.swapaxes(1,2)).to_frame().stack().reset_index()
-		stacked.columns = ['x', 'y', 'z', 'value']
+		stacked.columns = ['Direction', 'Coordinate X', 'Coordinate Y', 'Reward']
 		# save to disk
 		stacked.to_csv('SARSA_data_reward.csv', index=False)
 
