@@ -592,16 +592,16 @@ class SARSA_additional():
 		#print "Up:\n",    reward[:,:,1] 
 		#print "Right:\n", reward[:,:,2]
 		#print "Left:\n",  reward[:,:,3]
-		df = pd.DataFrame(reward[:,:,0]); df.columns.name = 'DOWN:...'; 
+		df = pd.DataFrame(reward[:,:,0]); df.columns.name = 'DOWN :___'; 
 		df = df.style.applymap(color_negative_red).apply(highlight_max).set_properties(**{'width': '100px'}); display.display(df)
 		
-		df = pd.DataFrame(reward[:,:,1]); df.columns.name = 'UP:.....'; 
+		df = pd.DataFrame(reward[:,:,1]); df.columns.name = 'UP :_____'; 
 		df = df.style.applymap(color_negative_red).apply(highlight_max).set_properties(**{'width': '100px'}); display.display(df)
 		
-		df = pd.DataFrame(reward[:,:,2]); df.columns.name = 'RIGHT:..'; 
+		df = pd.DataFrame(reward[:,:,2]); df.columns.name = 'RIGHT :__'; 
 		df = df.style.applymap(color_negative_red).apply(highlight_max).set_properties(**{'width': '100px'}); display.display(df)
 		
-		df = pd.DataFrame(reward[:,:,3]); df.columns.name = 'LEFT:...'; 
+		df = pd.DataFrame(reward[:,:,3]); df.columns.name = 'LEFT :___'; 
 		df = df.style.applymap(color_negative_red).apply(highlight_max).set_properties(**{'width': '100px'}); display.display(df)
 		
 		raw_input('Reward matrix is generated for your maze.\n\nPress Enter to finish... ')
