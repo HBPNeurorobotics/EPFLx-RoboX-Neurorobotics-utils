@@ -109,10 +109,22 @@ class SOM_additional():
 		return self.pos
 		        
     
-	def save_lattice(self,lattice):
+	def save_lattice2(self,lattice):
 		# convert it to stacked format using Pandas
 		stacked = pd.Panel(lattice.swapaxes(1,2)).to_frame().stack().reset_index()
 		stacked.columns = ['x', 'y', 'z', 'value']
 
 		# save to file
 		stacked.to_csv('SOM_data_lattice.csv', index=False)
+
+		
+	def save_lattice(self,lattice):
+		# 
+		output = np.zeros((Nn*Nn,4))
+		for i in range(Nn):
+			for j in range(Nn):
+				output[i*Nn+j][:] = [i,j,lattice[i,j,0],lattice[i,j,1]] 
+
+		# save to file
+		np.savetxt("foo.csv", output, delimiter=",", header = "Lattice index X,# Lattice index Y,# Coordinate X,# Coordinate Y")
+		#stacked.to_csv('SOM_data_lattice.csv', index=False)
