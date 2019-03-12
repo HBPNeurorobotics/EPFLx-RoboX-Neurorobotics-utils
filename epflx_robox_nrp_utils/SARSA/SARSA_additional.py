@@ -592,7 +592,7 @@ class SARSA_additional():
 	def save_Qvalue(self,Q):
 		# convert it to stacked format using Pandas
 		stacked = pd.Panel(Q.swapaxes(1,2)).to_frame().stack().reset_index()
-		stacked.columns = ['x', 'y', 'z', 'value']
+		stacked.columns = ['Direction', 'Coordinate X', 'Coordinate Y', 'Q-value']
 		# save to disk
 		stacked.to_csv('SARSA_data_Qvalue.csv', index=False)
         
