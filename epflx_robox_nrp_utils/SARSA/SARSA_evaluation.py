@@ -61,11 +61,29 @@ class SARSA_evaluation():
 		self.M = self.perfect_map()
 		self.video = 1
 		
-		if(start==None): self.start = [np.random.randint(self.Nn),np.random.randint(self.Nn)]
-		else: self.start = start
+		while True:
+			print; print		'==================================================================================================================='
 
-		while(self.M[self.start[0],self.start[1]] == 0):
-			self.start = [np.random.randint(self.Nn),np.random.randint(self.Nn)]
+			try:
+				self.s_start = input('Start coordinates (format = [vertical,horizontal], example = [0,0]):');
+				print 		 '==================================================================================================================='; print
+				if(self.M[self.start[0],self.start[1] != 0.0): break
+				print "Goal cannot be in the wall or in the goal. You have to change the start position."
+			except: 
+				print 		 '==================================================================================================================='; print
+				print self.s_start
+				if():
+					while(self.M[self.start[0],self.start[1]] == 0): self.start = [np.random.randint(self.Nn),np.random.randint(self.Nn)]
+					break
+				else: print "Input is incorrect, please, use an example to make correct input."
+		
+		
+		
+		#if(start==None): self.start = [np.random.randint(self.Nn),np.random.randint(self.Nn)]
+		#else: self.start = start
+
+		#while(self.M[self.start[0],self.start[1]] == 0):
+		#	self.start = [np.random.randint(self.Nn),np.random.randint(self.Nn)]
 
 		Qway = self.trial_evaluation()
 		#print "Number of steps:", len(self.X)
