@@ -56,7 +56,7 @@ class SARSA_evaluation():
 
 
 
-    def test_generation(self, start=None):
+    def test_generation(self):
 		self.Nn,self.states,self.actions,self.reward,self.goal,self.Q = self.sarsaad.eva_analysis()
 		self.M = self.perfect_map()
 		self.video = 1
