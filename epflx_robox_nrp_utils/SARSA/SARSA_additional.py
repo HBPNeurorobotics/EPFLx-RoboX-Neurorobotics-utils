@@ -221,9 +221,16 @@ class SARSA_additional():
 	def reward_data(self,actions):
 		reward = np.zeros((self.Nn,self.Nn,4))
 		if(self.input):
-			print; print        '==================================================================================================================='
-			self.s_goal = input('Goal coordinates (format = [vertical,horizontal], example = [0,0]):'); 
-			print 		    '==================================================================================================================='; print
+			while True:
+				print; print        '==================================================================================================================='
+				try:
+					self.s_goal = input('Goal coordinates (format = [vertical,horizontal], example = [0,0]):'); 
+					print 		    '==================================================================================================================='; print
+					if(states[self.Nn*self.s_goal[0]+self.s_goal[1]] == 1.0): break
+					print "Goal cannot be in the wall. You have to change the goal position."
+				except:
+					print 		    '==================================================================================================================='; print
+					print "Input is incorrect, please, use an example to make correct input."
 		else:
 			self.s_goal = self.s_goal
 
