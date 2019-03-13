@@ -426,7 +426,7 @@ class SARSA_additional():
 
 	###########################################################################
 
-	def visualization2(self,states,actions,test):
+	def visualization2(self,states,actions,test,goal=None):
 
 		#------------------------ FIGURE ------------------------###
 		get_ipython().run_line_magic('matplotlib', 'inline')
@@ -505,7 +505,13 @@ class SARSA_additional():
 			#rect3 = patches.Rectangle((self.y_position-0.25,\
 			#						   self.x_position-0.25), 0.5, 0.5, color='orange')
 			#ax.add_patch(rect3)
- 
+ 		
+		elif(goal!=None): 
+			# --- goal
+			rect1 = patches.Rectangle((self.reward_position[1]-0.5,\
+									   self.reward_position[0]-0.5), 1.0, 1.0, color='lime')
+			ax.add_patch(rect1)
+
 		#----------------------- SETTINGS -----------------------###
 		plt.gca().set_aspect('equal', adjustable='box')
 		if(self.test):
