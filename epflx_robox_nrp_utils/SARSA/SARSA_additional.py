@@ -645,7 +645,7 @@ class SARSA_additional():
 		stacked.to_csv('SARSA_data_Qvalue.csv', index=False)
         
 	def print_Qvalue(self,Q):
-		#print "Q structure:"
+		print "Result. Navigation heatmap:"
 		#print "Up:\n", 
 		#for i in range(Q.shape[0]):
 		#	print ["%12.8f"% (q) for i,q in enumerate(Q[i,:,0])]
