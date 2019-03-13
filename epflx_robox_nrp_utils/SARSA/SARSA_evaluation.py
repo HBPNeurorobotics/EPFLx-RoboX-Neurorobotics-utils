@@ -172,7 +172,7 @@ class SARSA_evaluation():
         rect2 = patches.Rectangle((self.start[1]-0.5,self.start[0]-0.5), 1., 1., color='orange')
 
         plt.figure(figsize=(8,6))
-	plt.title('Number of executed steps: {}'.format(len(self.X))
+        plt.title('Number of executed steps: {}'.format(len(self.X)))
         im = plt.imshow(np.reshape(np.zeros(self.Nn*self.Nn), newshape=(self.Nn,self.Nn)),
                             interpolation='none', alpha=0.0, vmin=0, vmax=1, aspect='equal');
 
