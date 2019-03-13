@@ -60,7 +60,7 @@ class SARSA_evaluation():
 		self.Nn,self.states,self.actions,self.reward,self.goal,self.Q = self.sarsaad.eva_analysis()
 		self.M = self.perfect_map()
 		self.video = 1; self.test = False
-		self.sarsaad.visualization2(states,actions,self.test)
+		self.sarsaad.visualization2(self.states,self.actions,self.test)
 		
 		while True:
 			print; print		'==================================================================================================================='
