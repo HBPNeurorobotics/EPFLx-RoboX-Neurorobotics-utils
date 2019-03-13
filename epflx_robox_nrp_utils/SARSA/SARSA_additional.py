@@ -247,7 +247,7 @@ class SARSA_additional():
 				print; print		'==================================================================================================================='
 
 				try:
-					self.s_goal = input('   Input goal coordinates (format = [vertical, horizontal]): '); 
+					self.s_goal = input('Goal coordinates (format = [vertical,horizontal], example = [0,0]):');
 					print 		 '==================================================================================================================='; print
 					if(states[self.Nn*self.s_goal[0]+self.s_goal[1]] == 1.0): break
 					print "Goal cannot be in the wall. You have to change the goal position."
