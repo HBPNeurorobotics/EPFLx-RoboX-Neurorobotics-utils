@@ -61,16 +61,17 @@ class SARSA_additional():
 
 		# SOM analyse (to generate maze and reward)
 		## maze
+		self.guide = np.zeros((self.Nn,self.Nn,4))
 		states = self.rewarded_states()
 		actions = self.rewarded_actions(states)
+		reward = self.reward_data(states,actions)
 
-		
-		# visualization (Maze: 2 Modes; Reward: Table)		
+		# visualization (Maze: 2 Modes; Reward: Table)
 		self.visualization1(states,actions)	# Mode 1
 		self.visualization2(states,actions)	# Mode 2
+		reward = self.reward_goal(states,reward)
 
 		## reward
-		reward = self.reward_data(actions)
 		self.save_reward(reward)
 		self.print_reward(reward)			# Table
 
@@ -92,7 +93,8 @@ class SARSA_additional():
 		actions = self.rewarded_actions(states)
 
 		## reward
-		reward = self.reward_data(actions)
+		reward = self.reward_data(states,actions)
+		reward = self.reward_goal(states,reward)
 		self.save_reward(reward)
 		#self.print_reward(reward)			# Table
 
@@ -218,27 +220,8 @@ class SARSA_additional():
 	########################################################################
 
     # Define reward as each Q(x,y,a)
-	def reward_data(self,actions):
+	def reward_data(self,states,actions):
 		reward = np.zeros((self.Nn,self.Nn,4))
-		if(self.input):
-			while True:
-				print; print        '==================================================================================================================='
-				try:
-					self.s_goal = input('Goal coordinates (format = [vertical,horizontal], example = [0,0]):'); 
-					if(states[self.Nn*self.s_goal[0]+self.s_goal[1]] == 1.0): break
-					print 		    '==================================================================================================================='; print
-					print "Goal cannot be in the wall. You have to change the goal position."
-				except:
-					print 		    '==================================================================================================================='; print
-					print "Input is incorrect, please, use an example to make correct input."
-		else:
-			self.s_goal = self.s_goal
-
-		if  (self.s_goal[0] > self.Nn-1): self.s_goal[0] = self.Nn-1
-		elif(self.s_goal[0] < 0):         self.s_goal[0] = 0
-		if  (self.s_goal[1] > self.Nn-1): self.s_goal[1] = self.Nn-1
-		elif(self.s_goal[1] < 0):         self.s_goal[1] = 0
-
 		for i in range(self.Nn):
 			for j in range(self.Nn):
 				for a in range(4):
@@ -248,11 +231,39 @@ class SARSA_additional():
 					elif(a == 3): ish =  0; jsh =  -1;
 
 					able = self.availability(i,j,i+ish,j+jsh,actions)
-					reward[i,j,a] = able    
-                    
-					if(i+ish==self.s_goal[0] and j+jsh==self.s_goal[1]): 
-						if(reward[i,j,a] == 0.0): 
-							reward[i,j,a] = 1.0
+					reward[i,j,a] = able 
+
+		for i in range(self.Nn):
+			for j in range(self.Nn):
+				if(max(reward[i,j,:])==-1.0): 
+					states[self.Nn*i+j] = 0.0
+					print i, j, " :: ", reward[i,j,:]
+
+		return reward
+
+    # Define reward as each Q(x,y,a)
+	def reward_goal(self,states,reward):
+		if(self.input):
+			while True:
+				print; print		'====================================================================='
+
+				try:
+					self.s_goal = input('   Input goal coordinates (format = [vertical, horizontal]): '); 
+					print 		 '====================================================================='; print
+					if(states[self.Nn*self.s_goal[0]+self.s_goal[1]] == 1.0): break
+					print "Goal cannot be in the wall. You have to change the goal position:"
+				except: 
+					print 		 '====================================================================='; print
+					print "Input is incorrect, please, use an example to make correct input:"
+		else:
+			self.s_goal = self.s_goal
+
+
+		if(reward[self.s_goal[0]-1,self.s_goal[1],0] == 0.0): reward[self.s_goal[0]-1,self.s_goal[1],0] = 1.0
+		if(reward[self.s_goal[0]+1,self.s_goal[1],1] == 0.0): reward[self.s_goal[0]+1,self.s_goal[1],1] = 1.0
+		if(reward[self.s_goal[0],self.s_goal[1]-1,2] == 0.0): reward[self.s_goal[0],self.s_goal[1]-1,2] = 1.0
+		if(reward[self.s_goal[0],self.s_goal[1]+1,3] == 0.0): reward[self.s_goal[0],self.s_goal[1]+1,3] = 1.0
+
 		return reward
     
     # Define the punishment at Q(x,y,a)
@@ -274,6 +285,18 @@ class SARSA_additional():
 				else:  return -1.0
 			else:  return -1.0
 		else:  return -1.0
+    
+
+    # Define the punishment at Q(x,y,a)
+	def available_positions(self,reward):
+		avpos = [[] for _ in range(self.Nn**2)]
+		for i in range(self.Nn):
+			for j in range(self.Nn):
+				if(reward[i,j,0] >= 0.0): avpos[i*self.Nn+j].append(0)
+				if(reward[i,j,1] >= 0.0): avpos[i*self.Nn+j].append(1)
+				if(reward[i,j,2] >= 0.0): avpos[i*self.Nn+j].append(2)
+				if(reward[i,j,3] >= 0.0): avpos[i*self.Nn+j].append(3)
+		return avpos
     
 
 
