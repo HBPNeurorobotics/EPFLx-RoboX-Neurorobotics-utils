@@ -73,7 +73,7 @@ class SARSA_evaluation():
 		display.clear_output(wait=True)
 		#print "Number of steps:", len(self.X)
 		self.Way = np.column_stack((self.X, self.Y))
-		print np.transpose(self.Way)
+		#print np.transpose(self.Way)
 
 		with open('SARSA_data_way_points.csv', 'w') as f:
 			writer = csv.writer(f)
