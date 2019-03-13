@@ -71,11 +71,7 @@ class SARSA_evaluation():
 				print "Goal cannot be in the wall or in the goal. You have to change the start position."
 			except: 
 				print 		 '==================================================================================================================='; print
-				print self.s_start
-				if():
-					while(self.M[self.start[0],self.start[1]] == 0): self.start = [np.random.randint(self.Nn),np.random.randint(self.Nn)]
-					break
-				else: print "Input is incorrect, please, use an example to make correct input."
+				print "Input is incorrect, please, use an example to make correct input."
 		
 		
 		
