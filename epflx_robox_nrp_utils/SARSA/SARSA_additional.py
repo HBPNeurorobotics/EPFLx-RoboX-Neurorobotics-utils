@@ -679,5 +679,5 @@ class SARSA_additional():
 			return ['background-color: %s' % color for color in c]
 				
 		df = pd.DataFrame(heatmap); df.columns.name = 'Q';
-		df = df.style.apply(background_gradient, cmap='PuBu', m=df.min().min()-df.max().max()*0.25, M=df.max().max(),low=0,high=0.2)
+		df = df.style.apply(background_gradient, cmap='PuBu', m=df.min().min()-df.max().max()*0.0, M=df.max().max(),low=0,high=0.2)
 		display.display(df)
