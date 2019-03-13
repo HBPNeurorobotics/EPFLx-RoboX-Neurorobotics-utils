@@ -237,7 +237,6 @@ class SARSA_additional():
 			for j in range(self.Nn):
 				if(max(reward[i,j,:])==-1.0): 
 					states[self.Nn*i+j] = 0.0
-					print i, j, " :: ", reward[i,j,:]
 
 		return reward
 
