@@ -43,8 +43,8 @@ class SARSA_evaluation():
 				self.start = [k,h]
 				if(self.M[k,h]!=0.0):
 					Qway = self.trial_evaluation()
-					print "Number of steps:", len(self.X)
-					print "Q-way:", ["%12.8f"% (q) for i,q in enumerate(Qway)]
+					#print "Number of steps:", len(self.X)
+					#print "Q-way:", ["%12.8f"% (q) for i,q in enumerate(Qway)]
 					if(self.video): time.sleep(2)
 					display.clear_output(wait=True)
 					
@@ -68,10 +68,10 @@ class SARSA_evaluation():
 			self.start = [np.random.randint(self.Nn),np.random.randint(self.Nn)]
 
 		Qway = self.trial_evaluation()
-		print "Number of steps:", len(self.X)
-		print "Q-way:", ["%12.8f"% (q) for i,q in enumerate(Qway)]
+		#print "Number of steps:", len(self.X)
+		#print "Q-way:", ["%12.8f"% (q) for i,q in enumerate(Qway)]
 		display.clear_output(wait=True)
-		print "Number of steps:", len(self.X)
+		#print "Number of steps:", len(self.X)
 		self.Way = np.column_stack((self.X, self.Y))
 		print np.transpose(self.Way)
 
@@ -172,6 +172,7 @@ class SARSA_evaluation():
         rect2 = patches.Rectangle((self.start[1]-0.5,self.start[0]-0.5), 1., 1., color='orange')
 
         plt.figure(figsize=(8,6))
+	plt.title('Number of executed steps: {}'.format(len(self.X))
         im = plt.imshow(np.reshape(np.zeros(self.Nn*self.Nn), newshape=(self.Nn,self.Nn)),
                             interpolation='none', alpha=0.0, vmin=0, vmax=1, aspect='equal');
 
