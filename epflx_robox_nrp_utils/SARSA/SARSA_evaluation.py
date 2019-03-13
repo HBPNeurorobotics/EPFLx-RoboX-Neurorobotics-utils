@@ -59,13 +59,14 @@ class SARSA_evaluation():
     def test_generation(self):
 		self.Nn,self.states,self.actions,self.reward,self.goal,self.Q = self.sarsaad.eva_analysis()
 		self.M = self.perfect_map()
-		self.video = 1
+		self.video = 1; self.test = False
+		self.sarsaad.visualization2(states,actions,self.test)
 		
 		while True:
 			print; print		'==================================================================================================================='
 
 			try:
-				self.start = input('Start coordinates (format = [vertical,horizontal], example = [0,0]):');
+				self.start = input('Start coordinate (format = [vertical,horizontal], example = [0,0]):');
 				print 		 '==================================================================================================================='; print
 				if(self.M[self.start[0],self.start[1]] != 0.0): break
 				print "Goal cannot be in the wall or in the goal. You have to change the start position."
