@@ -68,7 +68,7 @@ class SARSA_additional():
 
 		# visualization (Maze: 2 Modes; Reward: Table)
 		self.visualization1(states,actions)	# Mode 1
-		self.visualization2(states,actions)	# Mode 2
+		self.visualization2(states,actions,self.test)	# Mode 2
 		reward = self.reward_goal(states,reward)
 
 		## reward
@@ -329,7 +329,7 @@ class SARSA_additional():
 		actions = self.rewarded_actions(states)
 		
 		if(video == 1): self.visualization1(states,actions)
-		if(video == 2): self.visualization2(states,actions)
+		if(video == 2): self.visualization2(states,actions,self.test)
 
 
 	###########################################################################
@@ -426,7 +426,7 @@ class SARSA_additional():
 
 	###########################################################################
 
-	def visualization2(self,states,actions):
+	def visualization2(self,states,actions,test):
 
 		#------------------------ FIGURE ------------------------###
 		get_ipython().run_line_magic('matplotlib', 'inline')
@@ -441,7 +441,7 @@ class SARSA_additional():
 
 		# --- sub-plot
 		ax = fig2.add_subplot(111)
-		if(self.test):
+		if(test):
 			ax.set_title('Action: ({},{}) --> ({},{})'.format(self.x_position_old,\
 						  self.y_position_old,self.x_position,self.y_position))
 
