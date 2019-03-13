@@ -65,7 +65,7 @@ class SARSA_evaluation():
 			print; print		'==================================================================================================================='
 
 			try:
-				self.s_start = input('Start coordinates (format = [vertical,horizontal], example = [0,0]):');
+				self.start = input('Start coordinates (format = [vertical,horizontal], example = [0,0]):');
 				print 		 '==================================================================================================================='; print
 				if(self.M[self.start[0],self.start[1]] != 0.0): break
 				print "Goal cannot be in the wall or in the goal. You have to change the start position."
