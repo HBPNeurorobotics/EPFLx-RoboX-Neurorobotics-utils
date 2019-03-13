@@ -508,8 +508,7 @@ class SARSA_additional():
  		
 		elif(goal!=None): 
 			# --- goal
-			rect1 = patches.Rectangle((self.reward_position[1]-0.5,\
-									   self.reward_position[0]-0.5), 1.0, 1.0, color='lime')
+			rect1 = patches.Rectangle((goal[1]-0.5,goal[0]-0.5), 1.0, 1.0, color='lime')
 			ax.add_patch(rect1)
 
 		#----------------------- SETTINGS -----------------------###
