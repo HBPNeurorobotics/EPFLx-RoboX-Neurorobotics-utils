@@ -685,8 +685,8 @@ class SARSA_additional():
 			M + (rng * high))
 			normed = norm(s.values)
 			print type(s.values), type(s)
-			print s.values
-			print s
+			print s.values[0]
+			print s[0]
 			c = [colors.rgb2hex(x) for x in plt.cm.get_cmap(cmap)(normed)]
 			return ['background-color: %s' % color for color in c]
 				
