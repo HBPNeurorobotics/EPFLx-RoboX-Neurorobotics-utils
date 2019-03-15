@@ -686,9 +686,9 @@ class SARSA_additional():
 			norm = colors.Normalize(m - (rng * low),
 			M + (rng * high))
 			normed = norm(s.values)
-			print type(s.values)
+			print type(s.values), s.values.shape
 			c = [colors.rgb2hex(x) for x in plt.cm.get_cmap(cmap)(normed)]
-			return ['background-color: %s' % color for index, color in c]
+			return ['background-color: %s' % color for color in c]
 				
 		df = pd.DataFrame(heatmap); df.columns.name = 'Q';
 		df = df.style.applymap(color_negative).apply(background_gradient, cmap='PuBu', m=df.min().min(), M=df.max().max(),low=0,high=0.2, goal=goal)
