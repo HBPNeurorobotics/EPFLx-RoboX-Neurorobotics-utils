@@ -681,7 +681,7 @@ class SARSA_additional():
 			for j in range(Q.shape[0]):
 				heatmap[i,j] = max(Q[i,j,:])
 
-		def background_gradient(s, m, M, cmap='PuBu', goal, low=0, high=0):
+		def background_gradient(s, cmap='PuBu', m, M, goal, low=0, high=0):
 			rng = M - m
 			norm = colors.Normalize(m - (rng * low),
 			M + (rng * high))
