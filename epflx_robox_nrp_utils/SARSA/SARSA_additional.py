@@ -687,6 +687,8 @@ class SARSA_additional():
 			M + (rng * high))
 			normed = norm(s.values)
 			c = [colors.rgb2hex(x) for x in plt.cm.get_cmap(cmap)(normed)]
+			for index, color in c:
+				print index
 			return ['background-color: black' if(index[0]==goal[0] & index[1]==goal[1]) else 'background-color: %s' % color for index, color in c]
 				
 		df = pd.DataFrame(heatmap); df.columns.name = 'Q';
