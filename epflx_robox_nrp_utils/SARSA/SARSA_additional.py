@@ -688,6 +688,7 @@ class SARSA_additional():
 			return ['background-color: %s' % color for color in c]
 				
 		heatgoal = heatmap; heatgoal[goal[0],goal[1]] = 1000.0
+		sf = pd.DataFrame(heatgoal); sf.columns.name = 'Q';
 		df = pd.DataFrame(heatmap); df.columns.name = 'Q';
-		df = df.style.applymap(color_negative).apply(background_gradient, s=heatgoal, cmap='PuBu', m=df.min().min(), M=df.max().max(),low=0,high=0.2)
+		df = df.style.applymap(color_negative).apply(background_gradient, s=sf, cmap='PuBu', m=df.min().min(), M=df.max().max(),low=0,high=0.2)
 		display.display(df)
