@@ -679,7 +679,7 @@ class SARSA_additional():
 		heatmap = np.zeros((Q.shape[0],Q.shape[0]))
 		for i in range(Q.shape[0]):
 			for j in range(Q.shape[0]):
-				ind = argmax(Q[i,j,:])
+				ind = np.argmax(Q[i,j,:])
 				if(ind==0): heatmap[i+1,j] = max(Q[i,j,:])
 				if(ind==1): heatmap[i-1,j] = max(Q[i,j,:])
 				if(ind==2): heatmap[i,j+1] = max(Q[i,j,:])
