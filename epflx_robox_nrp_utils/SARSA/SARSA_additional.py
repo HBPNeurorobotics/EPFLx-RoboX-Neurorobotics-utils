@@ -620,23 +620,23 @@ class SARSA_additional():
 		def highlight_max(s):
 			return ['background-color: black' if (v==-1.0) else 'background-color: gold' if (v==1.0) else '' for v in s]
 		
-		def color_negative_red(val):
+		def color_negative(val):
 			color = 'white' if val < 0 else 'black'
 			return 'color: %s' % color
 		
 		print "Reward matrix is generated for your maze. Reward structure:"
 		
 		df = pd.DataFrame(reward[:,:,0]); df.columns.name = 'DOWN_____'; 
-		df = df.style.applymap(color_negative_red).apply(highlight_max).set_properties(**{'width': '100px'}); display.display(df)
+		df = df.style.applymap(color_negative).apply(highlight_max).set_properties(**{'width': '100px'}); display.display(df)
 		
 		df = pd.DataFrame(reward[:,:,1]); df.columns.name = 'UP________'; 
-		df = df.style.applymap(color_negative_red).apply(highlight_max).set_properties(**{'width': '100px'}); display.display(df)
+		df = df.style.applymap(color_negative).apply(highlight_max).set_properties(**{'width': '100px'}); display.display(df)
 		
 		df = pd.DataFrame(reward[:,:,2]); df.columns.name = 'RIGHT_____'; 
-		df = df.style.applymap(color_negative_red).apply(highlight_max).set_properties(**{'width': '100px'}); display.display(df)
+		df = df.style.applymap(color_negative).apply(highlight_max).set_properties(**{'width': '100px'}); display.display(df)
 		
 		df = pd.DataFrame(reward[:,:,3]); df.columns.name = 'LEFT______'; 
-		df = df.style.applymap(color_negative_red).apply(highlight_max).set_properties(**{'width': '100px'}); display.display(df)
+		df = df.style.applymap(color_negative).apply(highlight_max).set_properties(**{'width': '100px'}); display.display(df)
 		
 		raw_input('Press Enter to finish... ')
 		clear_output()
@@ -670,6 +670,10 @@ class SARSA_additional():
 		#for i in range(Q.shape[0]):
 		#	print ["%12.8f"% (q) for i,q in enumerate(Q[i,:,3])]
 
+		def color_negative(val):
+			color = 'white' if val == 0 else 'black'
+			return 'color: %s' % color
+		
 		heatmap = np.zeros((Q.shape[0],Q.shape[0]))
 		for i in range(Q.shape[0]):
 			for j in range(Q.shape[0]):
@@ -684,5 +688,5 @@ class SARSA_additional():
 			return ['background-color: %s' % color for color in c]
 				
 		df = pd.DataFrame(heatmap); df.columns.name = 'Q';
-		df = df.style.apply(background_gradient, cmap='PuBu', m=df.min().min()-df.max().max()*0.0, M=df.max().max(),low=0,high=0.2)
+		df = df.style.applymap(color_negative).apply(background_gradient, cmap='PuBu', m=df.min().min()-df.max().max()*0.0, M=df.max().max(),low=0,high=0.2)
 		display.display(df)
