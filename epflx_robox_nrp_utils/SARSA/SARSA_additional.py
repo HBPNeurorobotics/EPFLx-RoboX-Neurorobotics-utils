@@ -673,7 +673,7 @@ class SARSA_additional():
 		
 		def highlight_max(s,val):
 			is_max = s == val
-			return ['background-color: black' if v for v in is_max]
+			return ['background-color: black' if v else pass for v in is_max]
 		
 		def color_negative(val):
 			color = 'white' if val == 0 else 'black'
