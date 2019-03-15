@@ -670,6 +670,11 @@ class SARSA_additional():
 		#for i in range(Q.shape[0]):
 		#	print ["%12.8f"% (q) for i,q in enumerate(Q[i,:,3])]
 
+		
+		def highlight_max(s):
+			is_max = s == s.at[0][0]
+			return ['background-color: black' if v else '' for v in is_max]
+		
 		def color_negative(val):
 			color = 'white' if val == 0 else 'black'
 			return 'color: %s' % color
@@ -690,5 +695,5 @@ class SARSA_additional():
 			return ['background-color: %s' % color for color in c]
 				
 		df = pd.DataFrame(heatmap); df.columns.name = 'Q';
-		df = df.style.applymap(color_negative).apply(background_gradient, cmap='PuBu', m=df.min().min(), M=df.max().max(),low=0,high=0.2)
+		df = df.style.applymap(color_negative).apply(background_gradient, cmap='PuBu', m=df.min().min(), M=df.max().max(),low=0,high=0.2).apply(highlight_max)
 		display.display(df)
