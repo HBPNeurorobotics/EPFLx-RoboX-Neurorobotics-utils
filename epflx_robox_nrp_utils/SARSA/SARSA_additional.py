@@ -673,18 +673,18 @@ class SARSA_additional():
 
 		
 		def color_negative(val):
-			color = 'white' if val == 0 else 'black'
+			color = 'black' if val == 0 else 'black'
 			return 'color: %s' % color
 		
 		heatmap = np.zeros((Q.shape[0],Q.shape[0]))
 		for i in range(Q.shape[0]):
 			for j in range(Q.shape[0]):
-				#ind = np.argmax(Q[i,j,:])
-				#if(ind==0): heatmap[i+1,j] = max(Q[i,j,:])
-				#if(ind==1): heatmap[i-1,j] = max(Q[i,j,:])
-				#if(ind==2): heatmap[i,j+1] = max(Q[i,j,:])
-				#if(ind==3): heatmap[i,j-1] = max(Q[i,j,:])
-				heatmap[i,j] = max(Q[i,j,:])
+				ind = np.argmax(Q[i,j,:])
+				if(ind==0): heatmap[i+1,j] = max(Q[i,j,:])
+				if(ind==1): heatmap[i-1,j] = max(Q[i,j,:])
+				if(ind==2): heatmap[i,j+1] = max(Q[i,j,:])
+				if(ind==3): heatmap[i,j-1] = max(Q[i,j,:])
+				#heatmap[i,j] = max(Q[i,j,:])
 
 		def background_gradient(s, m, M, cmap='PuBu', low=0, high=0, goal=[0,0]):
 			rng = M - m
