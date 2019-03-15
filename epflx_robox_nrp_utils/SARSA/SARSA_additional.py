@@ -679,21 +679,24 @@ class SARSA_additional():
 		heatmap = np.zeros((Q.shape[0],Q.shape[0]))
 		for i in range(Q.shape[0]):
 			for j in range(Q.shape[0]):
-				ind = np.argmax(Q[i,j,:])
-				if(ind==0): heatmap[i+1,j] = max(Q[i,j,:])
-				if(ind==1): heatmap[i-1,j] = max(Q[i,j,:])
-				if(ind==2): heatmap[i,j+1] = max(Q[i,j,:])
-				if(ind==3): heatmap[i,j-1] = max(Q[i,j,:])
+				#ind = np.argmax(Q[i,j,:])
+				#if(ind==0): heatmap[i+1,j] = max(Q[i,j,:])
+				#if(ind==1): heatmap[i-1,j] = max(Q[i,j,:])
+				#if(ind==2): heatmap[i,j+1] = max(Q[i,j,:])
+				#if(ind==3): heatmap[i,j-1] = max(Q[i,j,:])
+				heatmap[i,j] = max(Q[i,j,:])
 
 		def background_gradient(s, m, M, cmap='PuBu', low=0, high=0, goal=[0,0]):
 			rng = M - m
 			norm = colors.Normalize(m - (rng * low),
 			M + (rng * high))
 			normed = norm(s.values)
-			print type(s.values[0]), s.values[0].shape
 			c = [colors.rgb2hex(x) for x in plt.cm.get_cmap(cmap)(normed)]
+			bg = ['background-color: %s' % color for color in c]
+			print type(bg), bg
 			return ['background-color: %s' % color for color in c]
 				
+		#heatmap[goal[0],goal[1]] = math.inf
 		df = pd.DataFrame(heatmap); df.columns.name = 'Q';
 		df = df.style.applymap(color_negative).apply(background_gradient, cmap='PuBu', m=df.min().min(), M=df.max().max(),low=0,high=0.2, goal=goal)
 		display.display(df)
