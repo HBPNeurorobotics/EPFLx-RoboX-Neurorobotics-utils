@@ -64,13 +64,13 @@ class SARSA_additional():
 		self.guide = np.zeros((self.Nn,self.Nn,4))
 		states = self.rewarded_states()
 		actions = self.rewarded_actions(states)
-		choice = self.choice_data(states,actions)
 		reward = self.reward_data(states,actions)
 
 		# visualization (Maze: 2 Modes; Reward: Table)
 		self.visualization1(states,actions)	# Mode 1
 		self.visualization2(states,actions,self.test)	# Mode 2
 		reward = self.reward_goal(states,reward)
+		choice = self.choice_data(states,actions)
 
 		## reward
 		self.save_reward(reward)
@@ -94,9 +94,9 @@ class SARSA_additional():
 		actions = self.rewarded_actions(states)
 
 		## reward
-		choice = self.choice_data(states,actions)
 		reward = self.reward_data(states,actions)
 		reward = self.reward_goal(states,reward)
+		choice = self.choice_data(states,actions)
 		self.save_reward(reward)
 		#self.print_reward(reward)			# Table
 
@@ -268,6 +268,7 @@ class SARSA_additional():
 				output[i][j] = '['+','.join(str(e) for e in reward[i*self.Nn+j])+']'
 
 		import pandas as pd
+		print 'Possible actions to choose: 0 - Down; 1 - Up; 2 - Right; 3 - Left.'
 		df = pd.DataFrame(output); df.columns.name = 'Actions';
 		df = df.style.applymap(color_negative).set_properties(**{'width': '100px'});
 		display.display(df)
