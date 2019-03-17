@@ -64,6 +64,7 @@ class SARSA_additional():
 		self.guide = np.zeros((self.Nn,self.Nn,4))
 		states = self.rewarded_states()
 		actions = self.rewarded_actions(states)
+		choice = self.choice_data(states,actions)
 		reward = self.reward_data(states,actions)
 
 		# visualization (Maze: 2 Modes; Reward: Table)
@@ -93,6 +94,7 @@ class SARSA_additional():
 		actions = self.rewarded_actions(states)
 
 		## reward
+		choice = self.choice_data(states,actions)
 		reward = self.reward_data(states,actions)
 		reward = self.reward_goal(states,reward)
 		self.save_reward(reward)
@@ -240,6 +242,42 @@ class SARSA_additional():
 
 		return reward
 
+    # Define reward as each Q(x,y,a)
+	def choice_data(self,states,actions):
+		reward = [] #np.zeros((self.Nn,self.Nn,4))
+		for i in range(self.Nn):
+			for j in range(self.Nn):
+				acts = []
+				for a in range(4):
+					if  (a == 0): ish =  1; jsh =   0;
+					elif(a == 1): ish = -1; jsh =   0;
+					elif(a == 2): ish =  0; jsh =   1;
+					elif(a == 3): ish =  0; jsh =  -1;
+
+					able = self.availability(i,j,i+ish,j+jsh,actions)
+					if(able==0.0): acts.append(a)
+				reward.append(acts)
+
+		def color_negative(val):
+			color = {len(val)==2.0: 'darkorange', len(val)==9.0: 'sandybrown'}.get(True, 'orange')
+			return 'background-color: %s' % color
+
+		output = np.chararray((self.Nn,self.Nn), itemsize=10)
+		for i in range(self.Nn):
+			for j in range(self.Nn):
+				output[i][j] = '['+','.join(str(e) for e in reward[i*self.Nn+j])+']'
+
+		import pandas as pd
+		df = pd.DataFrame(output); df.columns.name = 'Actions';
+		df = df.style.applymap(color_negative).set_properties(**{'width': '100px'});
+		display.display(df)
+
+		return reward
+	
+	
+	
+	
+	
     # Define reward as each Q(x,y,a)
 	def reward_goal(self,states,reward):
 		if(self.input):
