@@ -64,7 +64,7 @@ class SARSA_additional():
 		self.guide = np.zeros((self.Nn,self.Nn,4))
 		states = self.rewarded_states()
 		actions = self.rewarded_actions(states)
-		reward = self.reward_data(states,actions)
+		#reward = self.reward_data(states,actions)
 
 		# visualization (Maze: 2 Modes; Reward: Table)
 		self.visualization1(states,actions)	# Mode 1
@@ -76,7 +76,7 @@ class SARSA_additional():
 		self.save_reward(reward)
 		self.print_reward(reward)			# Table
 
-		#return self.Nn, self.lattice, self.pos, reward
+		return reward, choice
     
 
 	### Test analysis program
@@ -94,7 +94,7 @@ class SARSA_additional():
 		actions = self.rewarded_actions(states)
 
 		## reward
-		reward = self.reward_data(states,actions)
+		#reward = self.reward_data(states,actions)
 		reward = self.reward_goal(states,reward)
 		choice = self.choice_data(states,actions)
 		self.save_reward(reward)
@@ -297,12 +297,12 @@ class SARSA_additional():
 			self.s_goal = self.s_goal
 
 
-		if(reward[self.s_goal[0]-1,self.s_goal[1],0] == 0.0): reward[self.s_goal[0]-1,self.s_goal[1],0] = 1.0
-		if(reward[self.s_goal[0]+1,self.s_goal[1],1] == 0.0): reward[self.s_goal[0]+1,self.s_goal[1],1] = 1.0
-		if(reward[self.s_goal[0],self.s_goal[1]-1,2] == 0.0): reward[self.s_goal[0],self.s_goal[1]-1,2] = 1.0
-		if(reward[self.s_goal[0],self.s_goal[1]+1,3] == 0.0): reward[self.s_goal[0],self.s_goal[1]+1,3] = 1.0
+		#if(reward[self.s_goal[0]-1,self.s_goal[1],0] == 0.0): reward[self.s_goal[0]-1,self.s_goal[1],0] = 1.0
+		#if(reward[self.s_goal[0]+1,self.s_goal[1],1] == 0.0): reward[self.s_goal[0]+1,self.s_goal[1],1] = 1.0
+		#if(reward[self.s_goal[0],self.s_goal[1]-1,2] == 0.0): reward[self.s_goal[0],self.s_goal[1]-1,2] = 1.0
+		#if(reward[self.s_goal[0],self.s_goal[1]+1,3] == 0.0): reward[self.s_goal[0],self.s_goal[1]+1,3] = 1.0
 
-		return reward
+		return self.s_goal
     
     # Define the punishment at Q(x,y,a)
 	def availability(self,x0,y0,x1,y1,actions):
