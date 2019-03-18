@@ -259,7 +259,7 @@ class SARSA_additional():
 				reward.append(acts)
 
 		def color_negative(val):
-			color = {len(val)==2.0: 'darkorange', len(val)==9.0: 'sandybrown', len(val)%2==0.0: 'green'}.get(True, 'orange')
+			color = {len(val)==9.0: 'sandybrown', len(val)%2==0.0: 'green', len(val)==2.0: 'darkorange'}.get(True, 'orange')
 			return 'background-color: %s' % color
 
 		output = np.chararray((self.Nn,self.Nn), itemsize=10)
