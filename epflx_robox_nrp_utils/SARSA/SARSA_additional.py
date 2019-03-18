@@ -638,11 +638,12 @@ class SARSA_additional():
 			next(reader) # skip header
 			data = [r for r in reader]
 		# calculate Nn
-		print len(data)
-		self.Nn = int(math.sqrt(len(data)/4))
+		#print len(data)
+		self.Nn = len(data) #int(math.sqrt(len(data)/4))
 		# re-create Reward
 		Reward = np.zeros((self.Nn,self.Nn,4))
 		for i,line in enumerate(data):
+			print line
 			z = line[0]; y = line[1]; x = line[2];
 			Reward[x,y,z] = line[3]
 			if(Reward[x,y,z] == 1):
