@@ -610,7 +610,7 @@ class SARSA_additional():
 			self.lattice[x,y,0] = line[2]
 			self.lattice[x,y,1] = line[3]
 		return self.lattice
-            
+        """
 	def upload_reward(self):
 		# load data of som-lattice from csv 
 		with open("SARSA_data_reward.csv") as f:
@@ -630,7 +630,30 @@ class SARSA_additional():
 				if(int(z)==2): reward_position = [int(x),int(y)+1]
 				if(int(z)==3): reward_position = [int(x),int(y)-1]
 		return Reward, reward_position
-
+	"""
+	def upload_reward(self):
+		# load data of som-lattice from csv 
+		with open("SOM_possible_actions.csv") as f:
+			reader = csv.reader(f)
+			next(reader) # skip header
+			data = [r for r in reader]
+		# calculate Nn
+		print len(data)
+		self.Nn = int(math.sqrt(len(data)/4))
+		# re-create Reward
+		Reward = np.zeros((self.Nn,self.Nn,4))
+		for i,line in enumerate(data):
+			z = line[0]; y = line[1]; x = line[2];
+			Reward[x,y,z] = line[3]
+			if(Reward[x,y,z] == 1):
+				if(int(z)==0): reward_position = [int(x)+1,int(y)]
+				if(int(z)==1): reward_position = [int(x)-1,int(y)]
+				if(int(z)==2): reward_position = [int(x),int(y)+1]
+				if(int(z)==3): reward_position = [int(x),int(y)-1]
+		return Reward, reward_position	
+	
+	
+	
 	def upload_Qvalue(self):        
 		# load data of som-lattice from csv 
 		with open("SARSA_data_Qvalue.csv") as f:
