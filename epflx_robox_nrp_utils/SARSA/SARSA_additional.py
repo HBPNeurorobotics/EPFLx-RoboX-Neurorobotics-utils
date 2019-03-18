@@ -73,8 +73,8 @@ class SARSA_additional():
 		choice = self.choice_data(states,actions)
 
 		## reward
-		self.save_reward(reward)
-		self.print_reward(reward)			# Table
+		#self.save_reward(reward)
+		#self.print_reward(reward)			# Table
 
 		return reward, choice
     
@@ -97,7 +97,7 @@ class SARSA_additional():
 		#reward = self.reward_data(states,actions)
 		reward = self.reward_goal(states)
 		choice = self.choice_data(states,actions)
-		self.save_reward(reward)
+		#self.save_reward(reward)
 		#self.print_reward(reward)			# Table
 
 		#return self.Nn, self.lattice, self.pos, reward
