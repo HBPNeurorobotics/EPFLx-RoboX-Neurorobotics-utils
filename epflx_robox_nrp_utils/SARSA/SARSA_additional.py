@@ -267,6 +267,7 @@ class SARSA_additional():
 			for j in range(self.Nn):
 				output[i][j] = '['+','.join(str(e) for e in reward[i*self.Nn+j])+']'
 				if(i==self.s_goal[0] and j==self.s_goal[1]): output[i][j] = ' ' + output[i][j]
+				print i, j, len(output[i][j])
 				
 
 		import pandas as pd
