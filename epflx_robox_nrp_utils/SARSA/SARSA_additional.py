@@ -266,6 +266,8 @@ class SARSA_additional():
 		for i in range(self.Nn):
 			for j in range(self.Nn):
 				output[i][j] = '['+','.join(str(e) for e in reward[i*self.Nn+j])+']'
+				if(i==self.s_goal[0] and j==self.s_goal[1]): output[i][j] = ' ' + output[i][j]
+				
 
 		import pandas as pd
 		print 'Possible actions to choose: 0 - Down; 1 - Up; 2 - Right; 3 - Left.'
