@@ -69,7 +69,7 @@ class SARSA_additional():
 		# visualization (Maze: 2 Modes; Reward: Table)
 		self.visualization1(states,actions)	# Mode 1
 		self.visualization2(states,actions,self.test)	# Mode 2
-		reward = self.reward_goal(states,reward)
+		reward = self.reward_goal(states)
 		choice = self.choice_data(states,actions)
 
 		## reward
@@ -95,7 +95,7 @@ class SARSA_additional():
 
 		## reward
 		#reward = self.reward_data(states,actions)
-		reward = self.reward_goal(states,reward)
+		reward = self.reward_goal(states)
 		choice = self.choice_data(states,actions)
 		self.save_reward(reward)
 		#self.print_reward(reward)			# Table
@@ -280,7 +280,7 @@ class SARSA_additional():
 	
 	
     # Define reward as each Q(x,y,a)
-	def reward_goal(self,states,reward):
+	def reward_goal(self,states):
 		if(self.input):
 			while True:
 				print; print		'==================================================================================================================='
@@ -302,7 +302,6 @@ class SARSA_additional():
 		#if(reward[self.s_goal[0],self.s_goal[1]-1,2] == 0.0): reward[self.s_goal[0],self.s_goal[1]-1,2] = 1.0
 		#if(reward[self.s_goal[0],self.s_goal[1]+1,3] == 0.0): reward[self.s_goal[0],self.s_goal[1]+1,3] = 1.0
 
-		print self.s_goal
 		return self.s_goal
     
     # Define the punishment at Q(x,y,a)
