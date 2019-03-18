@@ -639,19 +639,21 @@ class SARSA_additional():
 			data = [r for r in reader]
 		# calculate Nn
 		#print len(data)
+		from ast import literal_eval
 		self.Nn = len(data) #int(math.sqrt(len(data)/4))
 		# re-create Reward
-		Reward = np.zeros((self.Nn,self.Nn,4))
+		#Reward = np.zeros((self.Nn,self.Nn,4))
+		Reward = []
 		for i,line in enumerate(data):
-			print line
-			z = line[0]; y = line[1]; x = line[2];
-			Reward[x,y,z] = line[3]
-			if(Reward[x,y,z] == 1):
-				if(int(z)==0): reward_position = [int(x)+1,int(y)]
-				if(int(z)==1): reward_position = [int(x)-1,int(y)]
-				if(int(z)==2): reward_position = [int(x),int(y)+1]
-				if(int(z)==3): reward_position = [int(x),int(y)-1]
-		return Reward, reward_position	
+			for j in range(1,N+1):
+    				if(len(line[j])%2==0)and(len(line[j])>2):
+        				reward_position = j; line[j] = line[j].replace(" [", "[")
+    				cell =  line[j]
+    				cell =  literal_eval(cell)
+    				Reward.append(cell)
+		print Reward
+		print reward_position
+		return Reward, reward_position
 	
 	
 	
