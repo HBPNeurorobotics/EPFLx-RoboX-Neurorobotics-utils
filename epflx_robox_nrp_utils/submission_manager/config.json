@@ -1,0 +1,15 @@
+{
+    "oidc": {
+        "user": "https://services.humanbrainproject.eu/idm/v1/api/user"
+    },
+
+    "grading-server": {
+        "staging": "http://148.187.97.48/proxy",
+        "dev": "http://148.187.96.224:80/proxy",
+        "local": "http://localhost:3000/submission"
+    },
+
+    "submission-header": "EPFLx-RoboX-Neurorobotics 2019",
+    "environment": "local"
+
+}
