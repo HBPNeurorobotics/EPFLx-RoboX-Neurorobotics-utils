@@ -146,7 +146,7 @@ class SARSA_evaluation():
 				    except: n = 1
 
 				    if(np.max(ways) < 0) and (t==1): L += 1
-				    for d in range(len(self.reward[i*self.Nn+j][d])):
+				    for d in range(len(self.reward[i*self.Nn+j])):
 				        if(self.reward[i*self.Nn+j][d] == 1):
 				            if(M[i,j]==100): N = N - 1
 				            M[i,j] = 1; 
