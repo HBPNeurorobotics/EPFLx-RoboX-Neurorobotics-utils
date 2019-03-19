@@ -262,6 +262,10 @@ class SARSA_additional():
 			color = {len(val)==9.0: 'sandybrown', len(val)%2==0.0: 'green', len(val)==2.0: 'darkorange'}.get(True, 'orange')
 			return 'background-color: %s' % color
 
+		def border_negative(val):
+			color = {len(val)==9.0: 'dashed double double none', len(val)%2==0.0: 'dashed double none', len(val)==2.0: 'dashed none'}.get(True, 'none')
+			return 'border-style: %s' % color
+		
 		output = np.chararray((self.Nn,self.Nn), itemsize=10)
 		for i in range(self.Nn):
 			for j in range(self.Nn):
@@ -273,7 +277,7 @@ class SARSA_additional():
 		print 'Possible actions to choose: 0 - Down; 1 - Up; 2 - Right; 3 - Left.'
 		df = pd.DataFrame(output); df.columns.name = 'Actions';
 		df.to_csv('SOM_possible_actions.csv')
-		df = df.style.applymap(color_negative).set_properties(**{'width': '100px'});
+		df = df.style.applymap(color_negative,border_negative).set_properties(**{'width': '100px'});
 		display.display(df)
 
 		return reward
