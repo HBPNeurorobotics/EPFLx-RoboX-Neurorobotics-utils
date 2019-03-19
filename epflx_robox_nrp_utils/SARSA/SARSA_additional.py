@@ -788,12 +788,40 @@ class SARSA_additional():
 			bg = ['background-color: %s' % color for color in c]
 			#print type(bg), bg
 			return ['background-color: %s' % color for color in c]
-				
+			
+			
+			
+		def border_negative(val):
+			color = {len(val)>=9.0: 'none', len(val)==2.0: 'solid solid solid solid', \
+				 val.find("[0,1]") > -1: 'none solid none solid', \
+				 val.find("[0,2]") > -1: 'solid none none solid', \
+				 val.find("[0,3]") > -1: 'solid solid none none', \
+				 
+				 val.find("[1,2]") > -1: 'none none solid solid', \
+				 val.find("[1,3]") > -1: 'none solid solid none', \
+				 
+				 val.find("[2,3]") > -1: 'solid none solid none', \
+				 
+				 val.find("[0]") > -1: 'solid solid none solid', \
+				 val.find("[1]") > -1: 'none solid solid solid', \
+				 val.find("[2]") > -1: 'solid none solid solid', \
+				 val.find("[3]") > -1: 'solid solid solid none', \
+				 
+				 val.find("[0,1,2]") > -1: 'none none none solid', \
+				 val.find("[1,2,3]") > -1: 'none none solid none', \
+				 val.find("[0,1,3]") > -1: 'none solid none none', \
+				 val.find("[0,2,3]") > -1: 'solid none none none'}.get(True, 'none')
+			return 'border-style: %s' % color
+			
+			
 		#heatmap[goal[0],goal[1]] = math.inf
 		df = pd.DataFrame(heatmap); df.columns.name = 'Q';
-		df = df.style.applymap(color_negative).apply(background_gradient, cmap='PuBu', m=df.min().min(), M=df.max().max(),low=0,high=0.2, goal=goal)
+		df = df.style.applymap(border_negative).applymap(color_negative).apply(background_gradient, cmap='PuBu', m=df.min().min(), M=df.max().max(),low=0,high=0.2, goal=goal).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
 		display.display(df)
 		
 		df2 = pd.DataFrame(heatmap2); df2.columns.name = 'Q';
-		df2 = df2.style.applymap(color_negative).apply(background_gradient, cmap='PuBu', m=df2.min().min(), M=df2.max().max(),low=0,high=0.2, goal=goal)
+		df2 = df2.style.applymap(border_negative).applymap(color_negative).apply(background_gradient, cmap='PuBu', m=df2.min().min(), M=df2.max().max(),low=0,high=0.2, goal=goal).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
 		display.display(df2)
+
+		#df = df.style.applymap(border_negative).applymap(color_negative).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
+		
