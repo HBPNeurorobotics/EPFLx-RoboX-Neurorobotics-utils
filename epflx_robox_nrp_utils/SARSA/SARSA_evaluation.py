@@ -182,6 +182,7 @@ class SARSA_evaluation():
 	M[self.goal[0],self.goal[1]] = 0
 	print self.goal
 	print self.reward
+	print M
 	t = 0; L = 0
 	while N > L:
 		t += 1
