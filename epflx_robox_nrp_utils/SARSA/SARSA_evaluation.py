@@ -199,11 +199,11 @@ class SARSA_evaluation():
 							if(M[i-1,j]>M[i,j]+1): 
 								if(M[i-1,j]==100): N = N - 1
 								M[i-1,j] = M[i,j] + 1;
-						if(self.reward[i*Nn+j][d] == 2):
+						if(self.reward[i*self.Nn+j][d] == 2):
 							if(M[i,j+1]>M[i,j]+1): 
 								if(M[i,j+1]==100): N = N - 1
 								M[i,j+1] = M[i,j] + 1; 
-						if(self.reward[i*Nn+j][d] == 3):
+						if(self.reward[i*self.Nn+j][d] == 3):
 							if(M[i,j-1]>M[i,j]+1): 
 								if(M[i,j-1]==100): N = N - 1
 								M[i,j-1] = M[i,j] + 1; 
