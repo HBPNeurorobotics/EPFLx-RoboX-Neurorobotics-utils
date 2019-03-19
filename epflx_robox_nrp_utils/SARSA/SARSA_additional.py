@@ -295,6 +295,7 @@ class SARSA_additional():
 		print 'Possible actions to choose: 0 - Down; 1 - Up; 2 - Right; 3 - Left.'
 		df = pd.DataFrame(output); df.columns.name = 'Actions';
 		df.to_csv('SOM_possible_actions.csv')
+		self.pro = df.style.applymap(border_negative)
 		df = df.style.applymap(border_negative).applymap(color_negative).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
 		display.display(df)
 
@@ -815,12 +816,13 @@ class SARSA_additional():
 			
 			
 		#heatmap[goal[0],goal[1]] = math.inf
+		
 		df = pd.DataFrame(heatmap); df.columns.name = 'Q';
 		df = df.style.applymap(color_negative).apply(background_gradient, cmap='PuBu', m=df.min().min(), M=df.max().max(),low=0,high=0.2, goal=goal).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
 		display.display(df)
 		
 		df2 = pd.DataFrame(heatmap2); df2.columns.name = 'Q';
-		df2 = df2.style.applymap(color_negative).apply(background_gradient, cmap='PuBu', m=df2.min().min(), M=df2.max().max(),low=0,high=0.2, goal=goal).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
+		df2 = df2.style.df.applymap(lambda x: self.pro).applymap(color_negative).apply(background_gradient, cmap='PuBu', m=df2.min().min(), M=df2.max().max(),low=0,high=0.2, goal=goal).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
 		display.display(df2)
 
 		#df = df.style.applymap(border_negative).applymap(color_negative).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
