@@ -277,7 +277,7 @@ class SARSA_additional():
 		print 'Possible actions to choose: 0 - Down; 1 - Up; 2 - Right; 3 - Left.'
 		df = pd.DataFrame(output); df.columns.name = 'Actions';
 		df.to_csv('SOM_possible_actions.csv')
-		df = df.style.applymap(border_negative).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
+		df = df.style.applymap(border_negative).applymap(color_negative).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
 		display.display(df)
 
 		return reward
