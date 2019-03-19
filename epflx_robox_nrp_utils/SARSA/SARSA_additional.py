@@ -264,8 +264,19 @@ class SARSA_additional():
 
 		def border_negative(val):
 			color = {len(val)>=9.0: 'none', len(val)==2.0: 'solid solid solid solid', \
-				 val.find("1,2") > -1: 'none none solid solid', \
-				 val.find("1,3") > -1: 'none solid solid none',}.get(True, 'none')
+				 val.find("[1,2]") > -1: 'none none solid solid', \
+				 val.find("[1,3]") > -1: 'none solid solid none', \
+				 val.find("[1,3]") > -1: 'none solid solid none', \
+				 
+				 val.find("[0]") > -1: 'none none solid none', \
+				 val.find("[1]") > -1: 'solid none solid none', \
+				 val.find("[2]") > -1: 'none solid none none', \
+				 val.find("[3]") > -1: 'none none none solid', \
+				 
+				 val.find("[0,1,2]") > -1: 'solid solid solid none', \
+				 val.find("[1,2,3]") > -1: 'solid solid none solid', \
+				 val.find("[0,1,3]") > -1: 'solid none solid solid', \
+				 val.find("[0,2,3]") > -1: 'none solid solid solid', \}.get(True, 'none')
 			return 'border-style: %s' % color
 		
 		output = np.chararray((self.Nn,self.Nn), itemsize=10)
