@@ -188,7 +188,7 @@ class SARSA_evaluation():
 		for i in range(self.Nn):
 			for j in range(self.Nn):
 				#print i,j, len(reward[i*Nn+j])
-				if(len(self.reward[i][j])==0.0 and M[i,j] == 100.0): L = L + 1; M[i,j] = 1000; print "L+1"
+				if(len(self.reward[i][j])==0.0 and M[i,j] == 100.0): L = L + 1; M[i,j] = 1000
 				if(M[i,j] < 100): 
 					for d in range(len(self.reward[i][j])):
 						if(self.reward[i][j][d] == 0):
