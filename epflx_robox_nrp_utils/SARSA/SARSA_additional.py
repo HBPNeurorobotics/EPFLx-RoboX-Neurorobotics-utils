@@ -263,7 +263,7 @@ class SARSA_additional():
 			return 'background-color: %s' % color
 
 		def border_negative(val):
-			color = {len(val)==9.0: 'dashed double double none', len(val)%2==0.0: 'dashed double none', len(val)==2.0: 'dashed none'}.get(True, 'none')
+			color = {len(val)>=9.0: 'none', len(val)==2.0: 'solid solid solid solid'}.get(True, 'none')
 			return 'border-style: %s' % color
 		
 		output = np.chararray((self.Nn,self.Nn), itemsize=10)
