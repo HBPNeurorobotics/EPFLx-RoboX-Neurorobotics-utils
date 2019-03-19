@@ -115,7 +115,7 @@ class SARSA_evaluation():
         while(state != self.goal) and (len(Qway) < self.Nn*self.Nn):
 
             try: index = np.argmax(self.Q[state[0],state[1],:])
-			except: break
+            except: break
             Qway.append(self.Q[state[0],state[1],index])
             if  (index == 0): state[0] += 1
             elif(index == 1): state[0] -= 1
