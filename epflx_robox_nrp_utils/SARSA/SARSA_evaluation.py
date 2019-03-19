@@ -175,8 +175,7 @@ class SARSA_evaluation():
 		return self.M
 	
 	"""
-	
-    def perfect_map(self):
+def perfect_map(self):
 	N = self.Nn*self.Nn-1
 	M = np.zeros((self.Nn,self.Nn))+100
 	M[self.goal[0],self.goal[1]] = 0
@@ -188,66 +187,31 @@ class SARSA_evaluation():
 		t += 1
 		for i in range(self.Nn):
 			for j in range(self.Nn):
-					
-				
+				#print i,j, len(reward[i*Nn+j])
+				if(len(self.reward[i*self.Nn+j])==0.0 and M[i,j] == 100.0): L = L + 1; M[i,j] = 1000; print "L+1"
 				if(M[i,j] < 100): 
-					print i,j, self.reward[i*self.Nn+j]
 					for d in range(len(self.reward[i*self.Nn+j])):
 						if(self.reward[i*self.Nn+j][d] == 0):
-							if(M[i+1,j]+1<M[i,j]): 
-				                    		if(M[i,j]==100): N = N - 1
-				                    		M[i,j] = M[i+1,j] + 1;
+							if(M[i+1,j]>M[i,j]+1): 
+											if(M[i+1,j]==100): N = N - 1
+											M[i+1,j] = M[i,j] + 1;
 						if(self.reward[i*self.Nn+j][d] == 1):
-							if(M[i-1,j]+1<M[i,j]): 
-				                    		if(M[i,j]==100): N = N - 1
-				                    		M[i,j] = M[i-1,j] + 1;
-						if(self.reward[i*self.Nn+j][d] == 2):
-							if(M[i,j+1]+1<M[i,j]): 
-				                    		if(M[i,j]==100): N = N - 1
-				                    		M[i,j] = M[i,j+1] + 1; 
-						if(self.reward[i*self.Nn+j][d] == 3):
-							if(M[i,j-1]+1<M[i,j]): 
-				                    		if(M[i,j]==100): N = N - 1
-				                    		M[i,j] = M[i,j-1] + 1; 
-				"""    
-				ways = []
-				    try: ways.append(self.reward[(i+1)*self.Nn+j][1])
-				    except: n = 1
-				    try: ways.append(self.reward[(i-1)*self.Nn+j][0]) 
-				    except: n = 1
-				    try: ways.append(self.reward[i*self.Nn+(j+1)][3])
-				    except: n = 1
-				    try: ways.append(self.reward[i*self.Nn+(j-1)][2])
-				    except: n = 1
-
-				    if(np.max(ways) < 0) and (t==1): L += 1
-				    for d in range(len(self.reward[i*self.Nn+j])):
-				        if(self.reward[i*self.Nn+j][d] == 1):
-				            if(M[i,j]==100): N = N - 1
-				            M[i,j] = 1; 
-				        elif(self.reward[i*self.Nn+j][d] == 0):     
-				            if(d==0):
-				                if(M[i+1,j]+1<M[i,j]): 
-				                    if(M[i,j]==100): N = N - 1
-				                    M[i,j] = M[i+1,j] + 1;
-				            if(d==1):
-				                if(M[i-1,j]+1<M[i,j]): 
-				                    if(M[i,j]==100): N = N - 1
-				                    M[i,j] = M[i-1,j] + 1;
-				            if(d==2):
-				                if(M[i,j+1]+1<M[i,j]): 
-				                    if(M[i,j]==100): N = N - 1
-				                    M[i,j] = M[i,j+1] + 1; 
-				            if(d==3):
-				                if(M[i,j-1]+1<M[i,j]): 
-				                    if(M[i,j]==100): N = N - 1
-				                    M[i,j] = M[i,j-1] + 1; 
-				"""
-
+							if(M[i-1,j]>M[i,j]+1): 
+											if(M[i-1,j]==100): N = N - 1
+											M[i-1,j] = M[i,j] + 1;
+						if(self.reward[i*Nn+j][d] == 2):
+							if(M[i,j+1]>M[i,j]+1): 
+											if(M[i,j+1]==100): N = N - 1
+											M[i,j+1] = M[i,j] + 1; 
+						if(self.reward[i*Nn+j][d] == 3):
+							if(M[i,j-1]>M[i,j]+1): 
+											if(M[i,j-1]==100): N = N - 1
+											M[i,j-1] = M[i,j] + 1; 
+		print N, L
 	M[self.goal[0],self.goal[1]] = 100
-	self.M = np.where(M==100, 0, M)
-	print self.M
-	return self.M
+	M = np.where(M==100, 0, M)
+	print M
+	return M
 
 
 	################################################################################
