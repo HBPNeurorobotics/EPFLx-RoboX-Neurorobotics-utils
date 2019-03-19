@@ -820,10 +820,10 @@ class SARSA_additional():
 		#heatmap[goal[0],goal[1]] = math.inf
 		#print actions
 		
-		combine = np.dstack((heatmap2,actions))
-		print combine.shape, combine[0][1][1]
+		#combine = np.dstack((heatmap2,actions))
+		#print combine.shape, combine[0][1][1]
 		
-		df = pd.DataFrame(combine); df.columns.name = 'Q';
+		df = pd.DataFrame(heatmap); df.columns.name = 'Q';
 		df = df.style.applymap(color_negative).apply(background_gradient, cmap='PuBu', m=df.min().min(), M=df.max().max(),low=0,high=0.2, goal=goal).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
 		display.display(df)
 		
