@@ -188,22 +188,22 @@ class SARSA_evaluation():
 		for i in range(self.Nn):
 			for j in range(self.Nn):
 				#print i,j, len(reward[i*Nn+j])
-				if(len(self.reward[i*self.Nn+j])==0.0 and M[i,j] == 100.0): L = L + 1; M[i,j] = 1000; print "L+1"
+				if(len(self.reward[i][j])==0.0 and M[i,j] == 100.0): L = L + 1; M[i,j] = 1000; print "L+1"
 				if(M[i,j] < 100): 
-					for d in range(len(self.reward[i*self.Nn+j])):
-						if(self.reward[i*self.Nn+j][d] == 0):
+					for d in range(len(self.reward[i][j])):
+						if(self.reward[i][j][d] == 0):
 							if(M[i+1,j]>M[i,j]+1): 
 								if(M[i+1,j]==100): N = N - 1
 								M[i+1,j] = M[i,j] + 1;
-						if(self.reward[i*self.Nn+j][d] == 1):
+						if(self.reward[i][j][d] == 1):
 							if(M[i-1,j]>M[i,j]+1): 
 								if(M[i-1,j]==100): N = N - 1
 								M[i-1,j] = M[i,j] + 1;
-						if(self.reward[i*self.Nn+j][d] == 2):
+						if(self.reward[i][j][d] == 2):
 							if(M[i,j+1]>M[i,j]+1): 
 								if(M[i,j+1]==100): N = N - 1
 								M[i,j+1] = M[i,j] + 1; 
-						if(self.reward[i*self.Nn+j][d] == 3):
+						if(self.reward[i][j][d] == 3):
 							if(M[i,j-1]>M[i,j]+1): 
 								if(M[i,j-1]==100): N = N - 1
 								M[i,j-1] = M[i,j] + 1; 
