@@ -47,8 +47,9 @@ class SARSA_evaluation():
 					#print "Q-way:", ["%12.8f"% (q) for i,q in enumerate(Qway)]
 					if(self.video): time.sleep(2)
 					display.clear_output(wait=True)
+					print Qway[len(Qway)]
 					
-					if   (len(Qway) == self.Nn*self.Nn): neverway += 1
+					if   (Qway[len(Qway)] != self.goal) or (len(Qway) == self.Nn*self.Nn): neverway += 1
 					elif (len(Qway) == self.M[k,h]): fastway += 1
 					else: longway += 1; overway += len(Qway) - self.M[k,h]
 		return fastway, longway, overway, neverway
