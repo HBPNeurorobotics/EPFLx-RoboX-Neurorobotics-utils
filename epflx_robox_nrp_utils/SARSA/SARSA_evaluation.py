@@ -179,9 +179,9 @@ class SARSA_evaluation():
 	N = self.Nn*self.Nn-1
 	M = np.zeros((self.Nn,self.Nn))+100
 	M[self.goal[0],self.goal[1]] = 0
-	print self.goal
-	print self.reward
-	print M
+	#print self.goal
+	#print self.reward
+	#print M
 	t = 0; L = 0
 	while N > L:
 		t += 1
@@ -210,7 +210,7 @@ class SARSA_evaluation():
 		print N, L
 	#M[self.goal[0],self.goal[1]] = 100
 	M = np.where(M==1000, 0, M)
-	print M
+	#print M
 	return M
 
 
