@@ -46,7 +46,7 @@ class SARSA_evaluation():
 					#print "Number of steps:", len(self.X)
 					#print "Q-way:", ["%12.8f"% (q) for i,q in enumerate(Qway)]
 					if(self.video): time.sleep(2)
-					display.clear_output(wait=True)		
+					if(self.video): display.clear_output(wait=True)		
 					final = [self.X[len(Qway)-1],self.Y[len(Qway)-1]]
 					print final
 					if   (final != self.goal) or (len(Qway) == self.Nn*self.Nn): neverway += 1
