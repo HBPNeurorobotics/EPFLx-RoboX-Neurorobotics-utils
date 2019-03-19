@@ -190,7 +190,7 @@ class SARSA_evaluation():
 					
 				
 				    if(M[i,j] < 100): 
-						print self.reward[i*self.Nn+j]
+						print i,j, self.reward[i*self.Nn+j]
 						for d in range(len(self.reward[i*self.Nn+j])):
 							if(self.reward[i*self.Nn+j][d] == 0):
 								if(M[i+1,j]+1<M[i,j]): 
