@@ -136,21 +136,21 @@ class SARSA_evaluation():
 			for i in range(self.Nn):
 				for j in range(self.Nn):
 				    ways = []
-				    try: ways.append(self.reward[(i+1)*self.Nn+j,1])
+				    try: ways.append(self.reward[(i+1)*self.Nn+j][1])
 				    except: n = 1
-				    try: ways.append(self.reward[(i-1)*self.Nn+j,0]) 
+				    try: ways.append(self.reward[(i-1)*self.Nn+j][0]) 
 				    except: n = 1
-				    try: ways.append(self.reward[i*self.Nn+(j+1),3])
+				    try: ways.append(self.reward[i*self.Nn+(j+1)][3])
 				    except: n = 1
-				    try: ways.append(self.reward[i*self.Nn+(j-1),2])
+				    try: ways.append(self.reward[i*self.Nn+(j-1)][2])
 				    except: n = 1
 
 				    if(np.max(ways) < 0) and (t==1): L += 1
 				    for d in range(4):
-				        if(self.reward[i*self.Nn+j,d] == 1):
+				        if(self.reward[i*self.Nn+j][d] == 1):
 				            if(M[i,j]==100): N = N - 1
 				            M[i,j] = 1; 
-				        elif(self.reward[i*self.Nn+j,d] == 0):     
+				        elif(self.reward[i*self.Nn+j][d] == 0):     
 				            if(d==0):
 				                if(M[i+1,j]+1<M[i,j]): 
 				                    if(M[i,j]==100): N = N - 1
