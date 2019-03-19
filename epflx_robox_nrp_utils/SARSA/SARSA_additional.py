@@ -645,14 +645,16 @@ class SARSA_additional():
 		#Reward = np.zeros((self.Nn,self.Nn,4))
 		Reward = []
 		for i,line in enumerate(data):
+			reward = []
 			for j in range(1,self.Nn+1):
     				if(len(line[j])%2==0)and(len(line[j])>2):
         				reward_position = [i,j-1]; line[j] = line[j].replace(" [", "[")
     				cell =  line[j]
     				cell =  literal_eval(cell)
-    				Reward.append(cell)
-		#print Reward
-		#print reward_position
+				reward.append(cell)
+    			Reward.append(reward)
+		print Reward
+		print reward_position
 		return Reward, reward_position
 	
 	
