@@ -193,20 +193,20 @@ def perfect_map(self):
 					for d in range(len(self.reward[i*self.Nn+j])):
 						if(self.reward[i*self.Nn+j][d] == 0):
 							if(M[i+1,j]>M[i,j]+1): 
-											if(M[i+1,j]==100): N = N - 1
-											M[i+1,j] = M[i,j] + 1;
+								if(M[i+1,j]==100): N = N - 1
+								M[i+1,j] = M[i,j] + 1;
 						if(self.reward[i*self.Nn+j][d] == 1):
 							if(M[i-1,j]>M[i,j]+1): 
-											if(M[i-1,j]==100): N = N - 1
-											M[i-1,j] = M[i,j] + 1;
+								if(M[i-1,j]==100): N = N - 1
+								M[i-1,j] = M[i,j] + 1;
 						if(self.reward[i*Nn+j][d] == 2):
 							if(M[i,j+1]>M[i,j]+1): 
-											if(M[i,j+1]==100): N = N - 1
-											M[i,j+1] = M[i,j] + 1; 
+								if(M[i,j+1]==100): N = N - 1
+								M[i,j+1] = M[i,j] + 1; 
 						if(self.reward[i*Nn+j][d] == 3):
 							if(M[i,j-1]>M[i,j]+1): 
-											if(M[i,j-1]==100): N = N - 1
-											M[i,j-1] = M[i,j] + 1; 
+								if(M[i,j-1]==100): N = N - 1
+								M[i,j-1] = M[i,j] + 1; 
 		print N, L
 	M[self.goal[0],self.goal[1]] = 100
 	M = np.where(M==100, 0, M)
