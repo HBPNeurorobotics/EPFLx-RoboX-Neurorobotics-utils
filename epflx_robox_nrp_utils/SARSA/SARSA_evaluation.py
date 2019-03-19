@@ -47,6 +47,8 @@ class SARSA_evaluation():
 					#print "Q-way:", ["%12.8f"% (q) for i,q in enumerate(Qway)]
 					if(self.video): time.sleep(2)
 					display.clear_output(wait=True)
+					print Qway
+					print Qway[:,len(Qway)-1]
 					print Qway[len(Qway)-1]
 					
 					if   (Qway[len(Qway)-1] != self.goal) or (len(Qway) == self.Nn*self.Nn): neverway += 1
