@@ -114,7 +114,8 @@ class SARSA_evaluation():
 
         while(state != self.goal) and (len(Qway) < self.Nn*self.Nn):
 
-            index = np.argmax(self.Q[state[0],state[1],:])
+            try: index = np.argmax(self.Q[state[0],state[1],:])
+			except: break
             Qway.append(self.Q[state[0],state[1],index])
             if  (index == 0): state[0] += 1
             elif(index == 1): state[0] -= 1
@@ -125,93 +126,38 @@ class SARSA_evaluation():
             if(self.video): self.visualizationE(self.states,self.actions)
         return Qway
 
-    """
-    def perfect_map(self):
+
+	def perfect_map(self):
 		N = self.Nn*self.Nn-1
 		M = np.zeros((self.Nn,self.Nn))+100
-		M[self.goal[0],self.goal[1]] = -1
+		M[self.goal[0],self.goal[1]] = 0
 		t = 0; L = 0
 		while N > L:
 			t += 1
 			for i in range(self.Nn):
 				for j in range(self.Nn):
-				    ways = []
-				    try: ways.append(self.reward[(i+1)*self.Nn+j][1])
-				    except: n = 1
-				    try: ways.append(self.reward[(i-1)*self.Nn+j][0]) 
-				    except: n = 1
-				    try: ways.append(self.reward[i*self.Nn+(j+1)][3])
-				    except: n = 1
-				    try: ways.append(self.reward[i*self.Nn+(j-1)][2])
-				    except: n = 1
+					if(len(self.reward[i][j])==0.0 and M[i,j] == 100.0): L = L + 1; M[i,j] = 1000
+					if(M[i,j] < 100): 
+						for d in range(len(self.reward[i][j])):
+							if(self.reward[i][j][d] == 0):
+								if(M[i+1,j]>M[i,j]+1): 
+									if(M[i+1,j]==100): N = N - 1
+									M[i+1,j] = M[i,j] + 1;
+							if(self.reward[i][j][d] == 1):
+								if(M[i-1,j]>M[i,j]+1): 
+									if(M[i-1,j]==100): N = N - 1
+									M[i-1,j] = M[i,j] + 1;
+							if(self.reward[i][j][d] == 2):
+								if(M[i,j+1]>M[i,j]+1): 
+									if(M[i,j+1]==100): N = N - 1
+									M[i,j+1] = M[i,j] + 1; 
+							if(self.reward[i][j][d] == 3):
+								if(M[i,j-1]>M[i,j]+1): 
+									if(M[i,j-1]==100): N = N - 1
+									M[i,j-1] = M[i,j] + 1; 
 
-				    if(np.max(ways) < 0) and (t==1): L += 1
-				    for d in range(len(self.reward[i*self.Nn+j])):
-				        if(self.reward[i*self.Nn+j][d] == 1):
-				            if(M[i,j]==100): N = N - 1
-				            M[i,j] = 1; 
-				        elif(self.reward[i*self.Nn+j][d] == 0):     
-				            if(d==0):
-				                if(M[i+1,j]+1<M[i,j]): 
-				                    if(M[i,j]==100): N = N - 1
-				                    M[i,j] = M[i+1,j] + 1;
-				            if(d==1):
-				                if(M[i-1,j]+1<M[i,j]): 
-				                    if(M[i,j]==100): N = N - 1
-				                    M[i,j] = M[i-1,j] + 1;
-				            if(d==2):
-				                if(M[i,j+1]+1<M[i,j]): 
-				                    if(M[i,j]==100): N = N - 1
-				                    M[i,j] = M[i,j+1] + 1; 
-				            if(d==3):
-				                if(M[i,j-1]+1<M[i,j]): 
-				                    if(M[i,j]==100): N = N - 1
-				                    M[i,j] = M[i,j-1] + 1; 
-
-
-		M[self.goal[0],self.goal[1]] = 100
-		self.M = np.where(M==100, 0, M)
-		print self.M
-		return self.M
-	
-	"""
-    def perfect_map(self):
-	N = self.Nn*self.Nn-1
-	M = np.zeros((self.Nn,self.Nn))+100
-	M[self.goal[0],self.goal[1]] = 0
-	#print self.goal
-	#print self.reward
-	#print M
-	t = 0; L = 0
-	while N > L:
-		t += 1
-		for i in range(self.Nn):
-			for j in range(self.Nn):
-				#print i,j, len(reward[i*Nn+j])
-				if(len(self.reward[i][j])==0.0 and M[i,j] == 100.0): L = L + 1; M[i,j] = 1000
-				if(M[i,j] < 100): 
-					for d in range(len(self.reward[i][j])):
-						if(self.reward[i][j][d] == 0):
-							if(M[i+1,j]>M[i,j]+1): 
-								if(M[i+1,j]==100): N = N - 1
-								M[i+1,j] = M[i,j] + 1;
-						if(self.reward[i][j][d] == 1):
-							if(M[i-1,j]>M[i,j]+1): 
-								if(M[i-1,j]==100): N = N - 1
-								M[i-1,j] = M[i,j] + 1;
-						if(self.reward[i][j][d] == 2):
-							if(M[i,j+1]>M[i,j]+1): 
-								if(M[i,j+1]==100): N = N - 1
-								M[i,j+1] = M[i,j] + 1; 
-						if(self.reward[i][j][d] == 3):
-							if(M[i,j-1]>M[i,j]+1): 
-								if(M[i,j-1]==100): N = N - 1
-								M[i,j-1] = M[i,j] + 1; 
-		#print N, L
-	#M[self.goal[0],self.goal[1]] = 100
-	M = np.where(M==1000, 0, M)
-	#print M
-	return M
+		M = np.where(M==1000, 0, M)
+		return M
 
 
 	################################################################################
