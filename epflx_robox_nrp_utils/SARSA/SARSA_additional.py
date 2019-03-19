@@ -651,8 +651,8 @@ class SARSA_additional():
     				cell =  line[j]
     				cell =  literal_eval(cell)
     				Reward.append(cell)
-		print Reward
-		print reward_position
+		#print Reward
+		#print reward_position
 		return Reward, reward_position
 	
 	
@@ -761,7 +761,7 @@ class SARSA_additional():
 			normed = norm(s.values)
 			c = [colors.rgb2hex(x) for x in plt.cm.get_cmap(cmap)(normed)]
 			bg = ['background-color: %s' % color for color in c]
-			print type(bg), bg
+			#print type(bg), bg
 			return ['background-color: %s' % color for color in c]
 				
 		#heatmap[goal[0],goal[1]] = math.inf
