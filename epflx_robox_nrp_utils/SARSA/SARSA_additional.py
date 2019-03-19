@@ -791,9 +791,11 @@ class SARSA_additional():
 			
 			
 			
-		def border_negative(val,actions):
+		def border_negative(val,actions,i=0):
 			print actions
 			print "VAL", val
+			i = i + 1
+			print i
 			color = {len(actions)>=9.0: 'none', len(actions)==2.0: 'solid solid solid solid', \
 				 val.find("[0,1]") > -1: 'none solid none solid', \
 				 val.find("[0,2]") > -1: 'solid none none solid', \
@@ -824,7 +826,7 @@ class SARSA_additional():
 		display.display(df)
 		
 		df2 = pd.DataFrame(heatmap2); df2.columns.name = 'Q';
-		df2 = df2.style.applymap(color_negative).applymap(border_negative,actions=actions).apply(background_gradient, cmap='PuBu', m=df2.min().min(), M=df2.max().max(),low=0,high=0.2, goal=goal).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
+		df2 = df2.style.applymap(color_negative).applymap(border_negative,actions).apply(background_gradient, cmap='PuBu', m=df2.min().min(), M=df2.max().max(),low=0,high=0.2, goal=goal).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
 		display.display(df2)
 
 		#df = df.style.applymap(border_negative).applymap(color_negative).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
