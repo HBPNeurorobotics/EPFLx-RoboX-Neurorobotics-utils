@@ -244,10 +244,10 @@ class SARSA_evaluation():
 				                    M[i,j] = M[i,j-1] + 1; 
 				"""
 
-		M[self.goal[0],self.goal[1]] = 100
-		self.M = np.where(M==100, 0, M)
-		print self.M
-		return self.M
+	M[self.goal[0],self.goal[1]] = 100
+	self.M = np.where(M==100, 0, M)
+	print self.M
+	return self.M
 
 
 	################################################################################
