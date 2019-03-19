@@ -207,7 +207,7 @@ class SARSA_evaluation():
 							if(M[i,j-1]>M[i,j]+1): 
 								if(M[i,j-1]==100): N = N - 1
 								M[i,j-1] = M[i,j] + 1; 
-		print N, L
+		#print N, L
 	#M[self.goal[0],self.goal[1]] = 100
 	M = np.where(M==1000, 0, M)
 	#print M
