@@ -653,8 +653,8 @@ class SARSA_additional():
     				cell =  literal_eval(cell)
 				reward.append(cell)
     			Reward.append(reward)
-		print Reward
-		print reward_position
+		#print Reward
+		#print reward_position
 		return Reward, reward_position
 	
 	
