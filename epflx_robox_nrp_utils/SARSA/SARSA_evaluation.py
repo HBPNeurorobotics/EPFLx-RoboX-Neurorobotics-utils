@@ -175,7 +175,7 @@ class SARSA_evaluation():
 		return self.M
 	
 	"""
-def perfect_map(self):
+    def perfect_map(self):
 	N = self.Nn*self.Nn-1
 	M = np.zeros((self.Nn,self.Nn))+100
 	M[self.goal[0],self.goal[1]] = 0
