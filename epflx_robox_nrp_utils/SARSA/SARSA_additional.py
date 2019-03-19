@@ -793,6 +793,7 @@ class SARSA_additional():
 			
 		def border_negative(val,actions):
 			print actions
+			print "VAL", val
 			color = {len(actions)>=9.0: 'none', len(actions)==2.0: 'solid solid solid solid', \
 				 val.find("[0,1]") > -1: 'none solid none solid', \
 				 val.find("[0,2]") > -1: 'solid none none solid', \
