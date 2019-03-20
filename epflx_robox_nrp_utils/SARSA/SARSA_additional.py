@@ -822,7 +822,7 @@ class SARSA_additional():
 		#print actions
 		#print
 		#print heatmap
-		outheat = np.zeros((Q.shape[0],Q.shape[0]))
+		outheat = np.zeros((Q.shape[0],Q.shape[0]), dtype=float)
 		for i in range(Q.shape[0]):
 			for j in range(Q.shape[0]):
 				act = actions[i][j]
