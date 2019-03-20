@@ -818,7 +818,9 @@ class SARSA_additional():
 			
 			
 		#heatmap[goal[0],goal[1]] = math.inf
-		#print actions
+		print actions
+		print
+		print heatmap
 		
 		#combine = np.dstack((heatmap2,actions))
 		#print combine.shape, combine[0][1][1]
