@@ -768,6 +768,7 @@ class SARSA_additional():
 			color = 'black' if val == 0 else 'black'
 			return 'color: %s' % color
 		
+		
 		heatmap = np.zeros((Q.shape[0],Q.shape[0]))
 		heatmap2 = np.zeros((Q.shape[0],Q.shape[0]))
 		for i in range(Q.shape[0]):
@@ -778,9 +779,11 @@ class SARSA_additional():
 				if(ind==2): heatmap[i,j+1] = max(Q[i,j,:])
 				if(ind==3): heatmap[i,j-1] = max(Q[i,j,:])
 				heatmap2[i,j] = max(Q[i,j,:])
-
-		def background_gradient(s, m, M, cmap='PuBu', low=0, high=0, goal=[0,0]):
+				
+				
+		def background_gradient(s, m, M, cmap='PuBu', low=0, high=0, goal=0.0):
 			rng = M - m
+			print goal
 			norm = colors.Normalize(m - (rng * low),
 			M + (rng * high))
 			normed = norm(s.values)
@@ -822,7 +825,7 @@ class SARSA_additional():
 		#heatmap[goal[0],goal[1]] = math.inf
 		#print actions
 		#print
-		#print heatmap
+		#print heatmap		
 		outheat = np.zeros((Q.shape[0],Q.shape[0]), dtype=float)
 		for i in range(Q.shape[0]):
 			for j in range(Q.shape[0]):
@@ -838,6 +841,7 @@ class SARSA_additional():
 				heat = heat + num*10**(-(6+len(act)))
 				outheat[i,j] = heat
 				#print "OUT", i,j, outheat[i,j]
+		gvalue  = max(outheat[goal[0],goal[1]])
 		
 		#print outheat, outheat[2,1]
 		#combine = np.dstack((heatmap2,actions))
@@ -853,7 +857,7 @@ class SARSA_additional():
 
 		#df = df.style.applymap(border_negative).applymap(color_negative).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
 		df3 = pd.DataFrame(outheat); df3.columns.name = 'Q';
-		df3 = df3.style.applymap(border_negative).applymap(color_negative).apply(background_gradient, cmap='PuBu', m=df3.min().min(), M=df3.max().max(),low=0,high=0.2, goal=goal).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
+		df3 = df3.style.applymap(border_negative).applymap(color_negative).apply(background_gradient, cmap='PuBu', m=df3.min().min(), M=df3.max().max(),low=0,high=0.2, goal=gvalue).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
 		display.display(df3)
 
 		outheat2 = np.zeros((Q.shape[0],Q.shape[0]), dtype=float)
@@ -871,6 +875,8 @@ class SARSA_additional():
 				heat = heat + num*10**(-(6+len(act)))
 				outheat2[i,j] = heat
 				
+		gvalue2  = max(outheat2[goal[0],goal[1]])			
+				
 		df4 = pd.DataFrame(outheat2); df4.columns.name = 'Q';
-		df4 = df4.style.applymap(border_negative).applymap(color_negative).apply(background_gradient, cmap='PuBu', m=df4.min().min(), M=df4.max().max(),low=0,high=0.2, goal=goal).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
+		df4 = df4.style.applymap(border_negative).applymap(color_negative).apply(background_gradient, cmap='PuBu', m=df4.min().min(), M=df4.max().max(),low=0,high=0.2, goal=gvalue2).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
 		display.display(df4)
