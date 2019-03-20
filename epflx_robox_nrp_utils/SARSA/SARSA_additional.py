@@ -853,5 +853,5 @@ class SARSA_additional():
 
 		#df = df.style.applymap(border_negative).applymap(color_negative).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
 		df3 = pd.DataFrame(outheat); df3.columns.name = 'Q';
-		df3 = df3.style.applymap(border_negative).applymap(color_negative).apply(background_gradient, cmap='PuBu', m=df3.min().min(), M=df3.max().max(),low=0,high=0.2, goal=goal).round(5).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
-		display.display(df3)
+		df3 = df3.style.applymap(border_negative).applymap(color_negative).apply(background_gradient, cmap='PuBu', m=df3.min().min(), M=df3.max().max(),low=0,high=0.2, goal=goal).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
+		display.display(df3.round(5))
