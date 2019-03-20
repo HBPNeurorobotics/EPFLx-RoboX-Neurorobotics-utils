@@ -795,6 +795,7 @@ class SARSA_additional():
 			print "VAL", val
 			heat = val
 			vali = (heat - np.round(heat,5))*10**5
+			vali = np.round(vali,4)
 			print vali
 			color = {vali == 0.4321: 'none', vali==heat: 'solid solid solid solid', \
 				 vali == 0.21: 'none solid none solid', \
