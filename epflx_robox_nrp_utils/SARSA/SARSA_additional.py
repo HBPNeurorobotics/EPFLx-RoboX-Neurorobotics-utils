@@ -841,6 +841,7 @@ class SARSA_additional():
 				heat = heat + num*10**(-(6+len(act)))
 				outheat[i,j] = heat
 				#print "OUT", i,j, outheat[i,j]
+		print goal, goal[0], goal[1]
 		gvalue  = max(outheat[goal[0],goal[1]])
 		
 		#print outheat, outheat[2,1]
