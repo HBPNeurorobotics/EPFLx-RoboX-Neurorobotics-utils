@@ -797,24 +797,24 @@ class SARSA_additional():
 			val = (heat - np.round(heat,4))*10**4
 			print val
 			color = {val == 0.4321: 'none', val==heat: 'solid solid solid solid', \
-				 val.find("[0,1]") > -1: 'none solid none solid', \
-				 val.find("[0,2]") > -1: 'solid none none solid', \
-				 val.find("[0,3]") > -1: 'solid solid none none', \
+				 val == 0.21: 'none solid none solid', \
+				 val == 0.31: 'solid none none solid', \
+				 val == 0.41: 'solid solid none none', \
 				 
-				 val.find("[1,2]") > -1: 'none none solid solid', \
-				 val.find("[1,3]") > -1: 'none solid solid none', \
+				 val == 0.32: 'none none solid solid', \
+				 val == 0.42: 'none solid solid none', \
 				 
-				 val.find("[2,3]") > -1: 'solid none solid none', \
+				 val == 0.43: 'solid none solid none', \
 				 
-				 val.find("[0]") > -1: 'solid solid none solid', \
-				 val.find("[1]") > -1: 'none solid solid solid', \
-				 val.find("[2]") > -1: 'solid none solid solid', \
-				 val.find("[3]") > -1: 'solid solid solid none', \
+				 val == 0.1: 'solid solid none solid', \
+				 val == 0.2: 'none solid solid solid', \
+				 val == 0.3: 'solid none solid solid', \
+				 val == 0.4: 'solid solid solid none', \
 				 
-				 val.find("[0,1,2]") > -1: 'none none none solid', \
-				 val.find("[1,2,3]") > -1: 'none none solid none', \
-				 val.find("[0,1,3]") > -1: 'none solid none none', \
-				 val.find("[0,2,3]") > -1: 'solid none none none'}.get(True, 'none')
+				 val == 0.321: 'none none none solid', \
+				 val == 0.432: 'none none solid none', \
+				 val == 0.421: 'none solid none none', \
+				 val == 0.431: 'solid none none none'}.get(True, 'none')
 			return 'border-style: %s' % color
 			
 			
