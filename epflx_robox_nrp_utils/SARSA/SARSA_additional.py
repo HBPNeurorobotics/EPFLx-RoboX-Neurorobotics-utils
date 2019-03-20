@@ -836,7 +836,7 @@ class SARSA_additional():
 				heat = np.round(heat,5)
 				heat = heat + num*10**(-(5+len(act)))
 				outheat[i,j] = heat
-				print "OUT", outheat[i,j]
+				print "OUT", i,j, outheat[i,j]
 		
 		print outheat, outheat[2,1]
 		#combine = np.dstack((heatmap2,actions))
