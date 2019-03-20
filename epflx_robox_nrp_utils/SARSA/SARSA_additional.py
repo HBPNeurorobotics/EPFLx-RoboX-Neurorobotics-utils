@@ -837,7 +837,7 @@ class SARSA_additional():
 				outheat[i][j] = heat
 				print outheat[i][j]
 		
-		print outheat
+		print outheat[2][1]
 		#combine = np.dstack((heatmap2,actions))
 		#print combine.shape, combine[0][1][1]
 		
