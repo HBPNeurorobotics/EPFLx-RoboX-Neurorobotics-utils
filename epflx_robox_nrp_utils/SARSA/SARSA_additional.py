@@ -842,7 +842,7 @@ class SARSA_additional():
 				outheat[i,j] = heat
 				#print "OUT", i,j, outheat[i,j]
 		print goal, goal[0], goal[1]
-		gvalue  = max(outheat[goal[0],goal[1]])
+		gvalue  = outheat[goal[0],goal[1]]
 		
 		#print outheat, outheat[2,1]
 		#combine = np.dstack((heatmap2,actions))
@@ -876,7 +876,7 @@ class SARSA_additional():
 				heat = heat + num*10**(-(6+len(act)))
 				outheat2[i,j] = heat
 				
-		gvalue2  = max(outheat2[goal[0],goal[1]])			
+		gvalue2  = outheat2[goal[0],goal[1]]		
 				
 		df4 = pd.DataFrame(outheat2); df4.columns.name = 'Q';
 		df4 = df4.style.applymap(border_negative).applymap(color_negative).apply(background_gradient, cmap='PuBu', m=df4.min().min(), M=df4.max().max(),low=0,high=0.2, goal=gvalue2).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
