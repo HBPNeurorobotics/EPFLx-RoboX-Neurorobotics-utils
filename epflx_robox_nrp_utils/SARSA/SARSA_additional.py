@@ -829,7 +829,7 @@ class SARSA_additional():
 				print act
 				num = 0
 				for l in range(len(act)):
-				    num = num + (act[l]+1)*10**i
+				    num = num + (act[l]+1)*10**l
 				
 				heat = heatmap[i][j]
 				print heat
