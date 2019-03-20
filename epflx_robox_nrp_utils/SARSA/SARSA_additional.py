@@ -794,27 +794,27 @@ class SARSA_additional():
 		def border_negative(val):
 			print "VAL", val
 			heat = val
-			val = (heat - np.round(heat,4))*10**4
+			vali = (heat - np.round(heat,5))*10**5
 			print val
-			color = {val == 0.4321: 'none', val==heat: 'solid solid solid solid', \
-				 val == 0.21: 'none solid none solid', \
-				 val == 0.31: 'solid none none solid', \
-				 val == 0.41: 'solid solid none none', \
+			color = {vali == 0.4321: 'none', vali==heat: 'solid solid solid solid', \
+				 vali == 0.21: 'none solid none solid', \
+				 vali == 0.31: 'solid none none solid', \
+				 vali == 0.41: 'solid solid none none', \
 				 
-				 val == 0.32: 'none none solid solid', \
-				 val == 0.42: 'none solid solid none', \
+				 vali == 0.32: 'none none solid solid', \
+				 vali == 0.42: 'none solid solid none', \
 				 
-				 val == 0.43: 'solid none solid none', \
+				 vali == 0.43: 'solid none solid none', \
 				 
-				 val == 0.1: 'solid solid none solid', \
-				 val == 0.2: 'none solid solid solid', \
-				 val == 0.3: 'solid none solid solid', \
-				 val == 0.4: 'solid solid solid none', \
+				 vali == 0.1: 'solid solid none solid', \
+				 vali == 0.2: 'none solid solid solid', \
+				 vali == 0.3: 'solid none solid solid', \
+				 vali == 0.4: 'solid solid solid none', \
 				 
-				 val == 0.321: 'none none none solid', \
-				 val == 0.432: 'none none solid none', \
-				 val == 0.421: 'none solid none none', \
-				 val == 0.431: 'solid none none none'}.get(True, 'none')
+				 vali == 0.321: 'none none none solid', \
+				 vali == 0.432: 'none none solid none', \
+				 vali == 0.421: 'none solid none none', \
+				 vali == 0.431: 'solid none none none'}.get(True, 'none')
 			return 'border-style: %s' % color
 			
 			
