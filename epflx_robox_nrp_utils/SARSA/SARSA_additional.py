@@ -784,7 +784,6 @@ class SARSA_additional():
 			norm = colors.Normalize(m - (rng * low),
 			M + (rng * high))
 			normed = norm(s.values)
-			print "GOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOAL", goal
 			c = [colors.rgb2hex(x) for x in plt.cm.get_cmap(cmap)(normed)]
 			bg = ['background-color: %s' % color for color in c]
 			#print type(bg), bg
@@ -793,11 +792,11 @@ class SARSA_additional():
 			
 			
 		def border_negative(val):
-			print "VAL", val
+			#print "VAL", val
 			heat = val
-			vali = (heat - np.round(heat,5))*10**5
+			vali = (heat - np.round(heat,6))*10**6
 			vali = np.round(vali,4)
-			print vali
+			#print vali
 			color = {vali == 0.4321: 'none', vali==heat: 'solid solid solid solid', \
 				 vali == 0.21: 'none solid none solid', \
 				 vali == 0.31: 'solid none none solid', \
@@ -835,12 +834,12 @@ class SARSA_additional():
 				
 				heat = heatmap[i][j]
 				print heat
-				heat = np.round(heat,5)
-				heat = heat + num*10**(-(5+len(act)))
+				heat = np.round(heat,6)
+				heat = heat + num*10**(-(6+len(act)))
 				outheat[i,j] = heat
 				print "OUT", i,j, outheat[i,j]
 		
-		print outheat, outheat[2,1]
+		#print outheat, outheat[2,1]
 		#combine = np.dstack((heatmap2,actions))
 		#print combine.shape, combine[0][1][1]
 		
@@ -855,4 +854,4 @@ class SARSA_additional():
 		#df = df.style.applymap(border_negative).applymap(color_negative).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
 		df3 = pd.DataFrame(outheat); df3.columns.name = 'Q';
 		df3 = df3.style.applymap(border_negative).applymap(color_negative).apply(background_gradient, cmap='PuBu', m=df3.min().min(), M=df3.max().max(),low=0,high=0.2, goal=goal).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
-		display.display(df3.round(5))
+		display.display(df3)
