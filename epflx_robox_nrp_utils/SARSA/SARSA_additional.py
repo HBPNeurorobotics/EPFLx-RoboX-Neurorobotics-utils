@@ -827,31 +827,50 @@ class SARSA_additional():
 		for i in range(Q.shape[0]):
 			for j in range(Q.shape[0]):
 				act = actions[i][j]
-				print act
+				#print act
 				num = 0
 				for l in range(len(act)):
 				    num = num + (act[l]+1)*10**l
 				
 				heat = heatmap[i][j]
-				print heat
+				#print heat
 				heat = np.round(heat,6)
 				heat = heat + num*10**(-(6+len(act)))
 				outheat[i,j] = heat
-				print "OUT", i,j, outheat[i,j]
+				#print "OUT", i,j, outheat[i,j]
 		
 		#print outheat, outheat[2,1]
 		#combine = np.dstack((heatmap2,actions))
 		#print combine.shape, combine[0][1][1]
 		
-		df = pd.DataFrame(heatmap); df.columns.name = 'Q';
-		df = df.style.applymap(color_negative).apply(background_gradient, cmap='PuBu', m=df.min().min(), M=df.max().max(),low=0,high=0.2, goal=goal).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
-		display.display(df)
+		#df = pd.DataFrame(heatmap); df.columns.name = 'Q';
+		#df = df.style.applymap(color_negative).apply(background_gradient, cmap='PuBu', m=df.min().min(), M=df.max().max(),low=0,high=0.2, goal=goal).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
+		#display.display(df)
 		
-		df2 = pd.DataFrame(heatmap2); df2.columns.name = 'Q';
-		df2 = df2.style.applymap(color_negative).apply(background_gradient, cmap='PuBu', m=df2.min().min(), M=df2.max().max(),low=0,high=0.2, goal=goal).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
-		display.display(df2)
+		#df2 = pd.DataFrame(heatmap2); df2.columns.name = 'Q';
+		#df2 = df2.style.applymap(color_negative).apply(background_gradient, cmap='PuBu', m=df2.min().min(), M=df2.max().max(),low=0,high=0.2, goal=goal).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
+		#display.display(df2)
 
 		#df = df.style.applymap(border_negative).applymap(color_negative).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
 		df3 = pd.DataFrame(outheat); df3.columns.name = 'Q';
 		df3 = df3.style.applymap(border_negative).applymap(color_negative).apply(background_gradient, cmap='PuBu', m=df3.min().min(), M=df3.max().max(),low=0,high=0.2, goal=goal).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
 		display.display(df3)
+
+		outheat2 = np.zeros((Q.shape[0],Q.shape[0]), dtype=float)
+		for i in range(Q.shape[0]):
+			for j in range(Q.shape[0]):
+				act = actions[i][j]
+				#print act
+				num = 0
+				for l in range(len(act)):
+				    num = num + (act[l]+1)*10**l
+				
+				heat = heatmap2[i][j]
+				#print heat
+				heat = np.round(heat,6)
+				heat = heat + num*10**(-(6+len(act)))
+				outheat2[i,j] = heat
+				
+		df4 = pd.DataFrame(outheat2); df4.columns.name = 'Q';
+		df4 = df4.style.applymap(border_negative).applymap(color_negative).apply(background_gradient, cmap='PuBu', m=df4.min().min(), M=df4.max().max(),low=0,high=0.2, goal=goal).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
+		display.display(df4)
