@@ -65,7 +65,7 @@ class SOM_additional():
 		fig = plt.figure(0,figsize=(8, 6))
 
 		# Information board
-		fig.suptitle('Trial: {} [sigma: {}, eta: {}]; Map: {}x{} (links: {})'.format(int(trial), round(sigma,3), round(eta,3), Nn, Nn, len(edges)))
+		fig.suptitle('Trial: {} [sigma: {}, eta: {}]; Map: {}x{}'.format(int(trial), round(sigma,3), round(eta,3), Nn, Nn)) #  (links: {}) , len(edges)
 		ax = fig.add_subplot(111)
 
 		# displaying of obstacles
