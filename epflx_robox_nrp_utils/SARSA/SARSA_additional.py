@@ -818,10 +818,23 @@ class SARSA_additional():
 			
 			
 		#heatmap[goal[0],goal[1]] = math.inf
-		print actions
-		print
-		print heatmap
+		#print actions
+		#print
+		#print heatmap
+		outheat = np.zeros((Q.shape[0],Q.shape[0]))
+		for i in range(Q.shape[0]):
+			for j in range(Q.shape[0]):
+				act = actions[i][j]
+				num = 0
+				for i in range(len(act)):
+				    num = num + (act[i]+1)*10**i
+    
+				heat = heatmap[i][j]
+				heat = np.round(heat,5)
+				heat = heat + num*10**(-(5+len(act)))
+				outheat[i][j] = heat
 		
+		print outheat
 		#combine = np.dstack((heatmap2,actions))
 		#print combine.shape, combine[0][1][1]
 		
