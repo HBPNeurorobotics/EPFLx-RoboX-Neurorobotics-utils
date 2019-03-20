@@ -830,7 +830,7 @@ class SARSA_additional():
 				num = 0
 				for i in range(len(act)):
 				    num = num + (act[i]+1)*10**i
-    
+				
 				heat = heatmap[i][j]
 				print heat
 				heat = np.round(heat,5)
