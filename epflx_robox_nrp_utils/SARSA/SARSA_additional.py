@@ -788,7 +788,8 @@ class SARSA_additional():
 			norm = colors.Normalize(m - (rng * low),
 			M + (rng * high))
 			normed = norm(s.values)
-			#print normed
+			gnorm = norm(goal)
+			print gnorm
 			#print normed.min().min()
 			x = plt.cm.get_cmap(cmap)((0.0-m)/(M-m));  cb = colors.rgb2hex(x)
 			x = plt.cm.get_cmap(cmap)((goal-m)/(M-m)); gb = colors.rgb2hex(x)
