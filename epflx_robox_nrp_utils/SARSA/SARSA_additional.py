@@ -767,7 +767,8 @@ class SARSA_additional():
 		def color_negative(val):
 			color = 'white' if val == 0.0 else 'black'
 			print val, color
-			return 'color: %s' % color
+			#return 'color: %s' % color
+			return "'border': '3px 1px black solid !important',  'color': %s'" % color
 		
 		
 		heatmap = np.zeros((Q.shape[0],Q.shape[0]))
@@ -880,6 +881,5 @@ class SARSA_additional():
 		gvalue2  = outheat2[goal[0],goal[1]]		
 				
 		df4 = pd.DataFrame(outheat2); df4.columns.name = 'Q';
-		df4 = df4.style.applymap(border_negative).apply(background_gradient, cmap='PuBu', m=df4.min().min(), M=df4.max().max(),low=0,high=0.2, goal=gvalue2).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important'});
-		df4 = df4.style.applymap(color_negative)
+		df4 = df4.style.applymap(border_negative).applymap(color_negative).apply(background_gradient, cmap='PuBu', m=df3.min().min(), M=df3.max().max(),low=0,high=0.2, goal=gvalue).set_properties(**{'width': '100px'});
 		display.display(df4)
