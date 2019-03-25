@@ -789,11 +789,15 @@ class SARSA_additional():
 			normed = norm(s.values)
 			c = [colors.rgb2hex(x) for x in plt.cm.get_cmap(cmap)(normed)]
 			bg = ['background-color: %s' % color for color in c]
-			print bg
+			#print bg
 			#print type(bg), bg
 			return ['background-color: %s' % color for color in c]
 			
-			
+		
+		def color_background(val):
+			color = 'black' if(val==0.0) else pass
+			return 'background-color: %s' % color
+		
 			
 		def border_negative(val):
 			#print "VAL", val
@@ -880,5 +884,5 @@ class SARSA_additional():
 		gvalue2  = outheat2[goal[0],goal[1]]		
 				
 		df4 = pd.DataFrame(outheat2); df4.columns.name = 'Q';
-		df4 = df4.style.applymap(border_negative).applymap(color_negative).apply(background_gradient, cmap='PuBu', m=df4.min().min(), M=df4.max().max(),low=0,high=0.2, goal=gvalue).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important', 'color': 'black !important'});
+		df4 = df4.style.applymap(border_negative).apply(background_gradient, cmap='PuBu', m=df4.min().min(), M=df4.max().max(),low=0,high=0.2, goal=gvalue).applymap(color_background).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important', 'color': 'black !important'});
 		display.display(df4)
