@@ -799,7 +799,7 @@ class SARSA_additional():
 			#print cb
 			#bg = ['background-color: %s' % color for color in c]
 			#print bg
-			return [ 'background-color: black' if color==cb else 'background-color: %s' % color 'background-color: lime' if color==gb else 'background-color: %s' % color for color in c ]
+			return [ 'background-color: black' if color==cb else 'background-color: lime' if color==gb else 'background-color: %s' % color for color in c ]
 			#return ['background-color: %s' % color for color in c]
 		
 			
