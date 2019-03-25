@@ -766,6 +766,7 @@ class SARSA_additional():
 		
 		def color_negative(val):
 			color = 'white' if val == 0.0 else 'black'
+			print val, color
 			return 'color: %s' % color
 		
 		
