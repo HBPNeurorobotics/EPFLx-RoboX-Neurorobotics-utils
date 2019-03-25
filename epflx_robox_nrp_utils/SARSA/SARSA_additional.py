@@ -789,7 +789,7 @@ class SARSA_additional():
 			normed = norm(s.values)
 			print normed
 			print normed.min().min()
-			for x in plt.cm.get_cmap(cmap)(normed): print x
+			for x in plt.cm.get_cmap(cmap)(normed): print "XX", x
 			c = [colors.rgb2hex(x) for x in plt.cm.get_cmap(cmap)(normed)]
 			#cb = [colors.rgb2hex(x) for x in plt.cm.get_cmap(cmap)(0.0)]
 			#print cb
