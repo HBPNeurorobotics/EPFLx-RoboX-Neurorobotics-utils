@@ -784,7 +784,7 @@ class SARSA_additional():
 				
 		def background_gradient(s, m, M, cmap='PuBu', low=0, high=0, goal=0.0):
 			rng = M - m
-			print goal
+			print goal, low, high
 			norm = colors.Normalize(m - (rng * low),
 			M + (rng * high))
 			normed = norm(s.values)
