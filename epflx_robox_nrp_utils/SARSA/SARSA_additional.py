@@ -789,15 +789,17 @@ class SARSA_additional():
 			normed = norm(s.values)
 			print normed
 			print normed.min().min()
-			x = plt.cm.get_cmap(cmap)(0.0)
-			print "XX", x
-			print colors.rgb2hex(x)
+			x = plt.cm.get_cmap(cmap)(0.0); cb = colors.rgb2hex(x)
+			#print "XX", x
+			#print colors.rgb2hex(x)
 			c = [colors.rgb2hex(x) for x in plt.cm.get_cmap(cmap)(normed)]
 			#cb = [colors.rgb2hex(x) for x in plt.cm.get_cmap(cmap)(0.0)]
 			#print cb
-			bg = ['background-color: %s' % color for color in c]
+			#bg = ['background-color: %s' % color for color in c]
 			print bg
-			return ['background-color: %s' % color for color in c]
+			return [ 'background-color: black' if color==cb else 'background-color: %s' % color for color in c ]
+			#return ['background-color: %s' % color for color in c]
+		
 			
 		
 			
