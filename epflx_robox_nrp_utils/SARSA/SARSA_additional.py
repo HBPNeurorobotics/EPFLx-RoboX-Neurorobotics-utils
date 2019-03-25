@@ -778,7 +778,8 @@ class SARSA_additional():
 				if(ind==1): heatmap[i-1,j] = max(Q[i,j,:])
 				if(ind==2): heatmap[i,j+1] = max(Q[i,j,:])
 				if(ind==3): heatmap[i,j-1] = max(Q[i,j,:])
-				heatmap2[i,j] = max(Q[i,j,:])
+				heatmap2[i,j] = sum(Q[i,j,:])/4.0
+				#heatmap2[i,j] = max(Q[i,j,:])
 				
 				
 		def background_gradient(s, m, M, cmap='PuBu', low=0, high=0, goal=0.0):
