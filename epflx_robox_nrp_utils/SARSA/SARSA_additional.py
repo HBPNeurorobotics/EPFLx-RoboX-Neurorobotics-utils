@@ -790,8 +790,8 @@ class SARSA_additional():
 			normed = norm(s.values)
 			#print normed
 			#print normed.min().min()
-			x = plt.cm.get_cmap(cmap)(0.0);  cb = colors.rgb2hex(x)
-			x = plt.cm.get_cmap(cmap)(goal); gb = colors.rgb2hex(x)
+			x = plt.cm.get_cmap(cmap)((0.0-low)/(high-low));  cb = colors.rgb2hex(x)
+			x = plt.cm.get_cmap(cmap)((goal-low)/(high-low)); gb = colors.rgb2hex(x)
 			print "Gb", gb
 			#print colors.rgb2hex(x)
 			c = [colors.rgb2hex(x) for x in plt.cm.get_cmap(cmap)(normed)]
