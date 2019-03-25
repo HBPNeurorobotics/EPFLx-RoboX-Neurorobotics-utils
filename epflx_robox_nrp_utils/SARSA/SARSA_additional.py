@@ -880,5 +880,5 @@ class SARSA_additional():
 		gvalue2  = outheat2[goal[0],goal[1]]		
 				
 		df4 = pd.DataFrame(outheat2); df4.columns.name = 'Q';
-		df4 = df4.style.apply(color_negative).applymap(border_negative).apply(background_gradient, cmap='PuBu', m=df4.min().min(), M=df4.max().max(),low=0,high=0.2, goal=gvalue2).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important'});
+		df4 = df4.style.applymap(border_negative).apply(background_gradient, cmap='PuBu', m=df4.min().min(), M=df4.max().max(),low=0,high=0.2, goal=gvalue2).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important'});
 		display.display(df4)
