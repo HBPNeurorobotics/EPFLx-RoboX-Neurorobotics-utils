@@ -796,7 +796,7 @@ class SARSA_additional():
 			#cb = [colors.rgb2hex(x) for x in plt.cm.get_cmap(cmap)(0.0)]
 			#print cb
 			#bg = ['background-color: %s' % color for color in c]
-			print bg
+			#print bg
 			return [ 'background-color: black' if color==cb else 'background-color: %s' % color for color in c ]
 			#return ['background-color: %s' % color for color in c]
 		
