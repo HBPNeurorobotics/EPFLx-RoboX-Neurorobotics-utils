@@ -794,10 +794,6 @@ class SARSA_additional():
 			return ['background-color: %s' % color for color in c]
 			
 		
-		def color_background(val):
-			color = 'black' if val == 0.0
-			return 'background-color: %s' % color
-		
 			
 		def border_negative(val):
 			#print "VAL", val
@@ -863,7 +859,7 @@ class SARSA_additional():
 
 		#df = df.style.applymap(border_negative).applymap(color_negative).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
 		df3 = pd.DataFrame(outheat); df3.columns.name = 'Q';
-		df3 = df3.style.applymap(border_negative).applymap(color_negative).apply(background_gradient, cmap='PuBu', m=df3.min().min(), M=df3.max().max(),low=0,high=0.2, goal=gvalue).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
+		df3 = df3.style.applymap(border_negative).apply(background_gradient, cmap='PuBu', m=df3.min().min(), M=df3.max().max(),low=0,high=0.2, goal=gvalue).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
 		display.display(df3)
 
 		outheat2 = np.zeros((Q.shape[0],Q.shape[0]), dtype=float)
@@ -884,5 +880,5 @@ class SARSA_additional():
 		gvalue2  = outheat2[goal[0],goal[1]]		
 				
 		df4 = pd.DataFrame(outheat2); df4.columns.name = 'Q';
-		df4 = df4.style.applymap(border_negative).apply(background_gradient, cmap='PuBu', m=df4.min().min(), M=df4.max().max(),low=0,high=0.2, goal=gvalue).applymap(color_background).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important', 'color': 'black !important'});
+		df4 = df4.style.applymap(border_negative).apply(background_gradient, cmap='PuBu', m=df4.min().min(), M=df4.max().max(),low=0,high=0.2, goal=gvalue).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important', 'color': 'black !important'});
 		display.display(df4)
