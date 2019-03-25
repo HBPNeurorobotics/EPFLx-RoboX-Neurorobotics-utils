@@ -795,7 +795,7 @@ class SARSA_additional():
 			
 		
 		def color_background(val):
-			color = 'black' if(val==0.0) else pass
+			color = 'black' if val == 0.0
 			return 'background-color: %s' % color
 		
 			
