@@ -784,20 +784,20 @@ class SARSA_additional():
 				
 		def background_gradient(s, m, M, cmap='PuBu', low=0, high=0, goal=0.0):
 			rng = M - m
-			print goal, low, high
+			#print goal, low, high
 			norm = colors.Normalize(m - (rng * low),
 			M + (rng * high))
 			normed = norm(s.values)
 			gnorm = norm(goal)
-			print gnorm
+			#print gnorm
 			#print normed.min().min()
 			x = plt.cm.get_cmap(cmap)(0.0);  cb = colors.rgb2hex(x)
 			x = plt.cm.get_cmap(cmap)(gnorm); gb = colors.rgb2hex(x)
-			print "Gb", gb
+			#print "Gb", gb
 			#print colors.rgb2hex(x)
 			c = [colors.rgb2hex(x) for x in plt.cm.get_cmap(cmap)(normed)]
 			#cb = [colors.rgb2hex(x) for x in plt.cm.get_cmap(cmap)(0.0)]
-			print c
+			#print c
 			#bg = ['background-color: %s' % color for color in c]
 			#print bg
 			return [ 'background-color: black' if color==cb else 'background-color: lime' if color==gb else 'background-color: %s' % color for color in c ]
