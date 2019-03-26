@@ -880,7 +880,9 @@ class SARSA_additional():
 				heat = heat + num*10**(-(6+len(act)))
 				outheat2[i,j] = heat
 				
-		gvalue2  = outheat2[goal[0],goal[1]]		
+		gvalue2  = outheat2[goal[0],goal[1]]	
+		
+		print "You can see just below the table of average expected reward (Q-value) at each possible state. This table represents that expected reward is increasing as you move closer to the goal at the same time states within 'walls' don't have any expected reward, bacause they cannot be reached. Also, you can see that expected reward in the state of goal is less than on previous states. The reason is that making step from the goal state to anyother you will be one step away from goal again as well as on other such positions."
 				
 		df4 = pd.DataFrame(outheat2); df4.columns.name = 'Q';
 		df4 = df4.style.applymap(border_negative).apply(background_gradient, cmap='PuBu', m=df4.min().min(), M=df4.max().max(),low=0,high=0.2, goal=gvalue2).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important', 'color': 'black !important'});
