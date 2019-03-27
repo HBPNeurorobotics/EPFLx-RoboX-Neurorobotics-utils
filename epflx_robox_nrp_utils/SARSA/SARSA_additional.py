@@ -409,7 +409,7 @@ class SARSA_additional():
 			fig1.suptitle('Trial: {}; Episode: {}; Q({},{}): {}'.format(int(self.Trial),\
 						  int(self.Run), self.x_position, self.y_position, self.Qdata.round(4)))
 		else:
-			fig1.suptitle('Adapted SOM for SARSA implementation. (Reds are punished)')
+			fig1.suptitle('Adapted SOM for SARSA implementation (Reds are unavailable).')
 
 		# --- sub-plot
 		ax = fig1.add_subplot(111)
