@@ -39,6 +39,8 @@ REQS = parse_reqs(os.path.join(BASEDIR, 'requirements.txt'))
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+print(setuptools.find_packages())
+
 setuptools.setup(
     name="epflx_robox_nrp_utils",
     version="0.0.1",
@@ -51,7 +53,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     install_requires=REQS,
     include_package_data=True,
-    package_data={'': ['README.md']},
+    package_data={ 'epflx_robox_nrp_utils': ['submission_manager/config.json']},
     classifiers=[
         "Programming Language :: Python :: 2.7",
         "License :: OSI Approved :: MIT License",
