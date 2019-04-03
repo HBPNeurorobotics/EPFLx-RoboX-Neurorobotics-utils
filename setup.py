@@ -51,6 +51,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     install_requires=REQS,
     include_package_data=True,
+    package_data={'': ['README.md']},
     classifiers=[
         "Programming Language :: Python :: 2.7",
         "License :: OSI Approved :: MIT License",
