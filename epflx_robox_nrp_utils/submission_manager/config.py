@@ -74,7 +74,7 @@ class Config(dict):
 
         # validate required sections of the config, except if any values are missing
         self.__validate('oidc', ['user'])
-        self.__validate('grading-server', ['staging', 'dev', 'local', environment])
+        self.__validate('grading-server', ['staging', 'dev', 'local'])
         self.__validate('submission-header', [])
         self.__validate('environment', [])
 

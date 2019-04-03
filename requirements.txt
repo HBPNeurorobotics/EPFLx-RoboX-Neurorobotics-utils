@@ -1,7 +1,9 @@
 IPython
 matplotlib
 numpy
+seaborn
 six
 pandas
+requests
 wheel
 
