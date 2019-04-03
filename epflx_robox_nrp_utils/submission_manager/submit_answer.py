@@ -79,7 +79,7 @@ class SubmissionManager(object):
 
     def submit(self):
         body = self.create_submission_form()
-        environment = self.__config['grading-server']['environment']
+        environment = self.__config['environment']
         status_code, content = self.__http_client.post(self.__config['grading-server'][environment], body=body)
         if status_code != 200:
             raise Exception('Submission failed, Status Code: %s' % status_code)
