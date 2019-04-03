@@ -49,10 +49,10 @@ class SubmissionManager(object):
         """
         
 
-        :param oidc_username: (optional) A string representing the OIDC username for the current
-                              user, required if the provided environment requires OIDC
-                              authentication. The user will be interactively asked for a password by
-                              the OIDC client if the token is expired or they have not logged in.
+        :param oidc_username: A string representing the OIDC username for the current
+                              required for OIDC authentication. The user will be interactively 
+                              asked for a password by the OIDC client if the token has expired 
+                              or if they have not logged in.
         """
         assert isinstance(oidc_username, (str))
         # parse and load the config file before any OIDC actions
