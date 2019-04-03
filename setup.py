@@ -50,7 +50,7 @@ setuptools.setup(
     url="https://github.com/HBPNeurorobotics/EPFLx-RoboX-Neurorobotics-utils",
     packages=setuptools.find_packages(),
     install_requires=REQS,
-    data_files=[('epflx_robox_nrp_utils/submission_manager', 'config.json')],
+    include_package_data=True,
     classifiers=[
         "Programming Language :: Python :: 2.7",
         "License :: OSI Approved :: MIT License",
