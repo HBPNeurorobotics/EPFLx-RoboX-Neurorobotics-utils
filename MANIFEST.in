@@ -1,2 +1,2 @@
-include README.md
-include submission_manager/config.json
+include epflx_robox_nrp_utils/README.md
+include epflx_robox_nrp_utils/submission_manager/config.json
