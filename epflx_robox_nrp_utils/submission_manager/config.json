@@ -5,7 +5,7 @@
 
     "grading-server": {
         "staging": "http://148.187.97.48/proxy",
-        "dev": "http://10.80.68.11:80/submission",
+        "dev": "https://neurorobotics-dev.humanbrainproject.eu/grading-server/submission",
         "local": "http://localhost:3000/submission"
     },
 
