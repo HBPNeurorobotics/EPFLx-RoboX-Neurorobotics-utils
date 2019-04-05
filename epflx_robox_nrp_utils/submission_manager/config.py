@@ -55,7 +55,6 @@ class Config(dict):
         dict.__init__(self)
 
         # ensure the config.json file exists and is readable by our user
-        logger.info('Loading configuration file config.json')
         path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'config.json')
         if not os.path.isfile(path):
             raise IOError('[config] config.json not found, terminating.')
