@@ -1,18 +1,25 @@
 """ Class which uses the BBP oidc client to do http calls """
 
-from hbp_nrp_virtual_coach.http_client import HTTPClient
+from http_client import HTTPClient
 import json
 
 
 class OIDCHTTPClient(HTTPClient):
     """ Class which uses the BBP oidc client to do http calls """
 
-    def __init__(self, oidc_username):
+    def __init__(self, oidc_username='', token=''):
         """
-        :param oidc_username: The HBP oidc username
+        :param oidc_username: The HBP oidc username (optional, prompts for password when token expires)
+        :param token: The HBP oidc token (optional)
         """
+        if not oidc_username and not token:
+            raise ValueError("You need to specify either an oidc_username or a token in order to instantiate OIDCHTTPClient.")
+        
         from bbp_client.oidc.client import BBPOIDCClient
-        self.__oidc_client = BBPOIDCClient.implicit_auth(oidc_username)
+        if not token:
+            self.__oidc_client = BBPOIDCClient.implicit_auth(oidc_username)
+        else:
+            self.__oidc_client = BBPOIDCClient.bearer_auth(oauth_url=None, token=token)
         self.__headers = None
 
     def get(self, url):

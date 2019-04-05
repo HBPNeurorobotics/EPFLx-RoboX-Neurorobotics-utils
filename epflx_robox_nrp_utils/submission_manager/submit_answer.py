@@ -45,35 +45,40 @@ class SubmissionManager(object):
     Handles the submission of user's solution to the NRP MOOC grading server 
     """
 
-    def __init__(self, oidc_username):
+    def __init__(self, oidc_username='', token=''):
         """
         
 
-        :param oidc_username: A string representing the OIDC username for the current
-                              required for OIDC authentication. The user will be interactively 
+        :param oidc_username: (optional) A string representing the OIDC username
+                              Required for OIDC authentication if no token is provided. 
+                              The user will be interactively 
                               asked for a password by the OIDC client if the token has expired 
                               or if they have not logged in.
+
+        :param token: (optional) A string representing the OIDC token of the current user
+                              
         """
         assert isinstance(oidc_username, (str))
-        # parse and load the config file before any OIDC actions
+        assert isinstance(token, (str))
+        # Parse and load the config file before any OIDC actions
         self.__config = Config()
         self.__oidc_username = oidc_username
-        # if an OIDC username is provided, attempt to login or retrieve the last valid token
-        if self.__oidc_username:
-            # this will interactively prompt the user for a password in terminal if needed
+        self.__token = token
+        if self.__token or self.__oidc_username:
+            # This will interactively prompt the user for a password in terminal if needed
             logger.info('Logging into OIDC as: %s', self.__oidc_username)
-            self.__http_client = OIDCHTTPClient(self.__oidc_username)
+            self.__http_client = OIDCHTTPClient(
+                oidc_username=self.__oidc_username, token=self.__token
+            )
 
             authorization = self.__http_client.get_auth_header()
-            # Set self.__http_headers: it is also used
-            # as an argument of requests.post() and requests.get()
             self.__http_headers = {'Content-Type': 'application/json',
                                     'Authorization': authorization}
             self.__http_client.set_headers(self.__http_headers)
         else:
             raise Exception('No valid credentials - Submission failed.')
 
-        # if the config is valid and the login doesn't fail, we're ready
+        # If the config is valid and the login doesn't fail, we're ready
         logger.info('Ready to submit.')
 
 
