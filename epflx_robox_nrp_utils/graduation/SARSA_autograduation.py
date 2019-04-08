@@ -179,7 +179,7 @@ class SARSA_autograduation():
 		if(rank): os.chdir('./SARSA_solutions')
 		module = importlib.import_module(func)
 		SARSA = getattr(module, 'SARSA')
-		#if(rank): os.chdir('..')
+		if(rank): os.chdir('..')
 		return SARSA
 
 
