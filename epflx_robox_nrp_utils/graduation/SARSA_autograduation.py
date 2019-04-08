@@ -88,9 +88,9 @@ class SARSA_autograduation():
 			print self.goal
 
 			# upload solution
-			try:
-				SARSA = self.upload_solution(func,True); load = True
-			except: sumwayF = 0.0; load = False; os.chdir('..'); 
+			#try:
+			SARSA = self.upload_solution(func,True); load = True
+			#except: sumwayF = 0.0; load = False; os.chdir('..'); 
 
 			if(load):
 				sumwayF = 0.0
