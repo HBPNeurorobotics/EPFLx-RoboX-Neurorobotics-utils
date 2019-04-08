@@ -84,7 +84,7 @@ class SARSA_additional():
 		self.input = False
 		self.s_goal = goal
 		# SOM pre-processing
-		self.upload_positions()
+		#self.upload_positions()
 		self.upload_lattice(test)
 		self.net_details()
 
