@@ -18,7 +18,7 @@ class SARSA_autograduation():
 		import warnings; warnings.filterwarnings('ignore')
 		from epflx_robox_nrp_utils.SARSA.SARSA_evaluation import SARSA_evaluation
 		self.sarsaev = SARSA_evaluation()
-		from SARSA_additional import SARSA_additional
+		from epflx_robox_nrp_utils.SARSA.SARSA_additional import SARSA_additional
 		self.sarsaad = SARSA_additional()
 
 		# parameters of graduation range 
