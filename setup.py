@@ -53,7 +53,12 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     install_requires=REQS,
     include_package_data=True,
-    package_data={ 'epflx_robox_nrp_utils': ['submission_manager/config.json']},
+    package_data={ 'epflx_robox_nrp_utils': [
+        'submission_manager/config.json',
+        'graduation/SOM_test1_lattice.csv',
+        'graduation/SOM_test2_lattice.csv',
+        'graduation/SOM_test3_lattice.csv'
+    ]},
     classifiers=[
         "Programming Language :: Python :: 2.7",
         "License :: OSI Approved :: MIT License",
