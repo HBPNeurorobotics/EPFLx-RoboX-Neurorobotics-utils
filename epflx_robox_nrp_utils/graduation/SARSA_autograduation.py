@@ -90,7 +90,7 @@ class SARSA_autograduation():
 			# upload solution
 			try:
 				SARSA = self.upload_solution(func,True); load = True
-			except: sumwayF = 0.0; os.chdir('..'); load = False
+			except: sumwayF = 0.0; os.chdir('..'); load = False; print "Upload failed"
 
 			if(load):
 				sumwayF = 0.0
