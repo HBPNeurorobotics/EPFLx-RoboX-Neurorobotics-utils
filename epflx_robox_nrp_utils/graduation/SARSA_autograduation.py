@@ -132,7 +132,7 @@ class SARSA_autograduation():
 						#else: 		self.message = "Program had been interrupted by time limit but a current result was estimated."
 
 						# Estimate SARSA by test
-						#from SARSA_evaluation import SARSA_evaluation
+						from epflx_robox_nrp_utils.SARSA.SARSA_evaluation import SARSA_evaluation
 						sarsaev = SARSA_evaluation()
 						fastwayF, longwayF, overwayF, neverwayF = sarsaev.run_evaluation(0)
 						print "Function:", fastwayF, longwayF, overwayF, neverwayF
