@@ -124,6 +124,11 @@ class SARSA_additional():
 		return self.Nn, states, actions, Reward, reward_pos, self.Q
 
 
+	
+	##################################################################################
+	#####                 B.1. SOM analysis for Maze visualization               #####
+	##################################################################################
+	
 	### Define centers and links of SOM
 	def net_details(self):
 		# SOM-MAP: centers and edges    
@@ -131,19 +136,15 @@ class SARSA_additional():
 		self.centers = [] # list of centers
 		for i in range(self.Nn):
 			for j in range(self.Nn):
-				if i > 0:
-					self.edges.append([(self.lattice[i-1,j,0], self.lattice[i-1,j,1]),
-                                  (self.lattice[i,j,0], self.lattice[i,j,1])])
-				if j > 0:
-					self.edges.append([(self.lattice[i,j-1,0], self.lattice[i,j-1,1]),
-                                      (self.lattice[i,j,0], self.lattice[i,j,1])])
-
+				if i > 0: self.edges.append([(self.lattice[i-1,j,0], self.lattice[i-1,j,1]),
+                                                             (self.lattice[i,j,0],   self.lattice[i,j,1])])
+				if j > 0: self.edges.append([(self.lattice[i,j-1,0], self.lattice[i,j-1,1]),
+                                                             (self.lattice[i,j,0],   self.lattice[i,j,1])])
 				self.centers.append((self.lattice[i,j,0],self.lattice[i,j,1]))
         
-
 	### Define centers on the internal walls
 	def rewarded_states(self):
-		# Internal wall outlines:
+		# Internal wall outlines - description:
 		#	rect1 = patches.Rectangle((-3.0,-1.0), 1., 2., color='black')
 		#	rect2 = patches.Rectangle((-3.0, 1.0), 3., 1., color='black')
 		#	rect3 = patches.Rectangle(( 0.0,-2.0), 2., 1., color='black')
@@ -153,21 +154,16 @@ class SARSA_additional():
 		for i,center in enumerate(self.centers):
 			#rect1
 			lx0 = -3.0; lx1 = -2.0; ly0 = -1.0; ly1 = 1.0;
-			if((center[0]>=lx0)&(center[0]<=lx1)) & ((center[1]>=ly0)&(center[1]<=ly1)):
-				act_pos[i] = 0.0
+			if((center[0]>=lx0)&(center[0]<=lx1)) & ((center[1]>=ly0)&(center[1]<=ly1)): act_pos[i] = 0.0
 			#rect2
 			lx0 = -3.0; lx1 = 0.0; ly0 = 1.0; ly1 = 2.0;
-			if((center[0]>=lx0)&(center[0]<=lx1)) & ((center[1]>=ly0)&(center[1]<=ly1)):
-				act_pos[i] = 0.0
+			if((center[0]>=lx0)&(center[0]<=lx1)) & ((center[1]>=ly0)&(center[1]<=ly1)): act_pos[i] = 0.0
 			#rect3
 			lx0 = 0.0; lx1 = 2.0; ly0 = -2.0; ly1 = -1.0;
-			if((center[0]>=lx0)&(center[0]<=lx1)) & ((center[1]>=ly0)&(center[1]<=ly1)):
-				act_pos[i] = 0.0
+			if((center[0]>=lx0)&(center[0]<=lx1)) & ((center[1]>=ly0)&(center[1]<=ly1)): act_pos[i] = 0.0
 			#rect4
 			lx0 = 2.0; lx1 = 3.0; ly0 = -2.0; ly1 = 1.0;
-			if((center[0]>=lx0)&(center[0]<=lx1)) & ((center[1]>=ly0)&(center[1]<=ly1)):
-				act_pos[i] = 0.0
-		
+			if((center[0]>=lx0)&(center[0]<=lx1)) & ((center[1]>=ly0)&(center[1]<=ly1)): act_pos[i] = 0.0
 		return act_pos
         
 
@@ -180,7 +176,7 @@ class SARSA_additional():
                         [( 3.0,-2.0),( 0.0,-2.0)], [( 3.0,-1.0),( 0.0,-1.0)], [( 3.0, 1.0),( 2.0, 1.0)]];
 
 		results = []
-		Cx,Cy = zip(*self.centers)
+		#Cx,Cy = zip(*self.centers)
 		for i,edge in enumerate(self.edges):
 			result = False
 			for w in range(len(wall)):
@@ -196,7 +192,7 @@ class SARSA_additional():
 		return results
 
 	### Define the crossing
-	def cross(self,link,wall):
+	def cross(self, link, wall):
 		v1 = (wall[1][0]-wall[0][0])*(link[0][1]-wall[0][1]) -\
 			 (wall[1][1]-wall[0][1])*(link[0][0]-wall[0][0]);
 		v2 = (wall[1][0]-wall[0][0])*(link[1][1]-wall[0][1]) -\
@@ -212,32 +208,11 @@ class SARSA_additional():
 	########################################################################
 	#	Reward matrix generation
 	########################################################################
-	"""
-	# Define reward as each Q(x,y,a)
-	def reward_data(self,states,actions):
-		reward = np.zeros((self.Nn,self.Nn,4))
-		for i in range(self.Nn):
-			for j in range(self.Nn):
-				for a in range(4):
-					if  (a == 0): ish =  1; jsh =  0;
-					elif(a == 1): ish = -1; jsh =  0;
-					elif(a == 2): ish =  0; jsh =  1;
-					elif(a == 3): ish =  0; jsh = -1;
-
-					able = self.availability(i,j,i+ish,j+jsh,actions)
-					reward[i,j,a] = able 
-
-		for i in range(self.Nn):
-			for j in range(self.Nn):
-				if(max(reward[i,j,:])==-1.0): 
-					states[self.Nn*i+j] = 0.0
-
-		return reward
-	"""
 
 	# Define reward as each Q(x,y,a)
 	def choice_data(self,states,actions):
-		reward = [] #np.zeros((self.Nn,self.Nn,4))
+		# define possible actions
+		reward = []
 		for i in range(self.Nn):
 			for j in range(self.Nn):
 				acts = []
@@ -251,6 +226,7 @@ class SARSA_additional():
 					if(able==0.0): acts.append(a)
 				reward.append(acts)
 
+		# Representation of possible actions
 		def color_negative(val):
 			color = {len(val)==9.0: 'cornsilk', len(val)%2==0.0: 'lime', len(val)==2.0: 'papayawhip'}.get(True, 'oldlace')
 			return 'background-color: %s' % color
@@ -283,8 +259,6 @@ class SARSA_additional():
 				output[i][j] = '['+','.join(str(e) for e in reward[i*self.Nn+j])+']'
 				if(i==self.s_goal[0] and j==self.s_goal[1]): output[i][j] = ' ' + output[i][j]
 				
-
-		#import pandas as pd
 		print 'Possible actions to choose: 0 - Down; 1 - Up; 2 - Right; 3 - Left.'
 		df = pd.DataFrame(output); df.columns.name = 'Actions';
 		df.to_csv('SOM_possible_actions.csv')
@@ -317,7 +291,7 @@ class SARSA_additional():
     
     
 	# Define the punishment at Q(x,y,a)
-	def availability(self,x0,y0,x1,y1,actions):
+	def availability(self, x0, y0, x1, y1, actions):
 		Cx,Cy = zip(*self.centers)
 		if  (0 <= x1 < self.Nn) & (0 <= y1 < self.Nn):
 			idx0 = x0*self.Nn+y0; idx1 = x1*self.Nn+y1;
@@ -335,20 +309,6 @@ class SARSA_additional():
 				else:  return -1.0
 			else:  return -1.0
 		else:  return -1.0
-    
-    
-	"""
-	# Define the punishment at Q(x,y,a)
-	def available_positions(self,reward):
-		avpos = [[] for _ in range(self.Nn**2)]
-		for i in range(self.Nn):
-			for j in range(self.Nn):
-				if(reward[i,j,0] >= 0.0): avpos[i*self.Nn+j].append(0)
-				if(reward[i,j,1] >= 0.0): avpos[i*self.Nn+j].append(1)
-				if(reward[i,j,2] >= 0.0): avpos[i*self.Nn+j].append(2)
-				if(reward[i,j,3] >= 0.0): avpos[i*self.Nn+j].append(3)
-		return avpos
-	"""
 
 
 	########################################################################
