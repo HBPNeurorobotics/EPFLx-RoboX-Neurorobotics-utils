@@ -172,21 +172,10 @@ class SARSA_additional():
 	### Define links crossed the internal walls
 	def rewarded_actions(self,states):
 		# Evaluation: links
-		wall = [[(-3.0,-1.0),(-3.0, 2.0)],
-                [(-2.0,-1.0),(-2.0, 2.0)],
-                [( 0.0, 1.0),( 0.0, 2.0)],
-
-                [(-3.0, 2.0),( 0.0, 2.0)],
-                [(-3.0, 1.0),( 0.0, 1.0)],
-                [(-3.0,-1.0),(-2.0,-1.0)],
-
-                [( 3.0, 1.0),( 3.0,-2.0)],
-                [( 2.0, 1.0),( 2.0,-2.0)],
-                [( 0.0,-1.0),( 0.0,-2.0)],
-
-                [( 3.0,-2.0),( 0.0,-2.0)],
-                [( 3.0,-1.0),( 0.0,-1.0)],
-                [( 3.0, 1.0),( 2.0, 1.0)]];
+		wall = [[(-3.0,-1.0),(-3.0, 2.0)], [(-2.0,-1.0),(-2.0, 2.0)], [( 0.0, 1.0),( 0.0, 2.0)],
+                        [(-3.0, 2.0),( 0.0, 2.0)], [(-3.0, 1.0),( 0.0, 1.0)], [(-3.0,-1.0),(-2.0,-1.0)],
+                        [( 3.0, 1.0),( 3.0,-2.0)], [( 2.0, 1.0),( 2.0,-2.0)], [( 0.0,-1.0),( 0.0,-2.0)],
+                        [( 3.0,-2.0),( 0.0,-2.0)], [( 3.0,-1.0),( 0.0,-1.0)], [( 3.0, 1.0),( 2.0, 1.0)]];
 
 		results = []
 		Cx,Cy = zip(*self.centers)
@@ -200,7 +189,6 @@ class SARSA_additional():
 
 				if(states[idx0]+states[idx1]==0):
 					result = True
-
 
 			results.append(result)
 		return results
@@ -229,10 +217,10 @@ class SARSA_additional():
 		for i in range(self.Nn):
 			for j in range(self.Nn):
 				for a in range(4):
-					if  (a == 0): ish =  1; jsh =   0;
-					elif(a == 1): ish = -1; jsh =   0;
-					elif(a == 2): ish =  0; jsh =   1;
-					elif(a == 3): ish =  0; jsh =  -1;
+					if  (a == 0): ish =  1; jsh =  0;
+					elif(a == 1): ish = -1; jsh =  0;
+					elif(a == 2): ish =  0; jsh =  1;
+					elif(a == 3): ish =  0; jsh = -1;
 
 					able = self.availability(i,j,i+ish,j+jsh,actions)
 					reward[i,j,a] = able 
