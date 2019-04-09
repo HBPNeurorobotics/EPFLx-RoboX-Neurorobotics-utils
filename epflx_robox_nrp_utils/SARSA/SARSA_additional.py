@@ -283,7 +283,7 @@ class SARSA_additional():
 				output[i][j] = '['+','.join(str(e) for e in reward[i*self.Nn+j])+']'
 				if(i==self.s_goal[0] and j==self.s_goal[1]): output[i][j] = ' ' + output[i][j]
 				
-		print "self.test: ", self.testfile
+		#print "self.test: ", self.testfile
 		if(self.testfile=='SOM_data_lattice.csv'): print 'Possible actions to choose: 0 - Down; 1 - Up; 2 - Right; 3 - Left.'
 		df = pd.DataFrame(output); df.columns.name = 'Actions';
 		df.to_csv('SOM_possible_actions.csv')
@@ -573,7 +573,7 @@ class SARSA_additional():
 		if(Lfile!='SOM_data_lattice.csv'):
 			script_path = os.path.dirname(os.path.abspath( __file__ ))
 			Lfile = os.path.join(script_path,'../graduation/'+Lfile)
-		print Lfile
+		#print Lfile
 		with open(Lfile) as f:
 			reader = csv.reader(f)
 			next(reader) # skip header
