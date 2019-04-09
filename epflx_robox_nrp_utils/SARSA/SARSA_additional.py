@@ -108,7 +108,8 @@ class SARSA_additional():
 
 	def eva_analysis(self):
 		self.upload_positions()
-		self.upload_lattice()
+		try: self.upload_lattice(self.test)
+		except: self.upload_lattice()
 		self.net_details()
 
 		# SOM analyse (to generate maze and reward)
