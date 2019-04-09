@@ -749,66 +749,29 @@ class SARSA_additional():
         
 	
 	def print_Qvalue(self,Q,goal,actions):
-		#print "Result. Navigation heatmap:"
-		#print "Up:\n", 
-		#for i in range(Q.shape[0]):
-		#	print ["%12.8f"% (q) for i,q in enumerate(Q[i,:,0])]
-
-		#print
-		#print "Down:\n", 
-		#for i in range(Q.shape[0]):
-		#	print ["%12.8f"% (q) for i,q in enumerate(Q[i,:,1])]
-
-		#print
-		#print "Right:\n", 
-		#for i in range(Q.shape[0]):
-		#	print ["%12.8f"% (q) for i,q in enumerate(Q[i,:,2])]
-
-		#print
-		#print "Left:\n", 
-		#for i in range(Q.shape[0]):
-		#	print ["%12.8f"% (q) for i,q in enumerate(Q[i,:,3])]
-
-
 		
-		def color_negative(val):
-			color = 'white' if val == 0.0 else 'black'
-			return 'color: %s' % color
+		#def color_negative(val):
+		#	color = 'white' if val == 0.0 else 'black'
+		#	return 'color: %s' % color
 		
 		
-		#heatmap = np.zeros((Q.shape[0],Q.shape[0]))
 		heatmap2 = np.zeros((Q.shape[0],Q.shape[0]))
 		for i in range(Q.shape[0]):
 			for j in range(Q.shape[0]):
 				ind = np.argmax(Q[i,j,:])
-				#if(ind==0): heatmap[i+1,j] = max(Q[i,j,:])
-				#if(ind==1): heatmap[i-1,j] = max(Q[i,j,:])
-				#if(ind==2): heatmap[i,j+1] = max(Q[i,j,:])
-				#if(ind==3): heatmap[i,j-1] = max(Q[i,j,:])
-				#heatmap2[i,j] = sum(Q[i,j,:])/4.0
 				heatmap2[i,j] = max(Q[i,j,:])
 				
 				
 		def background_gradient(s, m, M, cmap='PuBu', low=0, high=0, goal=0.0):
 			rng = M - m
-			#print goal, low, high
 			norm = colors.Normalize(m - (rng * low),
 			M + (rng * high))
 			normed = norm(s.values)
 			gnorm = norm(goal)
-			#print gnorm
-			#print normed.min().min()
 			x = plt.cm.get_cmap(cmap)(0.0);  cb = colors.rgb2hex(x)
 			x = plt.cm.get_cmap(cmap)(gnorm); gb = colors.rgb2hex(x)
-			#print "Gb", gb
-			#print colors.rgb2hex(x)
 			c = [colors.rgb2hex(x) for x in plt.cm.get_cmap(cmap)(normed)]
-			#cb = [colors.rgb2hex(x) for x in plt.cm.get_cmap(cmap)(0.0)]
-			#print c
-			#bg = ['background-color: %s' % color for color in c]
-			#print bg
 			return [ 'background-color: black' if color==cb else 'background-color: lime' if color==gb else 'background-color: %s' % color for color in c ]
-			#return ['background-color: %s' % color for color in c]
 		
 			
 		
@@ -837,38 +800,7 @@ class SARSA_additional():
 				 vali == 0.421: 'none solid none none', \
 				 vali == 0.431: 'solid none none none'}.get(True, 'none')
 			return 'border-style: %s' % color
-			
-			
-		#heatmap[goal[0],goal[1]] = math.inf
-		#print actions
-		#print
-		#print heatmap	
-		"""
-		outheat = np.zeros((Q.shape[0],Q.shape[0]), dtype=float)
-		for i in range(Q.shape[0]):
-			for j in range(Q.shape[0]):
-				act = actions[i][j]
-				#print act
-				num = 0
-				for l in range(len(act)):
-				    num = num + (act[l]+1)*10**l
-				
-				heat = heatmap[i][j]
-				#print heat
-				heat = np.round(heat,6)
-				heat = heat + num*10**(-(6+len(act)))
-				outheat[i,j] = heat
-				#print "OUT", i,j, outheat[i,j]
-		
-		gvalue  = outheat[goal[0],goal[1]]
-		"""
-		#print outheat, outheat[2,1]
-		#combine = np.dstack((heatmap2,actions))
-		#print combine.shape, combine[0][1][1]
 
-		#df3 = pd.DataFrame(outheat); df3.columns.name = 'Q';
-		#df3 = df3.style.applymap(border_negative).apply(background_gradient, cmap='PuBu', m=df3.min().min(), M=df3.max().max(),low=0,high=0.2, goal=gvalue).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
-		#display.display(df3)
 
 		outheat2 = np.zeros((Q.shape[0],Q.shape[0]), dtype=float)
 		for i in range(Q.shape[0]):
