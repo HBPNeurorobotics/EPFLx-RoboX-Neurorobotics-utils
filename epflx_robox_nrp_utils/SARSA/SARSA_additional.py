@@ -132,8 +132,8 @@ class SARSA_additional():
 	### Define centers and links of SOM
 	def net_details(self):
 		# SOM-MAP: centers and edges    
-		self.edges = [] # list of links between centers
-		self.centers = [] # list of centers
+		self.edges = []    # list of links between centers
+		self.centers = []  # list of centers
 		for i in range(self.Nn):
 			for j in range(self.Nn):
 				if i > 0: self.edges.append([(self.lattice[i-1,j,0], self.lattice[i-1,j,1]),
@@ -176,18 +176,16 @@ class SARSA_additional():
                         [( 3.0,-2.0),( 0.0,-2.0)], [( 3.0,-1.0),( 0.0,-1.0)], [( 3.0, 1.0),( 2.0, 1.0)]];
 
 		results = []
-		#Cx,Cy = zip(*self.centers)
 		for i,edge in enumerate(self.edges):
 			result = False
 			for w in range(len(wall)):
+				# check if link cross a wall
 				result += self.cross(edge, wall[w])
-
-				idx0 = self.centers.index(edge[0])
+				# check if one of centers is on a wall
+				idx0 = self.centers.index(edge[0]) 
 				idx1 = self.centers.index(edge[1])
-
-				if(states[idx0]+states[idx1]==0):
-					result = True
-
+				if(states[idx0]+states[idx1]==0): result = True
+			# add info into list
 			results.append(result)
 		return results
 
@@ -204,6 +202,29 @@ class SARSA_additional():
 		return (v1*v2<0) & (v3*v4<0)
 
 
+	##################################################################################
+	#####                        B.1. Input of Goal position                     #####
+	##################################################################################
+	
+	# Define reward as each Q(x,y,a)
+	def reward_goal(self,states):
+		if(self.input):
+			while True:
+				print; print		'==================================================================================================================='
+
+				try:
+					self.s_goal = input('Goal coordinates (format = [vertical,horizontal], example = [0,0]):');
+					print 		 '==================================================================================================================='; print
+					if(states[self.Nn*self.s_goal[0]+self.s_goal[1]] == 1.0): break
+					print "Goal cannot be in the wall. You have to change the goal position."
+				except: 
+					print 		 '==================================================================================================================='; print
+					print "Input is incorrect, please, use an example to make correct input."
+		else:
+			self.s_goal = self.s_goal
+
+		return self.s_goal
+	
 
 	########################################################################
 	#	Reward matrix generation
@@ -267,28 +288,6 @@ class SARSA_additional():
 
 		return reward
 	
-	
-	
-	
-	# Define reward as each Q(x,y,a)
-	def reward_goal(self,states):
-		if(self.input):
-			while True:
-				print; print		'==================================================================================================================='
-
-				try:
-					self.s_goal = input('Goal coordinates (format = [vertical,horizontal], example = [0,0]):');
-					print 		 '==================================================================================================================='; print
-					if(states[self.Nn*self.s_goal[0]+self.s_goal[1]] == 1.0): break
-					print "Goal cannot be in the wall. You have to change the goal position."
-				except: 
-					print 		 '==================================================================================================================='; print
-					print "Input is incorrect, please, use an example to make correct input."
-		else:
-			self.s_goal = self.s_goal
-
-		return self.s_goal
-    
     
 	# Define the punishment at Q(x,y,a)
 	def availability(self, x0, y0, x1, y1, actions):
