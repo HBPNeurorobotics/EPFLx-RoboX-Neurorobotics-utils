@@ -99,8 +99,8 @@ class SARSA_evaluation():
 				writer.writerow([self.X[i], self.Y[i]])
 		
     
-    def auto_generation(self,test):
-		self.Nn,self.states,self.actions,self.reward,self.goal,self.Q = self.sarsaad.eva_analysis(test)
+    def auto_generation(self):
+		self.Nn,self.states,self.actions,self.reward,self.goal,self.Q = self.sarsaad.eva_analysis()
 		self.M = self.perfect_map()
 		return self.M
 
