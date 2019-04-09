@@ -223,7 +223,7 @@ class SARSA_additional():
 	#	Reward matrix generation
 	########################################################################
 
-    # Define reward as each Q(x,y,a)
+	# Define reward as each Q(x,y,a)
 	def reward_data(self,states,actions):
 		reward = np.zeros((self.Nn,self.Nn,4))
 		for i in range(self.Nn):
@@ -244,7 +244,7 @@ class SARSA_additional():
 
 		return reward
 
-    # Define reward as each Q(x,y,a)
+	# Define reward as each Q(x,y,a)
 	def choice_data(self,states,actions):
 		reward = [] #np.zeros((self.Nn,self.Nn,4))
 		for i in range(self.Nn):
@@ -305,8 +305,7 @@ class SARSA_additional():
 	
 	
 	
-	
-    # Define reward as each Q(x,y,a)
+	# Define reward as each Q(x,y,a)
 	def reward_goal(self,states):
 		if(self.input):
 			while True:
@@ -323,15 +322,10 @@ class SARSA_additional():
 		else:
 			self.s_goal = self.s_goal
 
-
-		#if(reward[self.s_goal[0]-1,self.s_goal[1],0] == 0.0): reward[self.s_goal[0]-1,self.s_goal[1],0] = 1.0
-		#if(reward[self.s_goal[0]+1,self.s_goal[1],1] == 0.0): reward[self.s_goal[0]+1,self.s_goal[1],1] = 1.0
-		#if(reward[self.s_goal[0],self.s_goal[1]-1,2] == 0.0): reward[self.s_goal[0],self.s_goal[1]-1,2] = 1.0
-		#if(reward[self.s_goal[0],self.s_goal[1]+1,3] == 0.0): reward[self.s_goal[0],self.s_goal[1]+1,3] = 1.0
-
 		return self.s_goal
     
-    # Define the punishment at Q(x,y,a)
+    
+	# Define the punishment at Q(x,y,a)
 	def availability(self,x0,y0,x1,y1,actions):
 		Cx,Cy = zip(*self.centers)
 		if  (0 <= x1 < self.Nn) & (0 <= y1 < self.Nn):
@@ -351,8 +345,8 @@ class SARSA_additional():
 			else:  return -1.0
 		else:  return -1.0
     
-
-    # Define the punishment at Q(x,y,a)
+    
+	# Define the punishment at Q(x,y,a)
 	def available_positions(self,reward):
 		avpos = [[] for _ in range(self.Nn**2)]
 		for i in range(self.Nn):
