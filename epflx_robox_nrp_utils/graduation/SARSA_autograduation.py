@@ -84,7 +84,7 @@ class SARSA_autograduation():
 			self.goal = self.G[t]
 			test = 'SOM_test'+str(t+1)+'_lattice.csv'
 			self.sarsaad.test_analysis(self.goal,test)
-			self.M = self.sarsaev.auto_generation(test)
+			self.M = self.sarsaev.auto_generation()
 			print self.goal
 
 			# upload solution
