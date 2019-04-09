@@ -212,7 +212,7 @@ class SARSA_additional():
 	########################################################################
 	#	Reward matrix generation
 	########################################################################
-
+	"""
 	# Define reward as each Q(x,y,a)
 	def reward_data(self,states,actions):
 		reward = np.zeros((self.Nn,self.Nn,4))
@@ -233,6 +233,7 @@ class SARSA_additional():
 					states[self.Nn*i+j] = 0.0
 
 		return reward
+	"""
 
 	# Define reward as each Q(x,y,a)
 	def choice_data(self,states,actions):
