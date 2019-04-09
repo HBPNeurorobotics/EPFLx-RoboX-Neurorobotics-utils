@@ -43,19 +43,13 @@ class SARSA_evaluation():
 				self.start = [k,h]
 				if(self.M[k,h]!=0.0):
 					Qway = self.trial_evaluation()
-					#print "Number of steps:", len(self.X)
-					#print "Q-way:", ["%12.8f"% (q) for i,q in enumerate(Qway)]
 					if(self.video): time.sleep(2)
 					if(self.video): display.clear_output(wait=True)		
 					final = [self.X[len(self.X)-1],self.Y[len(self.Y)-1]]
-					#print final, self.goal
-					#print self.X, self.Y
 					if   (final != self.goal) or (len(Qway) == self.Nn*self.Nn): neverway += 1
 					elif (len(Qway) == self.M[k,h]): fastway += 1
 					else: longway += 1; overway += len(Qway) - self.M[k,h]
 		return fastway, longway, overway, neverway
-
-
 
 
 	def test_generation(self):
@@ -76,37 +70,25 @@ class SARSA_evaluation():
 				print 		 '==================================================================================================================='; print
 				print "Input is incorrect, please, use an example to make correct input."
 		
-		
-		
-		#if(start==None): self.start = [np.random.randint(self.Nn),np.random.randint(self.Nn)]
-		#else: self.start = start
-
-		#while(self.M[self.start[0],self.start[1]] == 0):
-		#	self.start = [np.random.randint(self.Nn),np.random.randint(self.Nn)]
 
 		Qway = self.trial_evaluation()
-		#print "Number of steps:", len(self.X)
-		#print "Q-way:", ["%12.8f"% (q) for i,q in enumerate(Qway)]
 		display.clear_output(wait=True)
-		#print "Number of steps:", len(self.X)
 		self.Way = np.column_stack((self.X, self.Y))
-		#print np.transpose(self.Way)
 
 		with open('SARSA_data_way_points.csv', 'w') as f:
 			writer = csv.writer(f)
 			writer.writerow(['x', 'y'])
 			for i in range(len(self.X)):
 				writer.writerow([self.X[i], self.Y[i]])
-		
-    	"""
-	def auto_generation(self):
-		self.Nn,self.states,self.actions,self.reward,self.goal,self.Q = self.sarsaad.eva_analysis()
-		self.M = self.perfect_map()
-		return self.M
-	"""
 
+	
+	def auto_generation(self,testfile):
+		self.Nn,self.states,self.actions,self.reward,self.goal,self.Q = self.sarsaad.eva_analysis(testfile)
+		self.M = self.perfect_map()
+		return self.M	
+				
 	################################################################################
-	# additional to Modes
+	###   Additional to Modes
 	################################################################################
 
 	def trial_evaluation(self):
@@ -128,6 +110,7 @@ class SARSA_evaluation():
 			if(self.video): self.visualizationE(self.states,self.actions)
 		return Qway
 
+	
 	def perfect_map(self):
 		N = self.Nn*self.Nn-1
 		M = np.zeros((self.Nn,self.Nn))+100
@@ -160,11 +143,10 @@ class SARSA_evaluation():
 		M = np.where(M==1000, 0, M)
 		return M
 
-
+	
 	################################################################################
-	# visualization
+	###    Visualization
 	################################################################################
-
 
 	def visualizationE(self,states,actions):
 
