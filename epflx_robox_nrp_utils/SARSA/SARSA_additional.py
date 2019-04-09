@@ -226,9 +226,9 @@ class SARSA_additional():
 		return self.s_goal
 	
 
-	########################################################################
-	#	Reward matrix generation
-	########################################################################
+	##################################################################################
+	#####                       B.1. List of possible action                     #####
+	##################################################################################
 
 	# Define reward as each Q(x,y,a)
 	def choice_data(self,states,actions):
@@ -288,7 +288,7 @@ class SARSA_additional():
 
 		return reward
 	
-    
+
 	# Define the punishment at Q(x,y,a)
 	def availability(self, x0, y0, x1, y1, actions):
 		Cx,Cy = zip(*self.centers)
