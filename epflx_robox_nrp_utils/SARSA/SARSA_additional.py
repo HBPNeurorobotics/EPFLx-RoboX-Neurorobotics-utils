@@ -84,9 +84,10 @@ class SARSA_additional():
 	def test_analysis(self,goal,test):
 		self.input = False
 		self.s_goal = goal
+		self.test = test
 		# SOM pre-processing
 		#self.upload_positions()
-		self.upload_lattice(test)
+		self.upload_lattice(self.test)
 		self.net_details()
 
 		# SOM analyse (to generate maze and reward)
