@@ -621,8 +621,8 @@ class SARSA_additional():
 
 	def upload_lattice(self,Lfile='SOM_data_lattice.csv'):
 		# load data of som-lattice from csv 
-		script_path = os.path.dirname(os.path.abspath( __file__ ))
-		with open(os.path.join(script_path,'../graduation/'+Lfile)) as f:
+		#script_path = os.path.dirname(os.path.abspath( __file__ ))
+		with open(Lfile) as f:
 			reader = csv.reader(f)
 			next(reader) # skip header
 			data = [r for r in reader]
