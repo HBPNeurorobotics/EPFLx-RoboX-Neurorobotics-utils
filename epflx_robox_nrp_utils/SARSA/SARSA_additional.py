@@ -749,19 +749,7 @@ class SARSA_additional():
         
 	
 	def print_Qvalue(self,Q,goal,actions):
-		
-		#def color_negative(val):
-		#	color = 'white' if val == 0.0 else 'black'
-		#	return 'color: %s' % color
-		
-		
-		heatmap2 = np.zeros((Q.shape[0],Q.shape[0]))
-		for i in range(Q.shape[0]):
-			for j in range(Q.shape[0]):
-				ind = np.argmax(Q[i,j,:])
-				heatmap2[i,j] = max(Q[i,j,:])
-				
-				
+					
 		def background_gradient(s, m, M, cmap='PuBu', low=0, high=0, goal=0.0):
 			rng = M - m
 			norm = colors.Normalize(m - (rng * low),
@@ -773,14 +761,11 @@ class SARSA_additional():
 			c = [colors.rgb2hex(x) for x in plt.cm.get_cmap(cmap)(normed)]
 			return [ 'background-color: black' if color==cb else 'background-color: lime' if color==gb else 'background-color: %s' % color for color in c ]
 		
-			
-		
-			
 		def border_negative(val):
-			heat = val
-			vali = (heat - np.round(heat,6))*10**6
+			#heat = val
+			vali = (val - np.round(val,6))*10**6
 			vali = np.round(vali,4)
-			color = {vali == 0.4321: 'none', vali==heat: 'solid solid solid solid', \
+			color = {vali == 0.4321: 'none', vali==val: 'solid solid solid solid', \
 				 vali == 0.21: 'none solid none solid', \
 				 vali == 0.31: 'solid none none solid', \
 				 vali == 0.41: 'solid solid none none', \
@@ -801,7 +786,12 @@ class SARSA_additional():
 				 vali == 0.431: 'solid none none none'}.get(True, 'none')
 			return 'border-style: %s' % color
 
-
+		heatmap2 = np.zeros((Q.shape[0],Q.shape[0]))
+		for i in range(Q.shape[0]):
+			for j in range(Q.shape[0]):
+				ind = np.argmax(Q[i,j,:])
+				heatmap2[i,j] = max(Q[i,j,:])
+		
 		outheat2 = np.zeros((Q.shape[0],Q.shape[0]), dtype=float)
 		for i in range(Q.shape[0]):
 			for j in range(Q.shape[0]):
