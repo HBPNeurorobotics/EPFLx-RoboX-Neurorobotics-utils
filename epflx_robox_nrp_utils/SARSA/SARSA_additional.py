@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 from matplotlib import collections as mc
-from matplotlib import patches
+#from matplotlib import patches
 import matplotlib.pyplot as plt
 from matplotlib import patches
 from matplotlib import colors
@@ -16,6 +16,8 @@ import math
 import time
 import csv
 import os
+
+from ast import literal_eval
 
 
 class SARSA_additional():
@@ -281,7 +283,7 @@ class SARSA_additional():
 				if(i==self.s_goal[0] and j==self.s_goal[1]): output[i][j] = ' ' + output[i][j]
 				
 
-		import pandas as pd
+		#import pandas as pd
 		print 'Possible actions to choose: 0 - Down; 1 - Up; 2 - Right; 3 - Left.'
 		df = pd.DataFrame(output); df.columns.name = 'Actions';
 		df.to_csv('SOM_possible_actions.csv')
@@ -627,7 +629,7 @@ class SARSA_additional():
 			data = [r for r in reader]
 		# calculate Nn
 		#print len(data)
-		from ast import literal_eval
+		#from ast import literal_eval
 		self.Nn = len(data) #int(math.sqrt(len(data)/4))
 		# re-create Reward
 		#Reward = np.zeros((self.Nn,self.Nn,4))
