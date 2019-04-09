@@ -106,10 +106,9 @@ class SARSA_additional():
 
 
 
-	def eva_analysis(self):
+	def eva_analysis(self, test = 'SOM_data_lattice.csv'):
 		self.upload_positions()
-		try: self.upload_lattice(self.test)
-		except: self.upload_lattice()
+		self.upload_lattice(test)
 		self.net_details()
 
 		# SOM analyse (to generate maze and reward)
