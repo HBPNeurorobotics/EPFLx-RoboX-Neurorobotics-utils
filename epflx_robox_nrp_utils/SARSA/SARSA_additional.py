@@ -108,9 +108,10 @@ class SARSA_additional():
 
 
 
-	def eva_analysis(self):
+	def eva_analysis(self,testfile):
+		#self.testfile = testfile
 		self.upload_positions()
-		self.upload_lattice()
+		self.upload_lattice(testfile)
 		self.net_details()
 
 		# SOM analyse (to generate maze and reward)
@@ -566,7 +567,10 @@ class SARSA_additional():
 
 	def upload_lattice(self,Lfile='SOM_data_lattice.csv'):
 		# load data of som-lattice from csv 
-		#script_path = os.path.dirname(os.path.abspath( __file__ ))
+		if(Lfile!='SOM_data_lattice.csv')
+			script_path = os.path.dirname(os.path.abspath( __file__ ))
+			Lfile = os.path.join(script_path,'../graduation'+Lfile)
+		print Lfile
 		with open(Lfile) as f:
 			reader = csv.reader(f)
 			next(reader) # skip header
