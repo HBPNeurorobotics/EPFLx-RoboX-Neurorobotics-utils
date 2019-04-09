@@ -337,6 +337,7 @@ class SARSA_additional():
 		else:  return -1.0
     
     
+	"""
 	# Define the punishment at Q(x,y,a)
 	def available_positions(self,reward):
 		avpos = [[] for _ in range(self.Nn**2)]
@@ -347,7 +348,7 @@ class SARSA_additional():
 				if(reward[i,j,2] >= 0.0): avpos[i*self.Nn+j].append(2)
 				if(reward[i,j,3] >= 0.0): avpos[i*self.Nn+j].append(3)
 		return avpos
-    
+	"""
 
 
 	########################################################################
