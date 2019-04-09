@@ -88,7 +88,7 @@ class SARSA_additional():
 	def test_analysis(self,goal,testfile):
 		self.input = False
 		self.s_goal = goal
-		self.testfile = test
+		self.testfile = testfile
 		# SOM pre-processing
 		#self.upload_positions()
 		self.upload_lattice(self.testfile)
