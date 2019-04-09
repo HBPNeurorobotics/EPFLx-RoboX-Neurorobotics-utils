@@ -736,7 +736,10 @@ class SARSA_additional():
 		raw_input('Press Enter to finish... ')
 		clear_output()
 
+	
+	
 	### Q-VALUE
+	
 	def save_Qvalue(self,Q):
 		# convert it to stacked format using Pandas
 		stacked = pd.Panel(Q.swapaxes(1,2)).to_frame().stack().reset_index()
@@ -744,6 +747,7 @@ class SARSA_additional():
 		# save to disk
 		stacked.to_csv('SARSA_data_Qvalue.csv', index=False)
         
+	
 	def print_Qvalue(self,Q,goal,actions):
 		#print "Result. Navigation heatmap:"
 		#print "Up:\n", 
@@ -772,15 +776,15 @@ class SARSA_additional():
 			return 'color: %s' % color
 		
 		
-		heatmap = np.zeros((Q.shape[0],Q.shape[0]))
+		#heatmap = np.zeros((Q.shape[0],Q.shape[0]))
 		heatmap2 = np.zeros((Q.shape[0],Q.shape[0]))
 		for i in range(Q.shape[0]):
 			for j in range(Q.shape[0]):
 				ind = np.argmax(Q[i,j,:])
-				if(ind==0): heatmap[i+1,j] = max(Q[i,j,:])
-				if(ind==1): heatmap[i-1,j] = max(Q[i,j,:])
-				if(ind==2): heatmap[i,j+1] = max(Q[i,j,:])
-				if(ind==3): heatmap[i,j-1] = max(Q[i,j,:])
+				#if(ind==0): heatmap[i+1,j] = max(Q[i,j,:])
+				#if(ind==1): heatmap[i-1,j] = max(Q[i,j,:])
+				#if(ind==2): heatmap[i,j+1] = max(Q[i,j,:])
+				#if(ind==3): heatmap[i,j-1] = max(Q[i,j,:])
 				#heatmap2[i,j] = sum(Q[i,j,:])/4.0
 				heatmap2[i,j] = max(Q[i,j,:])
 				
@@ -810,11 +814,9 @@ class SARSA_additional():
 		
 			
 		def border_negative(val):
-			#print "VAL", val
 			heat = val
 			vali = (heat - np.round(heat,6))*10**6
 			vali = np.round(vali,4)
-			#print vali
 			color = {vali == 0.4321: 'none', vali==heat: 'solid solid solid solid', \
 				 vali == 0.21: 'none solid none solid', \
 				 vali == 0.31: 'solid none none solid', \
