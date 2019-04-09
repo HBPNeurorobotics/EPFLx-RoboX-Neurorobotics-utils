@@ -702,7 +702,7 @@ class SARSA_additional():
 	########################################################################
 	#	Output functions
 	########################################################################
-
+	"""
 	### REWARD
 	def save_reward(self,reward):
 		# convert it to stacked format using Pandas
@@ -736,7 +736,7 @@ class SARSA_additional():
 		raw_input('Press Enter to finish... ')
 		clear_output()
 
-	
+	"""
 	
 	### Q-VALUE
 	
