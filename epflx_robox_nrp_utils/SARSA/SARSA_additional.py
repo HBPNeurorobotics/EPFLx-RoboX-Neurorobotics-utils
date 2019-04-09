@@ -657,8 +657,7 @@ class SARSA_additional():
 			x = plt.cm.get_cmap(cmap)(0.0);  cb = colors.rgb2hex(x)
 			x = plt.cm.get_cmap(cmap)(gnorm); gb = colors.rgb2hex(x)
 			c = [colors.rgb2hex(x) for x in plt.cm.get_cmap(cmap)(normed)]
-			#return [ 'background-color: black' if color==cb else 'background-color: lime' if color==gb else 'background-color: %s' % color for color in c ]
-			return [ 'background-color: black' if color==cb else 'background-color: %s' % color for color in c ]
+			return [ 'background-color: black' if color==cb else 'background-color: lime' if color==gb else 'background-color: %s' % color for color in c ]
 		
 		def border_negative(val):
 			vali = (val - np.round(val,6))*10**6
@@ -703,7 +702,8 @@ class SARSA_additional():
 				heat = heat + num*10**(-(6+len(act)))
 				outheat[i,j] = heat
 				
-		gvalue  = int(outheat[goal[0],goal[1]])
+		outheat[goal[0],goal[1]] = int(outheat[goal[0],goal[1]])
+		gvalue  = outheat[goal[0],goal[1]]
 		
 		if(self.testfile=='SOM_data_lattice.csv'): print "You can see just below the table of average expected reward (Q-value) at each possible state. This table represents that expected reward is increasing as you move closer to the goal at the same time states within 'walls' don't have any expected reward, bacause they cannot be reached. Also, you can see that expected reward in the state of goal is less than on previous states. The reason is that making step from the goal state to anyother you will be one step away from goal again as well as on other such positions."
 				
