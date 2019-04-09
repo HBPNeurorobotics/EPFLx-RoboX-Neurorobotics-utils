@@ -635,27 +635,8 @@ class SARSA_additional():
 			self.lattice[x,y,0] = line[2]
 			self.lattice[x,y,1] = line[3]
 		return self.lattice
-        """
-	def upload_reward(self):
-		# load data of som-lattice from csv 
-		with open("SARSA_data_reward.csv") as f:
-			reader = csv.reader(f)
-			next(reader) # skip header
-			data = [r for r in reader]
-		# calculate Nn
-		self.Nn = int(math.sqrt(len(data)/4))
-		# re-create Reward
-		Reward = np.zeros((self.Nn,self.Nn,4))
-		for i,line in enumerate(data):
-			z = line[0]; y = line[1]; x = line[2];
-			Reward[x,y,z] = line[3]
-			if(Reward[x,y,z] == 1):
-				if(int(z)==0): reward_position = [int(x)+1,int(y)]
-				if(int(z)==1): reward_position = [int(x)-1,int(y)]
-				if(int(z)==2): reward_position = [int(x),int(y)+1]
-				if(int(z)==3): reward_position = [int(x),int(y)-1]
-		return Reward, reward_position
-	"""
+
+	
 	def upload_reward(self):
 		# load data of som-lattice from csv 
 		with open("SOM_possible_actions.csv") as f:
@@ -702,41 +683,6 @@ class SARSA_additional():
 	########################################################################
 	#	Output functions
 	########################################################################
-	"""
-	### REWARD
-	def save_reward(self,reward):
-		# convert it to stacked format using Pandas
-		stacked = pd.Panel(reward.swapaxes(1,2)).to_frame().stack().reset_index()
-		stacked.columns = ['Direction', 'Coordinate X', 'Coordinate Y', 'Reward']
-		# save to disk
-		stacked.to_csv('SARSA_data_reward.csv', index=False)
-
-	def print_reward(self,reward):
-		def highlight_max(s):
-			return ['background-color: black' if (v==-1.0) else 'background-color: gold' if (v==1.0) else '' for v in s]
-		
-		def color_negative(val):
-			color = 'white' if val < 0 else 'black'
-			return 'color: %s' % color
-		
-		print "Reward matrix is generated for your maze. Reward structure:"
-		
-		df = pd.DataFrame(reward[:,:,0]); df.columns.name = 'DOWN_____'; 
-		df = df.style.applymap(color_negative).apply(highlight_max).set_properties(**{'width': '100px'}); display.display(df)
-		
-		df = pd.DataFrame(reward[:,:,1]); df.columns.name = 'UP________'; 
-		df = df.style.applymap(color_negative).apply(highlight_max).set_properties(**{'width': '100px'}); display.display(df)
-		
-		df = pd.DataFrame(reward[:,:,2]); df.columns.name = 'RIGHT_____'; 
-		df = df.style.applymap(color_negative).apply(highlight_max).set_properties(**{'width': '100px'}); display.display(df)
-		
-		df = pd.DataFrame(reward[:,:,3]); df.columns.name = 'LEFT______'; 
-		df = df.style.applymap(color_negative).apply(highlight_max).set_properties(**{'width': '100px'}); display.display(df)
-		
-		raw_input('Press Enter to finish... ')
-		clear_output()
-
-	"""
 	
 	### Q-VALUE
 	
