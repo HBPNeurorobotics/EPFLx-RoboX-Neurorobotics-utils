@@ -57,7 +57,10 @@ setuptools.setup(
         'submission_manager/config.json',
         'graduation/SOM_test1_lattice.csv',
         'graduation/SOM_test2_lattice.csv',
-        'graduation/SOM_test3_lattice.csv'
+        'graduation/SOM_test3_lattice.csv',
+        'graduation/NRP_test1_robot_position.csv',
+        'graduation/NRP_test2_robot_position.csv',
+        'graduation/NRP_test3_robot_position.csv'
     ]},
     classifiers=[
         "Programming Language :: Python :: 2.7",
