@@ -132,7 +132,7 @@ class SOM_autograduation():
 					# calculate variation of given test result
 					if(work):     # Script was working properly or not (within time limit or not) 
 						# Estimate SOM by test
-						from SOM_evaluation import SOM_evaluation
+						from epflx_robox_nrp_utils.SOM.SOM_evaluation import SOM_evaluation
 						somev = SOM_evaluation()
 						vF, Nn = somev.run_evaluation()
 						if(Nn==12): variF = min(vF,variF)
