@@ -115,14 +115,19 @@ class SARSA_additional():
 		print self.testfile
 		self.upload_positions()
 		self.upload_lattice(self.testfile)
+		print "1", self.Nn
 		self.net_details()
+		print "2", self.Nn
 
 		# SOM analyse (to generate maze and reward)
 		## maze
 		states = self.rewarded_states()
+		print "3", self.Nn
 		actions = self.rewarded_actions(states)
+		print "4", self.Nn
 
 		Reward, reward_pos = self.upload_reward()
+		print "5", self.Nn
 		self.upload_Qvalue() 
 
 		return self.Nn, states, actions, Reward, reward_pos, self.Q
