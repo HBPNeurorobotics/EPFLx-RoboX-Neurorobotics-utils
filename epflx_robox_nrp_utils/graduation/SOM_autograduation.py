@@ -151,14 +151,14 @@ class SOM_autograduation():
 			else: 					self.message += str(t+1) + ") Cannot upload solution function.  "
 
 			# Notes
-			self.note(t, variF)
+			#self.note(t, variF)
 			print t, " : ", variF
 			time.sleep(5)
 			# clear notes
-			clear_output()
+			#clear_output()
 			
 		# Save graduation
-		self.save_graduation()
+		#self.save_graduation()
 
 
 
