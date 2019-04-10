@@ -169,10 +169,11 @@ class SOM_autograduation():
 
 	# upload function with student's solution
 	def upload_solution(self, func, rank):
-		if(rank): os.chdir('./SOM_solutions')
+		#if(rank): os.chdir('./SOM_solutions')
+		import os; lis = os.listdir('.'); print lis
 		module = importlib.import_module(func)
 		SOM = getattr(module, 'SOM')
-		if(rank): os.chdir('..')
+		#if(rank): os.chdir('..')
 		return SOM
 
 
