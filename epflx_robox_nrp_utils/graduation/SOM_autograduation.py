@@ -76,6 +76,7 @@ class SOM_autograduation():
 	########################################################
 
 	def graduate_one_function(self, funcname):
+		score = []
 		func, self.user = self.user_function(funcname)
 		self.message = ""
 		
@@ -146,12 +147,15 @@ class SOM_autograduation():
 			# Notes
 			#self.note(t, variF)
 			print t, " : ", variF
+			score.append(variF)
 			time.sleep(5)
 			# clear notes
 			#clear_output()
 			
 		# Save graduation
 		#self.save_graduation()
+		print score
+		return score
 
 
 
