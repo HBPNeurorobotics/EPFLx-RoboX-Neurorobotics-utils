@@ -117,8 +117,9 @@ class SOM_autograduation():
 					T = time.time()
 					
 					# run simulation of test
-					try: som.run_som()
-					except Exception, exc: inlim = False
+					#try: 
+					som.run_som()
+					#except Exception, exc: inlim = False
 					signal.alarm(0) # disable alarm
 				
 					# Challenge if script was simulating properly during all simulation time
