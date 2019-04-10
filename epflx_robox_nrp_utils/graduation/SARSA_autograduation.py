@@ -83,6 +83,8 @@ class SARSA_autograduation():
 		for t in range(3):
 			self.goal = self.G[t]
 			test = 'SOM_test'+str(t+1)+'_lattice.csv'
+			script_path = os.path.dirname(os.path.abspath( __file__ ))
+			test = os.path.join(script_path,test)
 			self.sarsaad.test_analysis(self.goal,test)
 			self.M = self.sarsaev.auto_generation(test)
 			print self.goal
