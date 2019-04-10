@@ -41,16 +41,17 @@ class SOM_autograduation():
 		self.message = ""
 		
 		try: SOM = self.upload_solution(func,True); load = True
-		except: self.message = "FAILED uploading..."; load = False; print self.message
+		except: score = "FAILED uploading..."; load = False
 		
-		for t in range(3):
-			# define name of file with test-data
-			test = 'NRP_test'+str(t+1)+'_robot_position.csv'
-			script_path = os.path.dirname(os.path.abspath( __file__ ))
-			test = os.path.join(script_path,test)
-			print test
+		if(load):
+			for t in range(3):
+				# define name of file with test-data
+				test = 'NRP_test'+str(t+1)+'_robot_position.csv'
+				script_path = os.path.dirname(os.path.abspath( __file__ ))
+				test = os.path.join(script_path,test)
+				print test
 			
-			if(load):
+			
 				variF = 2000.0
 				for e in range(self.N):
 					print "Epoche", e
@@ -105,16 +106,12 @@ class SOM_autograduation():
 			else: 					self.message += str(t+1) + ") Cannot upload solution function.  "
 
 			# Notes
-			#self.note(t, variF)
 			print t, " : ", variF
 			score.append(variF)
 			time.sleep(5)
-			# clear notes
 			#clear_output()
 			
 		# Save graduation
-		#self.save_graduation()
-		print score
 		return score
 
 
