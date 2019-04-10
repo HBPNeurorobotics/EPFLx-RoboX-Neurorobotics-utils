@@ -108,7 +108,7 @@ class SOM_autograduation():
 				
 					# import student's function and test data
 					#try: 
-					som = SOM(0,test,12) # som = SOM(Nn x Nn (lattice), tau, visualization, data file)
+					som = SOM(1,test,12) # som = SOM(Nn x Nn (lattice), tau, visualization, data file)
 					#except: work = False
 				
 					# set simulation time limit for the cases script doesn't work properly:
