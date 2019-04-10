@@ -129,6 +129,7 @@ class SARSA_additional():
 		Reward, reward_pos = self.upload_reward()
 		print "5", self.Nn
 		self.upload_Qvalue() 
+		print "6", self.Nn
 
 		return self.Nn, states, actions, Reward, reward_pos, self.Q
 
@@ -631,6 +632,7 @@ class SARSA_additional():
 			next(reader) # skip header
 			data = [r for r in reader]
 		# calculate Nn
+		print "LEN: ", len(data)
 		self.Nn = int(math.sqrt(len(data)/4))
 		# re-create lattice
 		self.Q = np.zeros((self.Nn,self.Nn,4))
