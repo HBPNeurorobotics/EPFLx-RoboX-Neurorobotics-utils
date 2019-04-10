@@ -78,6 +78,7 @@ class SARSA_autograduation():
 	########################################################
 
 	def graduate_one_function(self, funcname):
+		score = []
 		func, self.user = self.user_function(funcname)
 		self.message = ""
 		for t in range(3):
@@ -155,13 +156,16 @@ class SARSA_autograduation():
 			
 
 			# Notes
-			self.note(t, sumwayF)
-			time.sleep(5)
+			#self.note(t, sumwayF)
+			score.append(sumwayF)
+			#time.sleep(5)
 			# clear notes
-			clear_output()
+			#clear_output()
 		
 		# Save evaluation
-		self.save_graduation()
+		#self.save_graduation()
+		print score
+		return score
 
 
 
