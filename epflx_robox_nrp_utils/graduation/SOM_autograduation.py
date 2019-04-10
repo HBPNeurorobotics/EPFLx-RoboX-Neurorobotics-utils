@@ -78,6 +78,9 @@ class SOM_autograduation():
 	def graduate_one_function(self, funcname):
 		func, self.user = self.user_function(funcname)
 		self.message = ""
+		try: SOM = self.upload_solution(func,True)
+		except: print "FAILED uploading..."
+		sdfsdfsd=sdfsdfsd
 		for t in range(3):
 			# define name of file with test-data
 			test = 'NRP_test'+str(t+1)+'_robot_position.csv'
