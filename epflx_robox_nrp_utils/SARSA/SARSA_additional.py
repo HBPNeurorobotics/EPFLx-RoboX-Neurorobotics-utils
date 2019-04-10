@@ -719,4 +719,5 @@ class SARSA_additional():
 				
 		df = pd.DataFrame(outheat); df.columns.name = 'Q';
 		df = df.style.applymap(border_negative).apply(background_gradient, cmap='PuBu', m=df.min().min(), M=df.max().max(),low=0,high=0.2, goal=gvalue).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important', 'color': 'black !important'});
-		if(self.testfile!='SOM_data_lattice.csv'): display.display(df)
+		#if(self.testfile!='SOM_data_lattice.csv'): 
+		display.display(df)
