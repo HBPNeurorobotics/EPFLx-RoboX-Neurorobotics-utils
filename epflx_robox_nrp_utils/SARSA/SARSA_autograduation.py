@@ -185,10 +185,10 @@ class SARSA_autograduation():
 
 	# upload function with student's solution
 	def upload_solution(self, func, rank):
-		if(rank): os.chdir('./SARSA_solutions')
+		#if(rank): os.chdir('./SARSA_solutions')
 		module = importlib.import_module(func)
 		SARSA = getattr(module, 'SARSA')
-		if(rank): os.chdir('..')
+		#if(rank): os.chdir('..')
 		return SARSA
 
 
