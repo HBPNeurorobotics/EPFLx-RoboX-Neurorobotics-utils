@@ -136,7 +136,7 @@ class SARSA_autograduation():
 						# Estimate SARSA by test
 						from epflx_robox_nrp_utils.SARSA.SARSA_evaluation import SARSA_evaluation
 						sarsaev = SARSA_evaluation()
-						fastwayF, longwayF, overwayF, neverwayF = sarsaev.run_evaluation(0)
+						fastwayF, longwayF, overwayF, neverwayF = sarsaev.run_evaluation(0,test)
 						print "Function:", fastwayF, longwayF, overwayF, neverwayF
 						sumwayF = 1*fastwayF+(1-0.55+longwayF/max(overwayF,0.01))*longwayF+0*neverwayF
 					else:         # Script doesn't work / doesn't work properly
