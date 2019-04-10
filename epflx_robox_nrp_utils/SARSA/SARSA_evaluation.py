@@ -32,8 +32,8 @@ class SARSA_evaluation():
 	# Modes
 	################################################################################
 
-	def run_evaluation(self,video):
-		self.Nn,self.states,self.actions,self.reward,self.goal,self.Q = self.sarsaad.eva_analysis('SOM_data_lattice.csv')
+	def run_evaluation(self,video,evafile='SOM_data_lattice.csv'):
+		self.Nn,self.states,self.actions,self.reward,self.goal,self.Q = self.sarsaad.eva_analysis(evafile)
 		self.M = self.perfect_map()
 		self.video = video
 		fastway = 0; longway = 0; neverway = 0; overway = 0
