@@ -85,6 +85,8 @@ class SOM_autograduation():
 		for t in range(3):
 			# define name of file with test-data
 			test = 'NRP_test'+str(t+1)+'_robot_position.csv'
+			script_path = os.path.dirname(os.path.abspath( __file__ ))
+			test = os.path.join(script_path,test)
 			print test, ":"
 
 			# upload solution
