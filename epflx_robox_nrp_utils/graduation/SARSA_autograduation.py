@@ -158,7 +158,7 @@ class SARSA_autograduation():
 			# Notes
 			#self.note(t, sumwayF)
 			score.append(sumwayF)
-			#time.sleep(5)
+			time.sleep(5)
 			# clear notes
 			#clear_output()
 		
