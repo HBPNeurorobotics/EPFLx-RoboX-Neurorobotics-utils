@@ -113,6 +113,7 @@ class SOM_autograduation():
 				#clear_output()
 			
 		# Save graduation
+		print self.message
 		return score
 
 
