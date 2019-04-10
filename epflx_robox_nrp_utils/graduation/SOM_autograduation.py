@@ -20,6 +20,7 @@ class SOM_autograduation():
 		
 		# initialize the parameters of test (Map size and Number of trials)
 		self.N = 1
+		self.L = 6
 		self.tau = 100.0
 		self.limit = 120 # (s) only integer value
 		
@@ -64,7 +65,7 @@ class SOM_autograduation():
 					# Function gives back a final variation achieved during a test  
 				
 					# import student's function and test data
-					try: som = SOM(0,test,6) # som = SOM(Nn x Nn (lattice), tau, visualization, data file)
+					try: som = SOM(0,test,self.L) # som = SOM(Nn x Nn (lattice), tau, visualization, data file)
 					except: work = False
 				
 					# set simulation time limit for the cases script doesn't work properly:
@@ -90,7 +91,7 @@ class SOM_autograduation():
 						from epflx_robox_nrp_utils.SOM.SOM_evaluation import SOM_evaluation
 						somev = SOM_evaluation()
 						vF, Nn = somev.run_evaluation()
-						if(Nn==6): variF = min(vF,variF)
+						if(Nn==self.L): variF = min(vF,variF)
 						else: variF = 1212.0
 					else:         # Script doesn't work / doesn't work properly
 						# put punished value
@@ -98,18 +99,18 @@ class SOM_autograduation():
 
 					
 					
-			if(variF < 1000.0):	
-				if(inlim): 			self.message += str(t+1) + ") Program worked properly and it has been estimated.  "
-				else: 				self.message += str(t+1) + ") Program had been interrupted by time limit but a current result was estimated.  "
-			elif(variF == 1212.0): 	self.message += str(t+1) + ") Program is working properly, but SOM size is not 12x12.  "
-			elif(variF == 1000.0): 	self.message += str(t+1) + ") Program failed during simulation.  "
-			else: 					self.message += str(t+1) + ") Cannot upload solution function.  "
+				if(variF < 1000.0):	
+					if(inlim): 			self.message += str(t+1) + ") Program worked properly and it has been estimated.  "
+					else: 				self.message += str(t+1) + ") Program had been interrupted by time limit but a current result was estimated.  "
+				elif(variF == 1212.0): 	self.message += str(t+1) + ") Program is working properly, but SOM size is not 12x12.  "
+				elif(variF == 1000.0): 	self.message += str(t+1) + ") Program failed during simulation.  "
+				else: 					self.message += str(t+1) + ") Cannot upload solution function.  "
 
-			# Notes
-			print t, " : ", variF
-			score.append(variF)
-			time.sleep(5)
-			#clear_output()
+				# Notes
+				print t, " : ", variF
+				score.append(variF)
+				time.sleep(5)
+				#clear_output()
 			
 		# Save graduation
 		return score
