@@ -167,7 +167,7 @@ class SARSA_autograduation():
 		# Save evaluation
 		#self.save_graduation()
 		print scores
-		returen scores
+		return scores
 
 
 
