@@ -18,9 +18,9 @@ class SOM_autograduation():
 		import warnings; warnings.filterwarnings('ignore')
 		
 		# parameters of graduation range 
-		self.standard = [[0.192409957812, 175.045475472/100, 179.93572017/100, 189.93572017/100, 199.93572017/100, 244.0/100],
-						 [0.21339845681, 195.295979247/100, 205.261205001/100, 215.261205001/100, 225.261205001/100, 244.0/100],
-						 [0.188076984158, 172.935509104/100, 180.776196915/100, 190.776196915/100, 200.776196915/100, 244.0/100]] # range of variation result and given note dependency
+		#self.standard = [[0.192409957812, 175.045475472/100, 179.93572017/100, 189.93572017/100, 199.93572017/100, 244.0/100],
+		#				 [0.21339845681, 195.295979247/100, 205.261205001/100, 215.261205001/100, 225.261205001/100, 244.0/100],
+		#				 [0.188076984158, 172.935509104/100, 180.776196915/100, 190.776196915/100, 200.776196915/100, 244.0/100]] # range of variation result and given note dependency
 		
 		# initialize the parameters of test (Map size and Number of trials)
 		self.N = 1
@@ -87,12 +87,7 @@ class SOM_autograduation():
 			test = 'NRP_test'+str(t+1)+'_robot_position.csv'
 			script_path = os.path.dirname(os.path.abspath( __file__ ))
 			test = os.path.join(script_path,test)
-			print test, ":"
-
-			# upload solution
-			#try:
-			#	SOM = self.upload_solution(func,True); load = True
-			#except: variF = 5000.0; os.chdir('..'); load = False
+			print test
 			
 			if(load):
 				variF = 2000.0
@@ -107,9 +102,8 @@ class SOM_autograduation():
 					# Function gives back a final variation achieved during a test  
 				
 					# import student's function and test data
-					#try: 
-					som = SOM(1,test,12) # som = SOM(Nn x Nn (lattice), tau, visualization, data file)
-					#except: work = False
+					try: som = SOM(1,test,6) # som = SOM(Nn x Nn (lattice), tau, visualization, data file)
+					except: work = False
 				
 					# set simulation time limit for the cases script doesn't work properly:
 					# 1) script consists of endless loop
@@ -135,7 +129,7 @@ class SOM_autograduation():
 						from epflx_robox_nrp_utils.SOM.SOM_evaluation import SOM_evaluation
 						somev = SOM_evaluation()
 						vF, Nn = somev.run_evaluation()
-						if(Nn==12): variF = min(vF,variF)
+						if(Nn==6): variF = min(vF,variF)
 						else: variF = 1212.0
 					else:         # Script doesn't work / doesn't work properly
 						# put punished value
@@ -176,17 +170,14 @@ class SOM_autograduation():
 
 	# upload function with student's solution
 	def upload_solution(self, func, rank):
-		#if(rank): os.chdir('./SOM_solutions')
-		import os; lis = os.listdir('.'); print lis
 		module = importlib.import_module(func)
 		SOM = getattr(module, 'SOM')
-		#if(rank): os.chdir('..')
 		return SOM
 
 
 	# define that test simulation time is over
 	def handler(self, signum, frame):
-		raise Exception("end of time")
+		raise Exception("End of time")
 
 	"""
 	# find corresponding number of points
