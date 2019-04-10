@@ -79,11 +79,13 @@ class SARSA_autograduation():
 		for t in range(3):
 			# define name of file with test-data
 			#os.chdir('./SARSA_tests')
-			#test = 'test'+str(t+1)+'_robot_position.csv'
+			test = 'test'+str(t+1)+'_robot_position.csv'
+			script_path = os.path.dirname(os.path.abspath( __file__ ))
+			test = os.path.join(script_path,test)
 			#print test, ":"
 			#os.chdir('..')
 			# NEW GOAL
-			self.M = self.sarsaev.auto_generation()
+			self.M = self.sarsaev.auto_generation(test)
 			self.goal = [np.random.randint(len(self.M[0])),np.random.randint(len(self.M[0]))]
 			while(self.M[self.goal[0],self.goal[1]] == 0):
 				self.goal = [np.random.randint(len(self.M[0])),np.random.randint(len(self.M[0]))]
