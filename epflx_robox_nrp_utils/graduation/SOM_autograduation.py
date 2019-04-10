@@ -40,7 +40,7 @@ class SOM_autograduation():
 	#########################################################
 	'''     Mode 1 - Evaluate ALL submitted solutions     '''
 	#########################################################
-
+	"""
 	# make graduation of submitted student's solutions
 	def graduate_all_functions(self):
 		# remove previous graduation
@@ -66,7 +66,7 @@ class SOM_autograduation():
 				if fnmatch.fnmatch(name, pattern):
 					result.append(os.path.join(name))
 		return result
-
+	"""
 
 
 
@@ -188,7 +188,7 @@ class SOM_autograduation():
 	def handler(self, signum, frame):
 		raise Exception("end of time")
 
-
+	"""
 	# find corresponding number of points
 	def note(self, t, variF):
 		self.varis[t] = variF
@@ -227,7 +227,7 @@ class SOM_autograduation():
 											"Note 1", "Note 2", "Note 3", "Final", "Comment"))
 			wr.writerow(export_data)
 		myfile.close()
-
+	"""
 
 
 	################################################
