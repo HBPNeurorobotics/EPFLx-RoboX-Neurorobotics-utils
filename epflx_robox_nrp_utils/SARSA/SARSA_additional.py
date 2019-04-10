@@ -580,6 +580,7 @@ class SARSA_additional():
 		#if(Lfile!='SOM_data_lattice.csv'):
 		#	script_path = os.path.dirname(os.path.abspath( __file__ ))
 		#	Lfile = os.path.join(script_path,'../graduation/'+Lfile)
+		if(self.testfile != 'SOM_data_lattice.csv'): Lfile = self.testfile
 		print "FILE: ", Lfile
 		with open(Lfile) as f:
 			reader = csv.reader(f)
