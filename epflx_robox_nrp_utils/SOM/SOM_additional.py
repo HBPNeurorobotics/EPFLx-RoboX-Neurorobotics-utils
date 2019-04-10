@@ -6,8 +6,6 @@ import pylab as pl
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 
-#from mpl_toolkits.mplot3d import axes3d
-
 from matplotlib import collections as mc
 from matplotlib import patches
 from IPython import display
@@ -103,7 +101,6 @@ class SOM_additional():
 		# exctract and transform data
 		states = pd.read_csv(csv_file, delimiter=',',header=0).values
 		positions = np.array([pd.to_numeric(states[:,0], errors='coerce'), pd.to_numeric(states[:,1], errors='coerce')]).T
-		
 		# Reduce the number of data points
 		self.pos = positions[slice(0,positions.shape[0],(positions.shape[0]/1000)),:]
 		return self.pos
@@ -113,18 +110,15 @@ class SOM_additional():
 		# convert it to stacked format using Pandas
 		stacked = pd.Panel(lattice.swapaxes(1,2)).to_frame().stack().reset_index()
 		stacked.columns = ['x', 'y', 'z', 'value']
-
 		# save to file
 		stacked.to_csv('SOM_data_lattice.csv', index=False)
 
 		
 	def save_lattice(self,lattice,Nn):
-		# 
+		# prepare data to write
 		output = np.zeros((Nn*Nn,4))
 		for i in range(Nn):
 			for j in range(Nn):
 				output[i*Nn+j][:] = [i,j,lattice[i,j,0],lattice[i,j,1]] 
-
 		# save to file
 		np.savetxt('SOM_data_lattice.csv', output, delimiter=",", header = "Lattice index X,# Lattice index Y,# Coordinate X,# Coordinate Y")
-		#stacked.to_csv('SOM_data_lattice.csv', index=False)
