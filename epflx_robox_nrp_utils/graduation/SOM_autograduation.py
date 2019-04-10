@@ -78,18 +78,19 @@ class SOM_autograduation():
 	def graduate_one_function(self, funcname):
 		func, self.user = self.user_function(funcname)
 		self.message = ""
-		try: SOM = self.upload_solution(func,True)
-		except: print "FAILED uploading..."
-		sdfsdfsd=sdfsdfsd
+		
+		try: SOM = self.upload_solution(func,True); load = True
+		except: self.message = "FAILED uploading..."; load = False; print self.message
+		
 		for t in range(3):
 			# define name of file with test-data
 			test = 'NRP_test'+str(t+1)+'_robot_position.csv'
 			print test, ":"
 
 			# upload solution
-			try:
-				SOM = self.upload_solution(func,True); load = True
-			except: variF = 5000.0; os.chdir('..'); load = False
+			#try:
+			#	SOM = self.upload_solution(func,True); load = True
+			#except: variF = 5000.0; os.chdir('..'); load = False
 			
 			if(load):
 				variF = 2000.0
@@ -147,6 +148,8 @@ class SOM_autograduation():
 
 			# Notes
 			self.note(t, variF)
+			print t, " : ", variF
+			time.sleep(5)
 			# clear notes
 			clear_output()
 			
