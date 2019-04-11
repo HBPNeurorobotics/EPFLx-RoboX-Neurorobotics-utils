@@ -88,7 +88,7 @@ class SARSA_autograduation():
 			test = os.path.join(script_path,test)
 			self.sarsaad.test_analysis(self.goal,test)
 			self.M = self.sarsaev.auto_generation(test)
-			print self.goal
+			#print self.goal
 
 			# upload solution
 			#try:
@@ -139,13 +139,13 @@ class SARSA_autograduation():
 						from epflx_robox_nrp_utils.SARSA.SARSA_evaluation import SARSA_evaluation
 						sarsaev = SARSA_evaluation()
 						fastwayF, longwayF, overwayF, neverwayF = sarsaev.run_evaluation(0,test)
-						print "Function:", fastwayF, longwayF, overwayF, neverwayF
+						#print "Function:", fastwayF, longwayF, overwayF, neverwayF
 						sumwayF = 1*fastwayF+(1-0.55+longwayF/max(overwayF,0.01))*longwayF+0*neverwayF
 					else:         # Script doesn't work / doesn't work properly
 						# put punished value
 						fastwayF=0.001; longwayF=0.001; overwayF=0.001; neverwayF=0.001;
 						#self.message = "Program failed during simulation."
-						print "Function:", fastwayF, longwayF, overwayF, neverwayF
+						#print "Function:", fastwayF, longwayF, overwayF, neverwayF
 						sumwayF = 1*fastwayF+(1-0.55+longwayF/max(overwayF,0.01))*longwayF+0*neverwayF
 
 			if(load):
@@ -159,13 +159,13 @@ class SARSA_autograduation():
 			# Notes
 			#self.note(t, sumwayF)
 			score.append(sumwayF)
-			time.sleep(5)
+			#time.sleep(5)
 			# clear notes
 			#clear_output()
 		
 		# Save evaluation
 		#self.save_graduation()
-		print score
+		#print score
 		return score
 
 
