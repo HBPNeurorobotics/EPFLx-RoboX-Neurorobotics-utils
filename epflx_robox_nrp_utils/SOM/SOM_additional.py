@@ -131,3 +131,7 @@ class SOM_additional():
 		f = IntProgress(min=0, max=trials) # instantiate the bar
 		display.display(f) # display the bar
 		return T,f
+	
+	def post_process(self, T)
+		display.clear_output(wait=True)
+		print 'Done. Simulation time is ', time.time()-T, '(s).'
