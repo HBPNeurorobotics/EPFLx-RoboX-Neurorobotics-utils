@@ -21,9 +21,6 @@ class SARSA_autograduation():
 		from epflx_robox_nrp_utils.SARSA.SARSA_additional import SARSA_additional
 		self.sarsaad = SARSA_additional()
 
-		# parameters of graduation range 
-		#self.standard = [0.95, 0.9, 0.75, 0.5, 0.25, 0.1] # range of variation result and given note dependency
-
 		# initialize the parameters of test (Map size and Number of trials)
 		self.N = 1
 		self.tau = 100.0
@@ -82,6 +79,7 @@ class SARSA_autograduation():
 		func, self.user = self.user_function(funcname)
 		self.message = ""
 		
+		# upload solution
 		try: SARSA = self.upload_solution(func,True); load = True
 		except: score = "FAILED uploading..."; load = False
 		
@@ -93,18 +91,9 @@ class SARSA_autograduation():
 				test = os.path.join(script_path,test)
 				self.sarsaad.test_analysis(self.goal,test)
 				self.M = self.sarsaev.auto_generation(test)
-				#print self.goal
-
-				# upload solution
-				#try:
-				#SARSA = self.upload_solution(func,True); load = True
-				#except: sumwayF = 0.0; load = False; os.chdir('..'); 
-
 
 				sumwayF = 0.0
 				for e in range(1):
-					#print "Epoche", e
-
 					# initialize crucial requirement from student's function
 					# Function is compiling (work) and simulating within time limit (inlim)
 					work = True; inlim = True
@@ -113,9 +102,8 @@ class SARSA_autograduation():
 					# Function gives back a final variation achieved during a test  
 
 					# import student's function and test data
-					#try: 
-					sarsa = SARSA(0,test) # sarsa = SARSA(Nn x Nn (lattice), tau, visualization, data file)
-					#except: work = False
+					try: sarsa = SARSA(0,test) # sarsa = SARSA(Nn x Nn (lattice), tau, visualization, data file)
+					except: work = False
 
 					# set simulation time limit for the cases script doesn't work properly:
 					# 1) script consists of endless loop
@@ -136,41 +124,26 @@ class SARSA_autograduation():
 
 					# calculate variation of given test result
 					if(work):     # Script was working properly or not (within time limit or not) 
-
-						#if(inlim): 	self.message = "Program worked properly and it has been estimated."
-						#else: 		self.message = "Program had been interrupted by time limit but a current result was estimated."
-
 						# Estimate SARSA by test
 						from epflx_robox_nrp_utils.SARSA.SARSA_evaluation import SARSA_evaluation
 						sarsaev = SARSA_evaluation()
 						fastwayF, longwayF, overwayF, neverwayF = sarsaev.run_evaluation(0,test)
-						#print "Function:", fastwayF, longwayF, overwayF, neverwayF
 						sumwayF = 1*fastwayF+(1-0.55+longwayF/max(overwayF,0.01))*longwayF+0*neverwayF
 					else:         # Script doesn't work / doesn't work properly
 						# put punished value
 						fastwayF=0.001; longwayF=0.001; overwayF=0.001; neverwayF=0.001;
-						#self.message = "Program failed during simulation."
-						#print "Function:", fastwayF, longwayF, overwayF, neverwayF
 						sumwayF = 1*fastwayF+(1-0.55+longwayF/max(overwayF,0.01))*longwayF+0*neverwayF
 
-				#if(load):
 				if(work):
 					if(inlim): 	self.message += str(t+1) + ") Program worked properly and it has been estimated.  "
 					else: 		self.message += str(t+1) + ") Program had been interrupted by time limit but a current result was estimated.  "
 				else: 			self.message += str(t+1) + ") Program failed during simulation.  "
-				#else: 				self.message += str(t+1) + ") Cannot upload solution function.  "
-			
-
+				
 				# Notes
-				#self.note(t, sumwayF)
 				score.append(sumwayF)
-				#time.sleep(5)
-				# clear notes
 				#clear_output()
 		
 		# Save evaluation
-		#self.save_graduation()
-		#print score
 		print self.message
 		return score
 
