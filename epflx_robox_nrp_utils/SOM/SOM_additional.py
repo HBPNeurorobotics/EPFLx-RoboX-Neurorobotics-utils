@@ -124,10 +124,10 @@ class SOM_additional():
 		# save to file
 		np.savetxt('SOM_data_lattice.csv', output, delimiter=",", header = "Lattice index X,# Lattice index Y,# Coordinate X,# Coordinate Y")
 
-	def progress_widget(self):
+	def pre_process(self,trials):
 		from IPython import display
 		from ipywidgets import IntProgress
 		T = time.time()
-		f = IntProgress(min=0, max=100) # instantiate the bar
+		f = IntProgress(min=0, max=trials) # instantiate the bar
 		display.display(f) # display the bar
 		return T,f
