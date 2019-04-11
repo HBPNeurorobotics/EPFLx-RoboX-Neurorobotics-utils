@@ -35,11 +35,11 @@ class SARSA_autograduation():
 
 
 
-
+	"""
 	#########################################################
 	'''     Mode 1 - Evaluate ALL submitted solutions     '''
 	#########################################################
-
+	
 	# make graduation of student implementations
 	def graduate_all_functions(self):
 		# remove previous graduation
@@ -65,7 +65,7 @@ class SARSA_autograduation():
 		        if fnmatch.fnmatch(name, pattern):
 		            result.append(os.path.join(name))
 		return result
-
+	"""
 
 
 
@@ -148,7 +148,7 @@ class SARSA_autograduation():
 		return score
 
 
-
+	
 	#############################################
 	###     Mode 2 - Additional functions     ###
 	#############################################
@@ -174,7 +174,7 @@ class SARSA_autograduation():
 	def handler(self, signum, frame):
 		raise Exception("end of time")
 
-
+	"""
 	# find corresponding number of points
 	def note(self, t, variF):
 		self.varis[t] = variF
@@ -346,3 +346,4 @@ class SARSA_autograduation():
 		
 		import webbrowser, os
 		webpage = webbrowser.open('./HTML_Table/SARSA_ranking_table.html')
+	"""
