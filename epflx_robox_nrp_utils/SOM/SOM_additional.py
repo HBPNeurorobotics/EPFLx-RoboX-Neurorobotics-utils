@@ -123,18 +123,10 @@ class SOM_additional():
 		# save to file
 		np.savetxt('SOM_data_lattice.csv', output, delimiter=",", header = "Lattice index X,# Lattice index Y,# Coordinate X,# Coordinate Y")
 
-	def progress_widget(self, f):
+	def progress_widget(self):
+		from IPython import display
 		from ipywidgets import IntProgress
-		from IPython.display import display
-		import time
-
-		max_count = 100
-
-		f = IntProgress(min=0, max=max_count) # instantiate the bar
-		display(f) # display the bar
-
-		#count = 0
-		#while count <= max_count:
-		#f.value += 1 # signal to increment the progress bar
-		#time.sleep(.1)
-		#count += 1
+		T = time.time()
+		f = IntProgress(min=0, max=100) # instantiate the bar
+		display.display(f) # display the bar
+		return T,f
