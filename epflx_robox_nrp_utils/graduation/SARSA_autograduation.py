@@ -81,6 +81,10 @@ class SARSA_autograduation():
 		score = []
 		func, self.user = self.user_function(funcname)
 		self.message = ""
+		
+		try: SARSA = self.upload_solution(func,True); load = True
+		except: score = "FAILED uploading..."; load = False
+		
 		for t in range(3):
 			self.goal = self.G[t]
 			test = 'SOM_test'+str(t+1)+'_lattice.csv'
@@ -92,7 +96,7 @@ class SARSA_autograduation():
 
 			# upload solution
 			#try:
-			SARSA = self.upload_solution(func,True); load = True
+			#SARSA = self.upload_solution(func,True); load = True
 			#except: sumwayF = 0.0; load = False; os.chdir('..'); 
 
 			if(load):
