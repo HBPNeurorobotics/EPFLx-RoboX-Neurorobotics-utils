@@ -5,6 +5,7 @@ import pandas as pd
 import pylab as pl
 import matplotlib.pyplot as plt
 import matplotlib as mpl
+import time
 
 from matplotlib import collections as mc
 from matplotlib import patches
