@@ -132,6 +132,12 @@ class SOM_additional():
 		display.display(f) # display the bar
 		return T,f
 	
+	def process(self, lattice, Nn, N_trials, eta, sigma, trial, video):
+		f.value += 1
+		self.save_lattice(lattice,Nn)
+		if(video or trial==N_trials): 
+			self.somad.visualization(lattice,Nn,eta,sigma,trial)
+	
 	def post_process(self, T):
 		display.clear_output(wait=True)
 		print 'Done. Simulation time is ', time.time()-T, '(s).'
