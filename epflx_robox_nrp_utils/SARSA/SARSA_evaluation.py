@@ -84,7 +84,6 @@ class SARSA_evaluation():
 	
 	def auto_generation(self,testfile):
 		self.Nn,self.states,self.actions,self.reward,self.goal,self.Q = self.sarsaad.eva_analysis(testfile)
-		print "BEFORE M: ", self.Nn
 		self.M = self.perfect_map()
 		return self.M	
 				
@@ -113,7 +112,6 @@ class SARSA_evaluation():
 
 	
 	def perfect_map(self):
-		print "AFTER M", self.Nn
 		N = self.Nn*self.Nn-1
 		M = np.zeros((self.Nn,self.Nn))+100
 		M[self.goal[0],self.goal[1]] = 0
