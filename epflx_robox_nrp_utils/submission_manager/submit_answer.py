@@ -31,6 +31,7 @@ import json
 import requests
 import logging
 import os
+import signal
 
 logger_format = '%(levelname)s: [%(asctime)s - %(name)s] %(message)s'
 logging.basicConfig(format=logger_format, level=logging.INFO)
@@ -61,8 +62,8 @@ class SubmissionManager(object):
         assert isinstance(oidc_username, (str))
         assert isinstance(token, (str))
         assert isinstance(submission_info, (dict))
-        if os.path.exist(self.__submission_info['filepath']) is False:
-            print 'File not found: %(filepath)s does not exist' % {'filepath': self.__submission_info['filepath']}
+        if os.path.exists(submission_info['filepath']) is False:
+            print('File not found: %(filepath)s does not exist' % {'filepath': submission_info['filepath']})
             raise Exception('Submission failed.')
         # Parse and load the config file before any OIDC actions
         self.__config = Config()
@@ -88,19 +89,7 @@ class SubmissionManager(object):
 
         # If the config is valid and the login doesn't fail, we're ready
         logger.info('Ready to submit.')
-        init_grading_functions()
-        try:
-            grade()
-        except TimeoutException:
-            print 'Submission Timeout: the time to execute %(filepath)s exceeds %(timeout)d minutes' % \ 
-                { 'filepath': self.__submission_info['filepath'], 'timeout': self.__timeout / 60 }
-            raise Exception('Submission failed.')
-        except as e:
-            print 'Python error when executing %(filepath)s' % {'filepath': self.__submission_info['filepath']}
-            print 'Submission failed because of an error raised by your code.'
-                'Please test and fix your code before your next submission.'
-            raise e
-        submit()
+        self.init_grading_functions()
 
     def init_grading_functions(self):
         filepath = self.__submission_info['filepath']
@@ -123,11 +112,24 @@ class SubmissionManager(object):
         signal.signal(signal.SIGALRM, timeoutHandler)
 
     def grade(self):
-        grading_function = self.__graduation_functions[self.__submission_info['subheader']]
+        grading_function = self.__grading_functions[self.__submission_info['subheader']]
         signal.alarm(self.__timeout)
         grading_function()
 
     def submit(self):
+        try: # try grading
+            self.grade()
+        except TimeoutException:
+            print('Submission Timeout: the time to execute %(filepath)s exceeds %(timeout)d minutes' % { 'filepath': self.__submission_info['filepath'], 'timeout': self.__timeout / 60 })
+            raise Exception('Submission failed.')
+        except Exception as e:
+            print('Python error when executing %(filepath)s' % {'filepath': self.__submission_info['filepath']})
+            print('Submission failed because of an error raised by your code.'
+                'Please test and fix your code before your next submission.'
+            )
+            raise e
+        
+        # submit answer to a database
         body = self.create_submission_form()
         environment = self.__config['environment']
         status_code, content = self.__http_client.post(self.__config['grading-server'][environment], body=body)
@@ -149,5 +151,5 @@ class SubmissionManager(object):
         }
         submission_form['answer'] = dict()
         for i in range(0, 3):
-            submission_header['answer'][str(i + 1)] = self.__score[i]
+            submission_form['answer'][str(i + 1)] = self.__score[i]
         return submission_form
