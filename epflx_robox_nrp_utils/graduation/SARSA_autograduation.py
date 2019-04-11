@@ -161,12 +161,12 @@ class SARSA_autograduation():
 				#else: 				self.message += str(t+1) + ") Cannot upload solution function.  "
 			
 
-			# Notes
-			#self.note(t, sumwayF)
-			score.append(sumwayF)
-			#time.sleep(5)
-			# clear notes
-			#clear_output()
+				# Notes
+				#self.note(t, sumwayF)
+				score.append(sumwayF)
+				#time.sleep(5)
+				# clear notes
+				#clear_output()
 		
 		# Save evaluation
 		#self.save_graduation()
