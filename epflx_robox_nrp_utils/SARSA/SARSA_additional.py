@@ -68,17 +68,12 @@ class SARSA_additional():
 		self.guide = np.zeros((self.Nn,self.Nn,4))
 		states = self.rewarded_states()
 		actions = self.rewarded_actions(states)
-		#reward = self.reward_data(states,actions)
 
 		# visualization (Maze: 2 Modes; Reward: Table)
 		self.visualization1(states,actions)	# Mode 1
 		self.visualization2(states,actions,self.test)	# Mode 2
 		reward = self.reward_goal(states)
 		choice = self.choice_data(states,actions)
-
-		## reward
-		#self.save_reward(reward)
-		#self.print_reward(reward)			# Table
 
 		return reward, choice
     
@@ -99,11 +94,8 @@ class SARSA_additional():
 		actions = self.rewarded_actions(states)
 
 		## reward
-		#reward = self.reward_data(states,actions)
 		reward = self.reward_goal(states)
 		choice = self.choice_data(states,actions)
-		#self.save_reward(reward)
-		#self.print_reward(reward)			# Table
 
 		#return self.Nn, self.lattice, self.pos, reward
 
@@ -111,24 +103,17 @@ class SARSA_additional():
 
 	def eva_analysis(self,testfile):
 		self.testfile = testfile
-		print self.testfile
 		self.upload_positions()
 		self.upload_lattice(self.testfile)
-		print "1", self.Nn
 		self.net_details()
-		print "2", self.Nn
 
 		# SOM analyse (to generate maze and reward)
 		## maze
 		states = self.rewarded_states()
-		print "3", self.Nn
 		actions = self.rewarded_actions(states)
-		print "4", self.Nn
 
 		Reward, reward_pos = self.upload_reward()
-		print "5", self.Nn
 		self.upload_Qvalue() 
-		print "6", self.Nn
 
 		return self.Nn, states, actions, Reward, reward_pos, self.Q
 
@@ -576,11 +561,7 @@ class SARSA_additional():
 
 	def upload_lattice(self,Lfile='SOM_data_lattice.csv'):
 		# load data of som-lattice from csv 
-		#if(Lfile!='SOM_data_lattice.csv'):
-		#	script_path = os.path.dirname(os.path.abspath( __file__ ))
-		#	Lfile = os.path.join(script_path,'../graduation/'+Lfile)
 		if(self.testfile != 'SOM_data_lattice.csv'): Lfile = self.testfile
-		print "FILE: ", Lfile
 		with open(Lfile) as f:
 			reader = csv.reader(f)
 			next(reader) # skip header
@@ -604,11 +585,8 @@ class SARSA_additional():
 			next(reader) # skip header
 			data = [r for r in reader]
 		# calculate Nn
-		#print len(data)
-		#from ast import literal_eval
-		self.Nn = len(data) #int(math.sqrt(len(data)/4))
+		self.Nn = len(data)
 		# re-create Reward
-		#Reward = np.zeros((self.Nn,self.Nn,4))
 		Reward = []
 		for i,line in enumerate(data):
 			reward = []
@@ -619,8 +597,6 @@ class SARSA_additional():
     				cell =  literal_eval(cell)
 				reward.append(cell)
     			Reward.append(reward)
-		#print Reward
-		#print reward_position
 		return Reward, reward_position
 	
 	
@@ -632,7 +608,6 @@ class SARSA_additional():
 			next(reader) # skip header
 			data = [r for r in reader]
 		# calculate Nn
-		print "LEN: ", len(data)
 		self.Nn = int(math.sqrt(len(data)/4))
 		# re-create lattice
 		self.Q = np.zeros((self.Nn,self.Nn,4))
