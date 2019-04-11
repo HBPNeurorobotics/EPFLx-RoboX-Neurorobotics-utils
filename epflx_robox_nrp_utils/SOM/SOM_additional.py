@@ -132,6 +132,6 @@ class SOM_additional():
 		display.display(f) # display the bar
 		return T,f
 	
-	def post_process(self, T)
+	def post_process(self, T):
 		display.clear_output(wait=True)
 		print 'Done. Simulation time is ', time.time()-T, '(s).'
