@@ -140,3 +140,4 @@ class SOM_autograduation():
 	# define that test simulation time is over
 	def handler(self, signum, frame):
 		raise Exception("End of time")
+		
