@@ -22,12 +22,12 @@ class SARSA_autograduation():
 		self.sarsaad = SARSA_additional()
 
 		# parameters of graduation range 
-		self.standard = [0.95, 0.9, 0.75, 0.5, 0.25, 0.1] # range of variation result and given note dependency
+		#self.standard = [0.95, 0.9, 0.75, 0.5, 0.25, 0.1] # range of variation result and given note dependency
 
 		# initialize the parameters of test (Map size and Number of trials)
 		self.N = 1
 		self.tau = 100.0
-		self.limit = 90.0 # only integer value
+		self.limit = 120.0 # only integer value
 
 		self.user = {}
 		self.G = [[2,7],[6,7],[7,7]]
@@ -85,21 +85,22 @@ class SARSA_autograduation():
 		try: SARSA = self.upload_solution(func,True); load = True
 		except: score = "FAILED uploading..."; load = False
 		
-		for t in range(3):
-			self.goal = self.G[t]
-			test = 'SOM_test'+str(t+1)+'_lattice.csv'
-			script_path = os.path.dirname(os.path.abspath( __file__ ))
-			test = os.path.join(script_path,test)
-			self.sarsaad.test_analysis(self.goal,test)
-			self.M = self.sarsaev.auto_generation(test)
-			#print self.goal
+		if(load):
+			for t in range(3):
+				self.goal = self.G[t]
+				test = 'SOM_test'+str(t+1)+'_lattice.csv'
+				script_path = os.path.dirname(os.path.abspath( __file__ ))
+				test = os.path.join(script_path,test)
+				self.sarsaad.test_analysis(self.goal,test)
+				self.M = self.sarsaev.auto_generation(test)
+				#print self.goal
 
-			# upload solution
-			#try:
-			#SARSA = self.upload_solution(func,True); load = True
-			#except: sumwayF = 0.0; load = False; os.chdir('..'); 
+				# upload solution
+				#try:
+				#SARSA = self.upload_solution(func,True); load = True
+				#except: sumwayF = 0.0; load = False; os.chdir('..'); 
 
-			if(load):
+
 				sumwayF = 0.0
 				for e in range(1):
 					#print "Epoche", e
@@ -152,12 +153,12 @@ class SARSA_autograduation():
 						#print "Function:", fastwayF, longwayF, overwayF, neverwayF
 						sumwayF = 1*fastwayF+(1-0.55+longwayF/max(overwayF,0.01))*longwayF+0*neverwayF
 
-			if(load):
+				#if(load):
 				if(work):
 					if(inlim): 	self.message += str(t+1) + ") Program worked properly and it has been estimated.  "
 					else: 		self.message += str(t+1) + ") Program had been interrupted by time limit but a current result was estimated.  "
 				else: 			self.message += str(t+1) + ") Program failed during simulation.  "
-			else: 				self.message += str(t+1) + ") Cannot upload solution function.  "
+				#else: 				self.message += str(t+1) + ") Cannot upload solution function.  "
 			
 
 			# Notes
