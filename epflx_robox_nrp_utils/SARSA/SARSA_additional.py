@@ -568,7 +568,6 @@ class SARSA_additional():
 			data = [r for r in reader]
 		# calculate Nn
 		self.Nn = int(math.sqrt(len(data)))
-		print "SELF.NN: ", self.Nn
 		# re-create lattice
 		self.lattice = np.zeros((self.Nn,self.Nn,2))
 		for i,line in enumerate(data):
