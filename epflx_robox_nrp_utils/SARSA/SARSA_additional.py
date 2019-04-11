@@ -4,7 +4,6 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 from matplotlib import collections as mc
-#from matplotlib import patches
 import matplotlib.pyplot as plt
 from matplotlib import patches
 from matplotlib import colors
@@ -719,5 +718,4 @@ class SARSA_additional():
 				
 		df = pd.DataFrame(outheat); df.columns.name = 'Q';
 		df = df.style.applymap(border_negative).apply(background_gradient, cmap='PuBu', m=df.min().min(), M=df.max().max(),low=0,high=0.2, goal=gvalue).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important', 'color': 'black !important'});
-		#if(self.testfile!='SOM_data_lattice.csv'): 
-		display.display(df)
+		if(self.testfile=='SOM_data_lattice.csv'): display.display(df)
