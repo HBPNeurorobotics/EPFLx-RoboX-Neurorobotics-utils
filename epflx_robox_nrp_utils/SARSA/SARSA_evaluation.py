@@ -17,7 +17,7 @@ class SARSA_evaluation():
 	def __init__(self):
         
         	import warnings; warnings.filterwarnings('ignore')
-        	from SARSA_additional import SARSA_additional
+        	from epflx_robox_nrp_utils.SARSA.SARSA_additional import SARSA_additional
         	self.sarsaad = SARSA_additional()
 
 		self.Nn = {}
