@@ -25,8 +25,6 @@
 A strongly validated configuration implementation for the VirtualCoach.
 """
 
-from hbp_nrp_virtual_coach.version import VERSION
-
 import json
 import logging
 import os
@@ -46,9 +44,7 @@ class Config(dict):
         the given environment.
 
         :param environment A string for the environment to be used (e.g. 'production', 'dev',
-                           'local', or a custom value defined in the config.json). If None
-                           is provided, then the environment will be parsed from the version
-                           of this package.
+                           'local', or a custom value defined in the config.json).
         """
 
         # initialize the parent dictionary, required by pylint
