@@ -166,6 +166,7 @@ class SARSA_autograduation():
 		# Save evaluation
 		#self.save_graduation()
 		#print score
+		print self.message
 		return score
 
 
