@@ -55,7 +55,7 @@ class SOM_autograduation():
 			
 				variF = 2000.0
 				for e in range(self.N):
-					print "Epoche", e
+					#print "Epoche", e
 				
 					# initialize crucial requirement from student's function
 					# Function is compiling (work) and simulating within time limit (inlim)
