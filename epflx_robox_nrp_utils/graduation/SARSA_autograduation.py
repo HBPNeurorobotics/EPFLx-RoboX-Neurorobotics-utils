@@ -54,7 +54,7 @@ class SARSA_autograduation():
 				script_path = os.path.dirname(os.path.abspath( __file__ ))
 				test = os.path.join(script_path,test)
 				self.sarsaad.test_analysis(self.goal,test)
-				text = 'Test '+str(t+1)+'/3...'
+				text = 'Grading process: Test '+str(t+1)+'/3...'
 				print text #test
 
 				sumwayF = 0.0
