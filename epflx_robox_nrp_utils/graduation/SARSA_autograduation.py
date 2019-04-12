@@ -106,7 +106,7 @@ class SARSA_autograduation():
 				
 				# Notes
 				score.append(sumwayF)
-				#clear_output()
+				clear_output()
 		
 		# Save evaluation
 		###print self.message
