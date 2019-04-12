@@ -50,7 +50,8 @@ class SOM_autograduation():
 				test = 'NRP_test'+str(t+1)+'_robot_position.csv'
 				script_path = os.path.dirname(os.path.abspath( __file__ ))
 				test = os.path.join(script_path,test)
-				print test
+				text = 'Test '+str(t+1)+'/3...'
+				print text #test
 			
 			
 				variF = 2000.0
