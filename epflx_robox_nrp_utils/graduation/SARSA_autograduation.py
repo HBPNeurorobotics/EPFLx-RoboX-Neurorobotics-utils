@@ -109,7 +109,8 @@ class SARSA_autograduation():
 				clear_output()
 		
 		# Save evaluation
-		###print self.message
+		print self.message
+		time.sleep(20)
 		return score
 
 
