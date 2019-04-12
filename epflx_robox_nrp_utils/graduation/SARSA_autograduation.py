@@ -54,6 +54,7 @@ class SARSA_autograduation():
 				script_path = os.path.dirname(os.path.abspath( __file__ ))
 				test = os.path.join(script_path,test)
 				self.sarsaad.test_analysis(self.goal,test)
+				print test
 
 				sumwayF = 0.0
 				for e in range(1):
