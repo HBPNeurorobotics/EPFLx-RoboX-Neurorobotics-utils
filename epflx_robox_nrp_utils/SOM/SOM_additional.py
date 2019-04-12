@@ -139,6 +139,6 @@ class SOM_additional():
 		if(video or trial==N_trials): 
 			if(video<2): self.visualization(lattice,Nn,eta,sigma,trial)
 	
-	def post_process(self, T):
+	def post_process(self, T, video):
 		display.clear_output(wait=True)
-		print 'Done. Simulation time is ', time.time()-T, '(s).'
+		if(video<2): print 'Done. Simulation time is ', time.time()-T, '(s).'
