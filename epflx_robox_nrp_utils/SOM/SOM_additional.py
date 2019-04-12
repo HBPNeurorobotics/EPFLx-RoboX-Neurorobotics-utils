@@ -136,7 +136,7 @@ class SOM_additional():
 		f.value += 1
 		self.save_lattice(lattice,Nn)
 		if(video or trial==N_trials): 
-			self.visualization(lattice,Nn,eta,sigma,trial)
+			if(video<2): self.visualization(lattice,Nn,eta,sigma,trial)
 	
 	def post_process(self, T):
 		display.clear_output(wait=True)
