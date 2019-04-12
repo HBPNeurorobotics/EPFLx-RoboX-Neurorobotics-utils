@@ -103,7 +103,7 @@ class SARSA_additional():
 
 	def eva_analysis(self,testfile):
 		self.testfile = testfile
-		self.upload_positions()
+		#self.upload_positions()
 		self.upload_lattice(self.testfile)
 		self.net_details()
 
