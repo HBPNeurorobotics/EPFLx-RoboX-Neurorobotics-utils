@@ -54,7 +54,6 @@ class SARSA_autograduation():
 				script_path = os.path.dirname(os.path.abspath( __file__ ))
 				test = os.path.join(script_path,test)
 				self.sarsaad.test_analysis(self.goal,test)
-				#self.M = self.sarsaev.auto_generation(test)
 
 				sumwayF = 0.0
 				for e in range(1):
@@ -108,7 +107,7 @@ class SARSA_autograduation():
 				#clear_output()
 		
 		# Save evaluation
-		print self.message
+		###print self.message
 		return score
 
 
@@ -127,10 +126,8 @@ class SARSA_autograduation():
 
 	# upload function with student's solution
 	def upload_solution(self, func, rank):
-		#if(rank): os.chdir('./SARSA_solutions')
 		module = importlib.import_module(func)
 		SARSA = getattr(module, 'SARSA')
-		#if(rank): os.chdir('..')
 		return SARSA
 
 
