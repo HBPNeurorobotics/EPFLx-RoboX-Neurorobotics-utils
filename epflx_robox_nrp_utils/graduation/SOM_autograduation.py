@@ -20,7 +20,7 @@ class SOM_autograduation():
 		
 		# initialize the parameters of test (Map size and Number of trials)
 		self.N = 1
-		self.L = 6
+		self.L = 12
 		self.tau = 100.0
 		self.limit = 120 # (s) only integer value
 		
