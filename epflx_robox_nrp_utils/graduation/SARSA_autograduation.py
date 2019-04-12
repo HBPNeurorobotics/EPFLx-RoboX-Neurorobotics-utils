@@ -67,8 +67,9 @@ class SARSA_autograduation():
 					# Function gives back a final variation achieved during a test  
 
 					# import student's function and test data
-					try: sarsa = SARSA(4,test) # sarsa = SARSA(Nn x Nn (lattice), tau, visualization, data file)
-					except: work = False
+					#try: 
+					sarsa = SARSA(4,test) # sarsa = SARSA(Nn x Nn (lattice), tau, visualization, data file)
+					#except: work = False
 
 					# set simulation time limit for the cases script doesn't work properly:
 					# 1) script consists of endless loop
