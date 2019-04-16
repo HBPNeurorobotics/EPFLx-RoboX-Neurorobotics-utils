@@ -45,14 +45,18 @@ class TimeoutException(Exception):
 class SubmissionInfo(object):
     def __init__(self, submission_info):
         assert isinstance(submission_info, (dict))
-        assert isinstance(submission_info.oidc_username, (str))
-        assert isinstance(submission_info.token, (str))
-        assert isinstance(submission_info.filepath, (str))
-        assert isinstance(submission_info.collab_path, (str))
+        assert isinstance(submission_info['token'], (str))
+        assert isinstance(submission_info['filepath'], (str))
+        assert isinstance(submission_info['collab_path'], (str))
 
 
-        if not os.path.exists(submission_info.filepath):
-            print('File not found: %(filepath)s does not exist' % {'filepath': submission_info.filepath})
+        if not submission_info['oidc_username'] and not submission_info['token']:
+            raise ValueError("You need to specify either " 
+                "an oidc_username or a token in order to submit your answer."
+            )
+        
+        if not os.path.exists(submission_info['filepath']):
+            print('File not found: %(filepath)s does not exist' % {'filepath': submission_info['filepath']})
             raise Exception('Submission failed.')
         self = submission_info
 
@@ -81,12 +85,12 @@ class SubmissionManager(object):
         self.__config = Config()
         self.__submission_info = SubmissionInfo(submission_info)
         self.__timeout = 260
-        if self.__submission_info.token or self.__submission_info.oidc_username:
+        if self.__submission_info['token'] or self.__submission_info['oidc_username']:
             # This will interactively prompt the user for a password in terminal if needed
-            if self.__submission_info.oidc_username:
-                logger.info('Logging into OIDC as: %s', self.__submission_info.oidc_username)
+            if self.__submission_info['oidc_username']:
+                logger.info('Logging into OIDC as: %s', self.__submission_info['oidc_username'])
             self.__http_client = OIDCHTTPClient(
-                oidc_username=self.__submission_info.oidc_username, token=self.__submission_info.token
+                oidc_username=self.__submission_info['oidc_username'], token=self.__submission_info['token']
             )
             authorization = self.__http_client.get_auth_header()
             self.__http_headers = {
