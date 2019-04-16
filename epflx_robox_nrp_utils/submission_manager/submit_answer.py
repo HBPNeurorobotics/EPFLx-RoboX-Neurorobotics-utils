@@ -22,7 +22,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 # ---LICENSE-END
 """
-Functions dedicated the susbmission process of users'answers to the grading server
+Functions dedicated to the susbmission process of users'answers to the grading server
 """
 
 from config import Config
@@ -42,41 +42,51 @@ class TimeoutException(Exception):
     pass
 
 
+class SubmissionInfo(object):
+    def __init__(self, submission_info):
+        assert isinstance(submission_info, (dict))
+        assert isinstance(submission_info.oidc_username, (str))
+        assert isinstance(submission_info.token, (str))
+        assert isinstance(submission_info.filepath, (str))
+        assert isinstance(submission_info.collab_path, (str))
+
+
+        if not os.path.exists(submission_info.filepath):
+            print('File not found: %(filepath)s does not exist' % {'filepath': submission_info.filepath})
+            raise Exception('Submission failed.')
+        self = submission_info
+
+
 class SubmissionManager(object):
     """
     Handles the submission of user's solution to the NRP MOOC grading server
     """
 
-    def __init__(self, oidc_username='', token='', submission_info=None):
-        """
+    """
+    :param submission_info:  A dictionary with the following keys:
+                            subheader, oidc_username (optional), token, filepath, collab_path and
+                            clients_storage.
+                            subheader is a string describing the submission context, e.g., 'Exercise 3'
+                            oidc_username is a string containing the HBP OIDC username (optional)
+                            token is a string containing the HBP OIDC token of the user
+                            filepath is a string containing the name of the submitted file
+                            collab_path is the path to the HBP Collab where the submission takes place
+                            clients_storage is an object with a download_file method, e.g, clients.storage from bbp_services
 
-        :param oidc_username: (optional) A string representing the OIDC username
-                              Required for OIDC authentication if no token is provided.
-                              The user will be interactively
-                              asked for a password by the OIDC client if the token has expired
-                              or if they have not logged in.
+    """
+    def __init__(self, submission_info):
 
-        :param token: (optional) A string representing the OIDC token of the current user
 
-        """
-        assert isinstance(oidc_username, (str))
-        assert isinstance(token, (str))
-        assert isinstance(submission_info, (dict))
-        if os.path.exists(submission_info['filepath']) is False:
-            print('File not found: %(filepath)s does not exist' % {'filepath': submission_info['filepath']})
-            raise Exception('Submission failed.')
         # Parse and load the config file before any OIDC actions
         self.__config = Config()
-        self.__oidc_username = oidc_username
-        self.__token = token
-        self.__submission_info = submission_info
+        self.__submission_info = SubmissionInfo(submission_info)
         self.__timeout = 260
-        if self.__token or self.__oidc_username:
+        if self.__submission_info.token or self.__submission_info.oidc_username:
             # This will interactively prompt the user for a password in terminal if needed
-            if self.__oidc_username:
-                logger.info('Logging into OIDC as: %s', self.__oidc_username)
+            if self.__submission_info.oidc_username:
+                logger.info('Logging into OIDC as: %s', self.__submission_info.oidc_username)
             self.__http_client = OIDCHTTPClient(
-                oidc_username=self.__oidc_username, token=self.__token
+                oidc_username=self.__submission_info.oidc_username, token=self.__submission_info.token
             )
             authorization = self.__http_client.get_auth_header()
             self.__http_headers = {
@@ -120,7 +130,9 @@ class SubmissionManager(object):
         try: # try grading
             self.grade()
         except TimeoutException:
-            print('Submission Timeout: the time to execute %(filepath)s exceeds %(timeout)d minutes' % { 'filepath': self.__submission_info['filepath'], 'timeout': self.__timeout / 60 })
+            print('Submission Timeout: the time to execute %(filepath)s exceeds %(timeout)d minutes' % 
+                { 'filepath': self.__submission_info['filepath'], 'timeout': self.__timeout / 60 }
+            )
             raise Exception('Submission failed.')
         except Exception as e:
             print('Python error when executing %(filepath)s' % {'filepath': self.__submission_info['filepath']})
@@ -136,7 +148,7 @@ class SubmissionManager(object):
         if status_code != 200:
             raise Exception('Submission failed, Status Code: %s' % status_code)
         else:
-            logger.info('Successful submission!')
+            logger.info('Congratulations, your submission is successful!')
 
     def create_submission_form(self):
         with open(self.__submission_info['filepath'], 'r') as submitted_file:
