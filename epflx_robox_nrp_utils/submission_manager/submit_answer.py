@@ -50,13 +50,13 @@ class SubmissionInfo(object):
         assert isinstance(submission_info['collab_path'], (str))
 
 
-        if not submission_info.oidc_username and not submission_info.token:
+        if not submission_info['oidc_username'] and not submission_info['token']:
             raise ValueError("You need to specify either " 
                 "an oidc_username or a token in order to submit your answer."
             )
         
-        if not os.path.exists(submission_info.filepath):
-            print('File not found: %(filepath)s does not exist' % {'filepath': submission_info.filepath})
+        if not os.path.exists(submission_info['filepath']):
+            print('File not found: %(filepath)s does not exist' % {'filepath': submission_info['filepath']})
             raise Exception('Submission failed.')
         self = submission_info
 
