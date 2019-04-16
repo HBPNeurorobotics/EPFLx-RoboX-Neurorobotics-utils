@@ -77,6 +77,7 @@ def display_submission_widget(submission_info):
                 path.join(submission_info['collab_path'], filepath), 
                 submission_info['filepath']
             )
+            print("Download completed.")
             submission_button.close()
             filepath_widget.close()
             time.sleep(3)
