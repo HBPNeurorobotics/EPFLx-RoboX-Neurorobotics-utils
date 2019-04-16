@@ -42,23 +42,24 @@ class TimeoutException(Exception):
     pass
 
 
-class SubmissionInfo(object):
-    def __init__(self, submission_info):
-        assert isinstance(submission_info, (dict))
-        assert isinstance(submission_info['token'], (str))
-        assert isinstance(submission_info['filepath'], (str))
-        assert isinstance(submission_info['collab_path'], (str))
+def check_submission_info(submission_info):
+    assert isinstance(submission_info, (dict))
+    assert isinstance(submission_info['token'], (str))
+    assert isinstance(submission_info['filepath'], (str))
+    assert isinstance(submission_info['collab_path'], (str))
+    
+    no_oidc_username = 'oidc_username' not in submission_info or not submission_info['oidc_username']
+    no_token = 'token' not in submission_info or not submission_info['token']
+    if no_oidc_username and no_token:
+        raise ValueError(
+            "You need to specify either " 
+            "an oidc_username or a token in order to submit your answer."
+        )
 
-
-        if not submission_info['oidc_username'] and not submission_info['token']:
-            raise ValueError("You need to specify either " 
-                "an oidc_username or a token in order to submit your answer."
-            )
-        
-        if not os.path.exists(submission_info['filepath']):
-            print('File not found: %(filepath)s does not exist' % {'filepath': submission_info['filepath']})
-            raise Exception('Submission failed.')
-        self = submission_info
+    if not os.path.exists(submission_info['filepath']):
+        error_msg = '(Error message) File not found: the file named %(filepath)s does not exist' % \
+            {'filepath': submission_info['filepath']}
+        raise Exception('Submission failed! \n %(error_msg)s' % {'error_msg': error_msg})
 
 
 class SubmissionManager(object):
@@ -79,11 +80,10 @@ class SubmissionManager(object):
 
     """
     def __init__(self, submission_info):
-
-
         # Parse and load the config file before any OIDC actions
         self.__config = Config()
-        self.__submission_info = SubmissionInfo(submission_info)
+        check_submission_info(submission_info)
+        self.__submission_info = submission_info
         self.__timeout = 260
         if self.__submission_info['token'] or self.__submission_info['oidc_username']:
             # This will interactively prompt the user for a password in terminal if needed
