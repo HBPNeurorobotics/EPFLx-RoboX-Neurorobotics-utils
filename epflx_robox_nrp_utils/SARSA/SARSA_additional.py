@@ -695,7 +695,7 @@ class SARSA_additional():
 		if(csv_file=='SOM_data_lattice.csv'): display.display(df)
 
 			
-	def sarsa_preparation(self,trials,Nn,visualization):
+	def sarsa_preparation(self,trials,visualization):
 		from IPython import display
 		from ipywidgets import IntProgress
 		mode = ['simulation','environment', 'square_maze', 'latency', 'grading']
