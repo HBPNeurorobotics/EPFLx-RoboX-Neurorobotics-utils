@@ -66,7 +66,7 @@ class SOM_autograduation():
 					# Function gives back a final variation achieved during a test  
 				
 					# import student's function and test data
-					try: som = SOM(2,test) # som = SOM(Nn x Nn (lattice), tau, visualization, data file)
+					try: som = SOM('grading',test) # som = SOM(Nn x Nn (lattice), tau, visualization, data file)
 					except: work = False
 				
 					# set simulation time limit for the cases script doesn't work properly:
