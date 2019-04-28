@@ -728,6 +728,6 @@ class SARSA_additional():
 		video = visualization
 		#display.clear_output(wait=True)
 		self.print_Qvalue(self.Q, self.reward_position, self.Actions, self.csv_file)
-		if(self.video < 4): print 'Done. Simulation time is ', time.time()-T, '(s).'
+		if(video < 4): print 'Done. Simulation time is ', time.time()-T, '(s).'
 			
 			
