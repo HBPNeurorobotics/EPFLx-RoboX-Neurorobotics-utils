@@ -68,7 +68,7 @@ class SARSA_autograduation():
 
 					# import student's function and test data
 					#try: 
-					sarsa = SARSA(4,test) # sarsa = SARSA(Nn x Nn (lattice), tau, visualization, data file)
+					sarsa = SARSA('grading',test) # sarsa = SARSA(Nn x Nn (lattice), tau, visualization, data file)
 					#except: work = False
 
 					# set simulation time limit for the cases script doesn't work properly:
