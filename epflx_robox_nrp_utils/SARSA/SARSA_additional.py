@@ -309,7 +309,7 @@ class SARSA_additional():
 	#	Visualization functions
 	########################################################################
 
-	def visualization(self, video=1, simdata=[], actdata=[], Rdata=[], Sdata=[], Qdata=[]):
+	def visualization_main(self, video=1, simdata=[], actdata=[], Rdata=[], Sdata=[], Qdata=[]):
 		self.test = True
 
 		# imdata
@@ -712,7 +712,41 @@ class SARSA_additional():
 		display.display(f) # display the bar
 		return T,f
 			
+		
+	def visualization(self, Nn, trial, N_trials, Q, latency_list, latency, visualization, simdata, actdata, Rdata, Sdata, Qdata, f):
+		mode = ['simulation','environment', 'square_maze', 'latency', 'grading']
+		
+		# ERROR: there isn't any available mode with this name 
+		# Program cannot define an index for further processing
+		visualization = mode.index(visualization)
+		# 1) 'simulation' - only simulation of SOM training
+		# 2) 'vizualization' - visualize and update a current SOM state 
+		
+		video = visualization
+		f.value += 1
+		
+		# Add latency of last trial and visualize latency 
+		if(trial%1000==0 or trial==N_trials): self.save_Qvalue(Q)
+		latency_list.append(latency)
+		
+		if(video == 3):
+			# visualization of training bumped into a w
+			if(0 < video < 3): 
+				self.visualization_main(video, simdata, actdata, Rdata, Sdata, Qdata)
+			# visualization of latency
+			if(video == 3):
+				if(trial%int(N_trials/25)==0 or trial==N_trials-1):    
+					self.latency(latency_list,N_trials,Nn)
+					time.sleep(0.5)
 			
+		if((trial+1)%1000==0 or trial==N_trials):f.value += 1000 # signal to increment the progress bar
+           
+		return latency_list
+		
+		
+
+		
+		
 	def display_results(self, visualization, T, Q, reward_position, Actions, csv_file):
 		mode = ['simulation','environment', 'square_maze', 'latency', 'grading']
 		self.Q = Q
@@ -729,5 +763,3 @@ class SARSA_additional():
 		#display.clear_output(wait=True)
 		self.print_Qvalue(self.Q, self.reward_position, self.Actions, self.csv_file)
 		if(video < 4): print 'Done. Simulation time is ', time.time()-T, '(s).'
-			
-			
