@@ -26,7 +26,7 @@ class SOM_additional():
 	###   Visualization   ###
 	#########################
 	    
-	def visualization(self,lattice,Nn,eta,sigma,trial):
+	def visualization_main(self,lattice,Nn,eta,sigma,trial):
 		# Self Organazing Map - Process visualization
 		get_ipython().run_line_magic('matplotlib', 'inline')
 		    
@@ -124,7 +124,7 @@ class SOM_additional():
 		# save to file
 		np.savetxt('SOM_data_lattice.csv', output, delimiter=",", header = "Lattice index X,# Lattice index Y,# Coordinate X,# Coordinate Y")
 
-	def pre_process(self,trials,Nn,visualization):
+	def preparation(self,trials,Nn,visualization):
 		from IPython import display
 		from ipywidgets import IntProgress
 		mode = ['simulation','visualization','grading']
@@ -154,9 +154,9 @@ class SOM_additional():
 		f.value += 1
 		self.save_lattice(lattice,Nn)
 		if(video or trial==N_trials): 
-			if(video<2): self.visualization_add(lattice,Nn,eta,sigma,trial)
+			if(video<2): self.visualization_main(lattice,Nn,eta,sigma,trial)
 	
-	def post_process(self, T, visualization):
+	def results(self, T, visualization):
 		mode = ['simulation','visualization','grading']
 		
 		
