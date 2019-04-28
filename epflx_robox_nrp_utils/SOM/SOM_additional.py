@@ -142,7 +142,7 @@ class SOM_additional():
 		return T,f,Nn
 	
 	def process(self, lattice, Nn, N_trials, eta, sigma, trial, visualization, f):
-		viz = ['simulation','visualization','grading']
+		mode = ['simulation','visualization','grading']
 		
 		# ERROR: there isn't any available mode with this name 
 		# Program cannot define an index for further processing
