@@ -695,7 +695,22 @@ class SARSA_additional():
 		if(csv_file=='SOM_data_lattice.csv'): display.display(df)
 
 			
-			
+	def sarsa_preparation(self,trials,Nn,visualization):
+		from IPython import display
+		from ipywidgets import IntProgress
+		mode = ['simulation','environment', 'square_maze', 'latency', 'grading']
+		
+		
+		# ERROR: there are only two available modes: 'simualtion' or 'visualization' 
+		visualization = mode.index(visualization)
+		
+		
+		video = visualization
+		#if(video==2): Nn = 12
+		T = time.time()
+		f = IntProgress(min=0, max=trials) # instantiate the bar
+		display.display(f) # display the bar
+		return T,f
 			
 			
 	def display_results(self, visualization, T, Q, reward_position, Actions, csv_file):
