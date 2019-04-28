@@ -127,8 +127,8 @@ class SOM_additional():
 	def pre_process(self,trials,Nn,video):
 		from IPython import display
 		from ipywidgets import IntProgress
-		display = ['simulation','visualization','grading']
-		video = display.index(video)
+		viz = ['simulation','visualization','grading']
+		video = viz.index(video)
 		if(video==12): Nn = 12
 		T = time.time()
 		f = IntProgress(min=0, max=trials) # instantiate the bar
@@ -136,15 +136,15 @@ class SOM_additional():
 		return T,f,Nn
 	
 	def process(self, lattice, Nn, N_trials, eta, sigma, trial, video, f):
-		display = ['simulation','visualization','grading']
-		video = display.index(video)
+		viz = ['simulation','visualization','grading']
+		video = viz.index(video)
 		f.value += 1
 		self.save_lattice(lattice,Nn)
 		if(video or trial==N_trials): 
 			if(video<2): self.visualization(lattice,Nn,eta,sigma,trial)
 	
 	def post_process(self, T, video):
-		display = ['simulation','visualization','grading']
-		video = display.index(video)
+		viz = ['simulation','visualization','grading']
+		video = viz.index(video)
 		display.clear_output(wait=True)
 		if(video<2): print 'Done. Simulation time is ', time.time()-T, '(s).'
