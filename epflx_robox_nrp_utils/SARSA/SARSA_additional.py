@@ -713,7 +713,7 @@ class SARSA_additional():
 		return T,f
 			
 		
-	def visualization(self, Nn, trial, N_trials, Q, latency_list, latency, visualization, simdata, actdata, Rdata, Sdata, Qdata, f):
+	def latency_visualization(self, Nn, trial, N_trials, Q, latency_list, latency, visualization, simdata, actdata, Rdata, Sdata, Qdata, f):
 		mode = ['simulation','environment', 'square_maze', 'latency', 'grading']
 		
 		# ERROR: there isn't any available mode with this name 
