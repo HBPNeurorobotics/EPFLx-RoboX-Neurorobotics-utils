@@ -137,7 +137,13 @@ class SOM_additional():
 	
 	def process(self, lattice, Nn, N_trials, eta, sigma, trial, video, f):
 		viz = ['simulation','visualization','grading']
+		
+		
+		
 		video = viz.index(video)
+		
+		
+		
 		f.value += 1
 		self.save_lattice(lattice,Nn)
 		if(video or trial==N_trials): 
