@@ -744,7 +744,25 @@ class SARSA_additional():
 		return latency_list
 		
 
-
+	def maze_visualization(self, visualization, simdata, actdata, Rdata, Sdata, Qdata):
+		mode = ['simulation','environment', 'square_maze', 'latency', 'grading']
+		
+		# ERROR: there isn't any available mode with this name 
+		# Program cannot define an index for further processing
+		visualization = mode.index(visualization)
+		# 1) 'simulation' - only simulation of SOM training
+		# 2) 'vizualization' - visualize and update a current SOM state 
+		
+		video = visualization
+		
+		# visualization of training bumped into a w
+		if(0 < video < 3): 
+			self.visualization(Nn, trial, N_trials, latency_list, video, simdata, actdata, Rdata, Sdata, Qdata)
+		# visualization of latency
+		if(video == 3):
+			if(trial%int(N_trials/25)==0 or trial==N_trials-1):    
+				self.latency(latency_list,N_trials,Nn)
+				time.sleep(0.5)
 		
 		
 	def display_results(self, visualization, T, Q, reward_position, Actions, csv_file):
