@@ -124,17 +124,17 @@ class SOM_additional():
 		# save to file
 		np.savetxt('SOM_data_lattice.csv', output, delimiter=",", header = "Lattice index X,# Lattice index Y,# Coordinate X,# Coordinate Y")
 
-	def pre_process(self,trials,Nn,video):
+	def pre_process(self,trials,Nn,visualization):
 		from IPython import display
 		from ipywidgets import IntProgress
-		viz = ['simulation','visualization','grading']
+		mode = ['simulation','visualization','grading']
 		
 		
+		# ERROR: there are only two available modes: 'simualtion' or 'visualization' 
+		visualization = mode.index(visualization)
 		
-		video = viz.index(video)
 		
-		
-		
+		video = visualization
 		if(video==2): Nn = 12
 		T = time.time()
 		f = IntProgress(min=0, max=trials) # instantiate the bar
@@ -146,7 +146,7 @@ class SOM_additional():
 		
 		# ERROR: there isn't any available mode with this name 
 		# Program cannot define an index for further processing
-		visualization = viz.index(visualization)
+		visualization = mode.index(visualization)
 		# 1) 'simulation' - only simulation of SOM training
 		# 2) 'vizualization' - visualize and update a current SOM state 
 		
@@ -156,8 +156,14 @@ class SOM_additional():
 		if(video or trial==N_trials): 
 			if(video<2): self.visualization(lattice,Nn,eta,sigma,trial)
 	
-	def post_process(self, T, video):
-		viz = ['simulation','visualization','grading']
-		video = viz.index(video)
+	def post_process(self, T, visualization):
+		mode = ['simulation','visualization','grading']
+		
+		
+		# ERROR: there are only two available modes: 'simualtion' or 'visualization' 
+		visualization = mode.index(visualization)
+		
+		
+		video = visualization
 		display.clear_output(wait=True)
 		if(video<2): print 'Done. Simulation time is ', time.time()-T, '(s).'
