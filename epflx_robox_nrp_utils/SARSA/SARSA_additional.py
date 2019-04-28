@@ -723,7 +723,7 @@ class SARSA_additional():
 		# 2) 'vizualization' - visualize and update a current SOM state 
 		
 		video = visualization
-		f.value += 1
+		#f.value += 1
 		
 		# Add latency of last trial and visualize latency 
 		if(trial%1000==0 or trial==N_trials): self.save_Qvalue(Q)
@@ -743,7 +743,7 @@ class SARSA_additional():
            
 		return latency_list
 		
-		
+
 
 		
 		
