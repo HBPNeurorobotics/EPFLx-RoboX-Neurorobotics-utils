@@ -693,3 +693,26 @@ class SARSA_additional():
 		df = pd.DataFrame(outheat); df.columns.name = 'Q';
 		df = df.style.applymap(border_negative).apply(background_gradient, cmap='PuBu', m=df.min().min(), M=df.max().max(),low=0,high=0.2, goal=gvalue).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important', 'color': 'black !important'});
 		if(csv_file=='SOM_data_lattice.csv'): display.display(df)
+
+			
+			
+			
+			
+	def display_results(self, visualization, T, Q, reward_position, Actions, csv_file):
+		mode = ['simulation','environment', 'square_maze', 'latency', 'grading']
+		self.Q = Q
+		self.reward_position = reward_position
+		self.Actions = Actions
+		self.csv_file = csv_file
+		
+		
+		# ERROR: there are only two available modes: 'simualtion' or 'visualization' 
+		visualization = mode.index(visualization)
+		
+		
+		video = visualization
+		#display.clear_output(wait=True)
+		self.print_Qvalue(self.Q, self.reward_position, self.Actions, self.csv_file)
+		if(self.video < 4): print 'Done. Simulation time is ', time.time()-T, '(s).'
+			
+			
