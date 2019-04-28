@@ -744,7 +744,7 @@ class SARSA_additional():
 		return latency_list
 		
 
-	def maze_visualization(self, visualization, simdata, actdata, Rdata, Sdata, Qdata):
+	def maze_visualization(self, Nn, trial, N_trials, latency_list, visualization, simdata, actdata, Rdata, Sdata, Qdata):
 		mode = ['simulation','environment', 'square_maze', 'latency', 'grading']
 		
 		# ERROR: there isn't any available mode with this name 
@@ -757,7 +757,7 @@ class SARSA_additional():
 		
 		# visualization of training bumped into a w
 		if(0 < video < 3): 
-			self.visualization(Nn, trial, N_trials, latency_list, video, simdata, actdata, Rdata, Sdata, Qdata)
+			self.visualization(video, simdata, actdata, Rdata, Sdata, Qdata)
 		# visualization of latency
 		if(video == 3):
 			if(trial%int(N_trials/25)==0 or trial==N_trials-1):    
