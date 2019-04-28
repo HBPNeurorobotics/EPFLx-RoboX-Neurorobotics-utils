@@ -141,7 +141,7 @@ class SOM_additional():
 		display.display(f) # display the bar
 		return T,f,Nn
 	
-	def process(self, lattice, Nn, N_trials, eta, sigma, trial, visualization, f):
+	def visualization(self, lattice, Nn, N_trials, eta, sigma, trial, visualization, f):
 		mode = ['simulation','visualization','grading']
 		
 		# ERROR: there isn't any available mode with this name 
@@ -154,7 +154,7 @@ class SOM_additional():
 		f.value += 1
 		self.save_lattice(lattice,Nn)
 		if(video or trial==N_trials): 
-			if(video<2): self.visualization(lattice,Nn,eta,sigma,trial)
+			if(video<2): self.visualization_add(lattice,Nn,eta,sigma,trial)
 	
 	def post_process(self, T, visualization):
 		mode = ['simulation','visualization','grading']
