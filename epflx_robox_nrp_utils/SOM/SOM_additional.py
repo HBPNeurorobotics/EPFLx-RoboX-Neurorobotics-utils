@@ -124,7 +124,7 @@ class SOM_additional():
 		# save to file
 		np.savetxt('SOM_data_lattice.csv', output, delimiter=",", header = "Lattice index X,# Lattice index Y,# Coordinate X,# Coordinate Y")
 
-	def preparation(self,trials,Nn,visualization):
+	def som_preparation(self,trials,Nn,visualization):
 		from IPython import display
 		from ipywidgets import IntProgress
 		mode = ['simulation','visualization','grading']
@@ -156,7 +156,7 @@ class SOM_additional():
 		if(video or trial==N_trials): 
 			if(video<2): self.visualization_main(lattice,Nn,eta,sigma,trial)
 	
-	def results(self, T, visualization):
+	def display_results(self, T, visualization):
 		mode = ['simulation','visualization','grading']
 		
 		
