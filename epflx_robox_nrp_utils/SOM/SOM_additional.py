@@ -129,7 +129,7 @@ class SOM_additional():
 		from ipywidgets import IntProgress
 		viz = ['simulation','visualization','grading']
 		video = viz.index(video)
-		if(video==12): Nn = 12
+		if(video==2): Nn = 12
 		T = time.time()
 		f = IntProgress(min=0, max=trials) # instantiate the bar
 		display.display(f) # display the bar
