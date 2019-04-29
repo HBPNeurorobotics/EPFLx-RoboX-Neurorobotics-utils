@@ -141,14 +141,22 @@ class SOM_additional():
 		display.display(f) # display the bar
 		return T,f,Nn
 	
-	def visualization(self, lattice, Nn, N_trials, eta, sigma, trial, visualization, f):
+	def visualization(self, simdata, visualization, f):
 		mode = ['simulation','visualization','grading']
+		lattice = simdata[0]; 
+		Nn = simdata[1];
+		N_trials = simadata[2];
+		trial = simdata[3];
+		eta = simdata[4];
+		sigma = simdata[5];
+		
 		
 		# ERROR: there isn't any available mode with this name 
 		# Program cannot define an index for further processing
 		visualization = mode.index(visualization)
 		# 1) 'simulation' - only simulation of SOM training
 		# 2) 'vizualization' - visualize and update a current SOM state 
+		
 		
 		video = visualization
 		f.value += 1
