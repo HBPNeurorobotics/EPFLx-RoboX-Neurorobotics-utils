@@ -109,14 +109,14 @@ class SubmissionManager(object):
         filepath = self.__submission_info['filepath']
 
         def grade_SOM():
-            from epflx_robox_nrp_utils.graduation.SOM_autograduation import SOM_autograduation
-            som = SOM_autograduation()
-            self.__score = som.graduate_one_function(filepath)
+            from epflx_robox_nrp_utils.grading.SOM_autograding import SOM_autograding
+            som = SOM_autograding()
+            self.__score = som.grade_one_function(filepath)
 
         def grade_SARSA():
-            from epflx_robox_nrp_utils.graduation.SARSA_autograduation import SARSA_autograduation
-            sarsa = SARSA_autograduation()
-            self.__score = sarsa.graduate_one_function(filepath)
+            from epflx_robox_nrp_utils.grading.SARSA_autograding import SARSA_autograding
+            sarsa = SARSA_autograding()
+            self.__score = sarsa.grade_one_function(filepath)
 
         def timeoutHandler():
             raise TimeoutException()
