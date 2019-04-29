@@ -103,7 +103,7 @@ class SOM_autograding():
 				if(variF < 1000.0):	
 					if(inlim): 			self.message += str(t+1) + ") Program worked properly and it has been estimated.  "
 					else: 				self.message += str(t+1) + ") Program had been interrupted by time limit but a current result was estimated.  "
-				elif(variF == 1212.0): 	self.message += str(t+1) + ") Program is working properly, but SOM size is not 12x12.  "
+				elif(variF == 1212.0): 	self.message += str(t+1) + ") Program is working properly, but SOM size is not 8x8.  "
 				elif(variF == 1000.0): 	self.message += str(t+1) + ") Program failed during simulation.  "
 				else: 					self.message += str(t+1) + ") Cannot upload solution function.  "
 
