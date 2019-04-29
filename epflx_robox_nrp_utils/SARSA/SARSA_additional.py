@@ -713,8 +713,11 @@ class SARSA_additional():
 		return T,f
 			
 		
-	def latency_visualization(self, Nn, trial, N_trials, Q, latency_list, latency, visualization, simdata, actdata, Rdata, Sdata, Qdata, f):
+	def latency_visualization(self, simdata, Q, latency_list,  visualization, f):
 		mode = ['simulation','environment', 'square_maze', 'latency', 'grading']
+		Nn = simdata[0]; trial = simdata[1]; latency = simdata[2];  N_trials = simdata[3];
+		
+		
 		
 		# ERROR: there isn't any available mode with this name 
 		# Program cannot define an index for further processing
@@ -744,7 +747,7 @@ class SARSA_additional():
 		return latency_list
 		
 
-	def maze_visualization(self, Nn, trial, N_trials, latency_list, visualization, simdata, actdata, Rdata, Sdata, Qdata):
+	def maze_visualization(self, visualization, simdata, actdata, Rdata, Sdata, Qdata):
 		mode = ['simulation','environment', 'square_maze', 'latency', 'grading']
 		
 		# ERROR: there isn't any available mode with this name 
