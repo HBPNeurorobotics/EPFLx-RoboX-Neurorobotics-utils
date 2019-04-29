@@ -54,7 +54,7 @@ class SOM_evaluation():
         N = self.pos.shape[0]
 
         # load data of som-lattice from csv 
-        with open("SOM_data_lattice.csv") as f:
+        with open("lattice.csv") as f:
             reader = csv.reader(f)
             next(reader) # skip header
             data = [r for r in reader]
