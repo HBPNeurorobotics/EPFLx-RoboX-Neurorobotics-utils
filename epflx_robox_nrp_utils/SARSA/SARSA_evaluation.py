@@ -32,7 +32,7 @@ class SARSA_evaluation():
 	# Modes
 	################################################################################
 
-	def run_evaluation(self,video,evafile='SOM_data_lattice.csv'):
+	def run_evaluation(self,video,evafile='lattice.csv'):
 		self.Nn,self.states,self.actions,self.reward,self.goal,self.Q = self.sarsaad.eva_analysis(evafile)
 		self.M = self.perfect_map()
 		self.video = video
@@ -53,7 +53,7 @@ class SARSA_evaluation():
 
 
 	def test_generation(self):
-		self.Nn,self.states,self.actions,self.reward,self.goal,self.Q = self.sarsaad.eva_analysis('SOM_data_lattice.csv')
+		self.Nn,self.states,self.actions,self.reward,self.goal,self.Q = self.sarsaad.eva_analysis('lattice.csv')
 		self.M = self.perfect_map()
 		self.video = 1; self.test = False
 		self.sarsaad.visualization2(self.states,self.actions,self.test,self.goal)
@@ -75,7 +75,7 @@ class SARSA_evaluation():
 		display.clear_output(wait=True)
 		self.Way = np.column_stack((self.X, self.Y))
 
-		with open('SARSA_data_way_points.csv', 'w') as f:
+		with open('waypoints.csv', 'w') as f:
 			writer = csv.writer(f)
 			writer.writerow(['x', 'y'])
 			for i in range(len(self.X)):
