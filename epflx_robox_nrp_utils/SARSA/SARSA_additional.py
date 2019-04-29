@@ -729,15 +729,15 @@ class SARSA_additional():
 		if(trial%1000==0 or trial==N_trials): self.save_Qvalue(Q)
 		latency_list.append(latency)
 		
+		#if(video == 3):
+		#	# visualization of training bumped into a w
+		#	if(0 < video < 3): 
+		#		self.visualization_main(video, simdata, actdata, Rdata, Sdata, Qdata)
+		#	# visualization of latency
 		if(video == 3):
-			# visualization of training bumped into a w
-			if(0 < video < 3): 
-				self.visualization_main(video, simdata, actdata, Rdata, Sdata, Qdata)
-			# visualization of latency
-			if(video == 3):
-				if(trial%int(N_trials/25)==0 or trial==N_trials-1):    
-					self.latency(latency_list,N_trials,Nn)
-					time.sleep(0.5)
+			if(trial%int(N_trials/25)==0 or trial==N_trials-1):    
+				self.latency(latency_list,N_trials,Nn)
+				time.sleep(0.5)
 			
 		if((trial+1)%1000==0 or trial==N_trials):f.value += 1000 # signal to increment the progress bar
            
