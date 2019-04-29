@@ -701,7 +701,8 @@ class SARSA_additional():
 		mode = ['simulation','environment', 'square_maze', 'latency', 'grading']
 		
 		
-		# ERROR: there are only two available modes: 'simualtion' or 'visualization' 
+		# ERROR: there are only four available modes: 
+		# 1) 'simualtion'; 2) 'environment'; 3) 'square_maze'; 4) 'latency'.  
 		visualization = mode.index(visualization)
 		
 		
@@ -719,11 +720,11 @@ class SARSA_additional():
 		
 		
 		
-		# ERROR: there isn't any available mode with this name 
-		# Program cannot define an index for further processing
+		# ERROR: there are only four available modes: 
+		# 1) 'simualtion'; 2) 'environment'; 3) 'square_maze'; 4) 'latency'.  
 		visualization = mode.index(visualization)
-		# 1) 'simulation' - only simulation of SOM training
-		# 2) 'vizualization' - visualize and update a current SOM state 
+
+		
 		
 		video = visualization
 		#f.value += 1
@@ -732,11 +733,6 @@ class SARSA_additional():
 		if(trial%1000==0 or trial==N_trials): self.save_Qvalue(Q)
 		latency_list.append(latency)
 		
-		#if(video == 3):
-		#	# visualization of training bumped into a w
-		#	if(0 < video < 3): 
-		#		self.visualization_main(video, simdata, actdata, Rdata, Sdata, Qdata)
-		#	# visualization of latency
 		if(video == 3):
 			if(trial%int(N_trials/25)==0 or trial==N_trials-1):    
 				self.latency(latency_list,N_trials,Nn)
@@ -750,22 +746,19 @@ class SARSA_additional():
 	def maze_visualization(self, visualization, simdata, actdata, Rdata, Sdata, Qdata):
 		mode = ['simulation','environment', 'square_maze', 'latency', 'grading']
 		
-		# ERROR: there isn't any available mode with this name 
-		# Program cannot define an index for further processing
+		
+		# ERROR: there are only four available modes: 
+		# 1) 'simualtion'; 2) 'environment'; 3) 'square_maze'; 4) 'latency'.  
 		visualization = mode.index(visualization)
-		# 1) 'simulation' - only simulation of SOM training
-		# 2) 'vizualization' - visualize and update a current SOM state 
+
+		
 		
 		video = visualization
 		
 		# visualization of training bumped into a w
 		if(0 < video < 3): 
 			self.visualization_main(video, simdata, actdata, Rdata, Sdata, Qdata)
-		# visualization of latency
-		#if(video == 3):
-		#	if(trial%int(N_trials/25)==0 or trial==N_trials-1):    
-		#		self.latency(latency_list,N_trials,Nn)
-		#		time.sleep(0.5)
+
 		
 		
 	def display_results(self, visualization, T, Q, reward_position, Actions, csv_file):
@@ -776,7 +769,8 @@ class SARSA_additional():
 		self.csv_file = csv_file
 		
 		
-		# ERROR: there are only two available modes: 'simualtion' or 'visualization' 
+		# ERROR: there are only four available modes: 
+		# 1) 'simualtion'; 2) 'environment'; 3) 'square_maze'; 4) 'latency'.  
 		visualization = mode.index(visualization)
 		
 		
