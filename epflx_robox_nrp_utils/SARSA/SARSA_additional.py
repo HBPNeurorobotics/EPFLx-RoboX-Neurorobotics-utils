@@ -24,7 +24,7 @@ class SARSA_additional():
 	def __init__(self):
     
 		import warnings; warnings.filterwarnings('ignore')
-		self.testfile = 'SOM_data_lattice.csv'
+		self.testfile = 'lattice.csv'
 		self.lattice = {}
 		self.pos = {}
         
@@ -275,11 +275,11 @@ class SARSA_additional():
 				if(i==self.s_goal[0] and j==self.s_goal[1]): output[i][j] = ' ' + output[i][j]
 				
 		#print "self.test: ", self.testfile
-		if(self.testfile=='SOM_data_lattice.csv'): print 'Possible actions to choose: 0 - Down; 1 - Up; 2 - Right; 3 - Left.'
+		if(self.testfile=='lattice.csv'): print 'Possible actions to choose: 0 - Down; 1 - Up; 2 - Right; 3 - Left.'
 		df = pd.DataFrame(output); df.columns.name = 'Actions';
-		df.to_csv('SOM_possible_actions.csv')
+		df.to_csv('available_actions.csv')
 		df = df.style.applymap(border_negative).applymap(color_negative).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
-		if(self.testfile=='SOM_data_lattice.csv'): display.display(df)
+		if(self.testfile=='lattice.csv'): display.display(df)
 
 		return reward
 	
@@ -559,9 +559,9 @@ class SARSA_additional():
 		return self.pos
 
 
-	def upload_lattice(self,Lfile='SOM_data_lattice.csv'):
+	def upload_lattice(self,Lfile='lattice.csv'):
 		# load data of som-lattice from csv 
-		if(self.testfile != 'SOM_data_lattice.csv'): Lfile = self.testfile
+		if(self.testfile != 'lattice.csv'): Lfile = self.testfile
 		with open(Lfile) as f:
 			reader = csv.reader(f)
 			next(reader) # skip header
@@ -579,7 +579,7 @@ class SARSA_additional():
 	
 	def upload_reward(self):
 		# load data of som-lattice from csv 
-		with open("SOM_possible_actions.csv") as f:
+		with open("available_actions.csv") as f:
 			reader = csv.reader(f)
 			next(reader) # skip header
 			data = [r for r in reader]
@@ -602,7 +602,7 @@ class SARSA_additional():
 	
 	def upload_Qvalue(self):        
 		# load data of som-lattice from csv 
-		with open("SARSA_data_Qvalue.csv") as f:
+		with open("Q_values.csv") as f:
 			reader = csv.reader(f)
 			next(reader) # skip header
 			data = [r for r in reader]
@@ -626,10 +626,10 @@ class SARSA_additional():
 		stacked = pd.Panel(Q.swapaxes(1,2)).to_frame().stack().reset_index()
 		stacked.columns = ['Direction', 'Coordinate X', 'Coordinate Y', 'Q-value']
 		# save to disk
-		stacked.to_csv('SARSA_data_Qvalue.csv', index=False)
+		stacked.to_csv('Q_values.csv', index=False)
         
 	
-	def print_Qvalue(self,Q,goal,actions,csv_file='SOM_data_lattice.csv'):
+	def print_Qvalue(self,Q,goal,actions,csv_file='lattice.csv'):
 					
 		def background_gradient(s, m, M, cmap='PuBu', low=0, high=0, goal=0.0):
 			rng = M - m
@@ -688,11 +688,11 @@ class SARSA_additional():
 		outheat[goal[0],goal[1]] = outheat[goal[0],goal[1]]+(np.random.randint(2,size=1)*2-1)*0.9
 		gvalue  = outheat[goal[0],goal[1]]
 		
-		if(csv_file=='SOM_data_lattice.csv'): print "You can see just below the table of average expected reward (Q-value) at each possible state. This table represents that expected reward is increasing as you move closer to the goal at the same time states within 'walls' don't have any expected reward, bacause they cannot be reached. Also, you can see that expected reward in the state of goal is less than on previous states. The reason is that making step from the goal state to anyother you will be one step away from goal again as well as on other such positions."
+		if(csv_file=='lattice.csv'): print "You can see just below the table of average expected reward (Q-value) at each possible state. This table represents that expected reward is increasing as you move closer to the goal at the same time states within 'walls' don't have any expected reward, bacause they cannot be reached. Also, you can see that expected reward in the state of goal is less than on previous states. The reason is that making step from the goal state to anyother you will be one step away from goal again as well as on other such positions."
 				
 		df = pd.DataFrame(outheat); df.columns.name = 'Q';
 		df = df.style.applymap(border_negative).apply(background_gradient, cmap='PuBu', m=df.min().min(), M=df.max().max(),low=0,high=0.2, goal=gvalue).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important', 'color': 'black !important'});
-		if(csv_file=='SOM_data_lattice.csv'): display.display(df)
+		if(csv_file=='lattice.csv'): display.display(df)
 
 			
 	def sarsa_preparation(self,trials,visualization):
