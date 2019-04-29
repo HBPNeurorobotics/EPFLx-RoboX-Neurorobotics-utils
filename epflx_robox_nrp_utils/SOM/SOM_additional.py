@@ -135,7 +135,7 @@ class SOM_additional():
 		
 		
 		video = visualization
-		if(video==2): Nn = 12
+		if(video==2): Nn = 8
 		T = time.time()
 		f = IntProgress(min=0, max=trials) # instantiate the bar
 		display.display(f) # display the bar
