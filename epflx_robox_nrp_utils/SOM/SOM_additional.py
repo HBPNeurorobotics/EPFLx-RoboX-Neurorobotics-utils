@@ -144,7 +144,7 @@ class SOM_additional():
 	def visualization(self, simdata, lattice, visualization, f):
 		mode = ['simulation','visualization','grading']
 		Nn = simdata[0];
-		N_trials = simadata[1];
+		N_trials = simdata[1];
 		trial = simdata[2];
 		eta = simdata[3];
 		sigma = simdata[4];
