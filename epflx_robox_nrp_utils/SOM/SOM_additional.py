@@ -141,14 +141,13 @@ class SOM_additional():
 		display.display(f) # display the bar
 		return T,f,Nn
 	
-	def visualization(self, simdata, visualization, f):
+	def visualization(self, simdata, lattice, visualization, f):
 		mode = ['simulation','visualization','grading']
-		lattice = simdata[0]; 
-		Nn = simdata[1];
-		N_trials = simadata[2];
-		trial = simdata[3];
-		eta = simdata[4];
-		sigma = simdata[5];
+		Nn = simdata[0];
+		N_trials = simadata[1];
+		trial = simdata[2];
+		eta = simdata[3];
+		sigma = simdata[4];
 		
 		
 		# ERROR: there isn't any available mode with this name 
