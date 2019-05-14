@@ -27,7 +27,7 @@ class SARSA_additional():
 		self.csv_lattice = csv_input_lattice
 		self.csv_positions = csv_input_positions
 		self.csv_actions = csv_output
-		self.testfile = self.csv_input_lattice
+		self.testfile = self.csv_lattice
 		self.lattice = {}
 		self.pos = {}
         
