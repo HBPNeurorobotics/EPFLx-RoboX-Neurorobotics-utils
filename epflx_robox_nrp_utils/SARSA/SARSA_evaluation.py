@@ -65,7 +65,7 @@ class SARSA_evaluation():
 				self.start = input('Start position (format = [vertical,horizontal], example = [0,0]):')
 				print 		 '==================================================================================================================='; print
 				if(self.M[self.start[0],self.start[1]] != 0.0): break
-				print("Goal cannot be in the wall. You have to change the start position.")
+				print("The start position cannot be the goal position (green) or a wall. You have to change the start position.")
 			except: 
 				print 		 '==================================================================================================================='; print
 				print("Input is incorrect, please, use an example to make correct input.")
