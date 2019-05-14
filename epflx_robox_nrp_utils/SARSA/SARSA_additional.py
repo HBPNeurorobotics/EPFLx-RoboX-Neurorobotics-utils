@@ -21,12 +21,17 @@ from ast import literal_eval
 
 class SARSA_additional():
     
-	def __init__(self, csv_input_positions='robot_positions.csv', csv_input_lattice='lattice.csv', csv_output='actions.csv'):
+	def __init__(self, 
+	    csv_input_positions='robot_positions.csv', 
+		csv_input_lattice='lattice.csv', 
+		csv_output_actions='actions.csv',
+		csv_output_q_values='Q_values.csv'):
     
 		import warnings; warnings.filterwarnings('ignore')
 		self.csv_lattice = csv_input_lattice
 		self.csv_positions = csv_input_positions
-		self.csv_actions = csv_output
+		self.csv_actions = csv_output_actions
+		self.csv_q_values = csv_output_q_values
 		self.testfile = self.csv_lattice
 		self.lattice = {}
 		self.pos = {}
@@ -45,7 +50,7 @@ class SARSA_additional():
 		self.x_position_old = {}
 		self.y_position_old = {}
 		# Rdata
-		self.reward_position = {}
+		self.goal_position = {}
 		self.s_goal = [0,0]
 		# Qdata
 		self.Qdata = {}
@@ -115,7 +120,7 @@ class SARSA_additional():
 		states = self.rewarded_states()
 		actions = self.rewarded_actions(states)
 
-		Reward, reward_pos = self.upload_reward()
+		Reward, reward_pos = self.upload_environment()
 		self.upload_Qvalue() 
 
 		return self.Nn, states, actions, Reward, reward_pos, self.Q
@@ -278,8 +283,8 @@ class SARSA_additional():
 				if(i==self.s_goal[0] and j==self.s_goal[1]): output[i][j] = ' ' + output[i][j]
 				
 		#print "self.test: ", self.testfile
-		if(self.testfile==self.csv_lattice): print 'Available actions to choose and to execute: 0 - Down; 1 - Up; 2 - Right; 3 - Left.'
-		df = pd.DataFrame(output); df.columns.name = 'Actions';
+		if(self.testfile==self.csv_lattice): print('Available actions: 0 - Down; 1 - Up; 2 - Right; 3 - Left.')
+		df = pd.DataFrame(output); df.columns.name = 'Actions'
 		df.to_csv(self.csv_actions)
 		df = df.style.applymap(border_negative).applymap(color_negative).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important',  'color': 'black !important'});
 		if(self.testfile==self.csv_lattice): display.display(df)
@@ -325,7 +330,7 @@ class SARSA_additional():
 		self.x_position_old = actdata[2]
 		self.y_position_old = actdata[3]
 		# Rdata
-		self.reward_position = Rdata
+		self.goal_position = Rdata
 		# Sdata
 		self.start_position = Sdata
 		# Qdata
@@ -406,7 +411,7 @@ class SARSA_additional():
 
 		if(self.test):
 			# --- goal
-			Gind = self.reward_position[0]*self.Nn + self.reward_position[1]
+			Gind = self.goal_position[0]*self.Nn + self.goal_position[1]
 			plt.plot(Cy[Gind], Cx[Gind],'o',color='gold',markersize=25.0)
 			# --- start
 			Sind = self.start_position[0]*self.Nn + self.start_position[1]
@@ -415,7 +420,7 @@ class SARSA_additional():
 			Cind = self.x_position_old*self.Nn + self.y_position_old
 			plt.plot(Cy[Cind], Cx[Cind],'ro',markersize=15.0)
 			# --- agent-reward
-			if(self.reward_position[0] == self.x_position and self.reward_position[1] == self.y_position): 
+			if(self.goal_position[0] == self.x_position and self.goal_position[1] == self.y_position): 
 				plt.plot(Cy[Gind], Cx[Gind],'o',color='brown',markersize=25.0); time.sleep(3)
 
 		#----------------------- SETTINGS -----------------------###
@@ -503,8 +508,8 @@ class SARSA_additional():
 		#------------------------- POINTS -----------------------###
 		if(self.test):
 			# --- goal
-			rect1 = patches.Rectangle((self.reward_position[1]-0.5,\
-									   self.reward_position[0]-0.5), 1.0, 1.0, color='lime')
+			rect1 = patches.Rectangle((self.goal_position[1]-0.5,\
+									   self.goal_position[0]-0.5), 1.0, 1.0, color='lime')
 			ax.add_patch(rect1)
 			# --- agent
 			rect2 = patches.Rectangle((self.y_position-0.25,\
@@ -534,7 +539,7 @@ class SARSA_additional():
 
 	def latency(self, latency, N_trials, Nn):
 		plt.figure(0,figsize=(16, 9))
-		plt.title('Red line is an expected maximum latency.', fontsize=18)
+		plt.title('The red line represents the expected maximum latency.', fontsize=18)
 		plt.plot(latency[0::1],'b')
 		plt.axhline(y=2*Nn, linewidth=4, color='r')
 		plt.xlim(0,int(N_trials))
@@ -580,7 +585,7 @@ class SARSA_additional():
 		return self.lattice
 
 	
-	def upload_reward(self):
+	def upload_environment(self):
 		# load data of som-lattice from csv 
 		with open(self.csv_actions) as f:
 			reader = csv.reader(f)
@@ -594,18 +599,18 @@ class SARSA_additional():
 			reward = []
 			for j in range(1,self.Nn+1):
     				if(len(line[j])%2==0)and(len(line[j])>2):
-        				reward_position = [i,j-1]; line[j] = line[j].replace(" [", "[")
+        				goal_position = [i,j-1]; line[j] = line[j].replace(" [", "[")
     				cell =  line[j]
     				cell =  literal_eval(cell)
 				reward.append(cell)
     			Reward.append(reward)
-		return Reward, reward_position
+		return Reward, goal_position
 	
 	
 	
 	def upload_Qvalue(self):        
 		# load data of som-lattice from csv 
-		with open("Q_values.csv") as f:
+		with open(self.csv_q_values) as f:
 			reader = csv.reader(f)
 			next(reader) # skip header
 			data = [r for r in reader]
@@ -629,7 +634,7 @@ class SARSA_additional():
 		stacked = pd.Panel(Q.swapaxes(1,2)).to_frame().stack().reset_index()
 		stacked.columns = ['Direction', 'Coordinate X', 'Coordinate Y', 'Q-value']
 		# save to disk
-		stacked.to_csv('Q_values.csv', index=False)
+		stacked.to_csv(self.csv_q_values, index=False)
         
 	
 	def print_Qvalue(self,Q,goal,actions,csv_file='lattice.csv'):
@@ -691,7 +696,13 @@ class SARSA_additional():
 		outheat[goal[0],goal[1]] = outheat[goal[0],goal[1]]+(np.random.randint(2,size=1)*2-1)*0.9
 		gvalue  = outheat[goal[0],goal[1]]
 		
-		if(csv_file==self.csv_lattice): print "You can see just below the table of average expected reward (Q-value) at each possible state. This table represents that expected reward is increasing as you move closer to the goal at the same time states within 'walls' don't have any expected reward, bacause they cannot be reached. Also, you can see that expected reward in the state of goal is less than on previous states. The reason is that making step from the goal state to anyother you will be one step away from goal again as well as on other such states."
+		if(csv_file==self.csv_lattice): print(
+			"The table below holds the average expected reward (Q-value) for each state. "
+			"Observe how the expected reward increases as you move closer to the goal." 
+			"'Walls' are not considered as states and hence are not assigned any reward. " 
+			"Note also that the expected goal reward is less than the reward of some neighbouring states. " 
+			"Indeed, if you make one step away from the goal, you are still one step close to the goal." 
+		)
 				
 		df = pd.DataFrame(outheat); df.columns.name = 'Q';
 		df = df.style.applymap(border_negative).apply(background_gradient, cmap='PuBu', m=df.min().min(), M=df.max().max(),low=0,high=0.2, goal=gvalue).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important', 'color': 'black !important'});
@@ -764,10 +775,10 @@ class SARSA_additional():
 
 		
 		
-	def display_results(self, visualization, T, Q, reward_position, Actions, csv_file):
+	def display_results(self, visualization, T, Q, goal_position, Actions, csv_file):
 		mode = ['simulation','environment', 'square_maze', 'latency', 'grading']
 		self.Q = Q
-		self.reward_position = reward_position
+		self.goal_position = goal_position
 		self.Actions = Actions
 		self.csv_file = csv_file
 		
@@ -779,5 +790,5 @@ class SARSA_additional():
 		
 		video = visualization
 		#display.clear_output(wait=True)
-		self.print_Qvalue(self.Q, self.reward_position, self.Actions, self.csv_file)
+		self.print_Qvalue(self.Q, self.goal_position, self.Actions, self.csv_file)
 		if(video < 4): print 'Done. Simulation time is ', time.time()-T, '(s).'
