@@ -55,8 +55,8 @@ logger = logging.getLogger('submission_widget')
 """
 def display_submission_widget(submission_info):
     filepath_widget = widgets.Text(
-        description='File path', 
-        placeholder='Python file path, e.g., %(filepath)s' % {'filepath': submission_info['filepath']},
+        description='Filepath', 
+        placeholder='%(filepath)s (default)' % {'filepath': submission_info['filepath']},
         layout=widgets.Layout(width='50%')
     )
     display(filepath_widget)
@@ -70,8 +70,8 @@ def display_submission_widget(submission_info):
     def button_callback(submission_info):
         def on_button_clicked(b):
             sm = SubmissionManager(submission_info)
-            clear_output()
             filepath = str(filepath_widget.value) if filepath_widget.value else submission_info['filepath']
+            clear_output()
             print("Downloading %(filepath)s to your Jupyter user space ..." % {'filepath': filepath})
             submission_info['clients_storage'].download_file(
                 path.join(submission_info['collab_path'], filepath), 
