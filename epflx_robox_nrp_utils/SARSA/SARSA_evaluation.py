@@ -7,7 +7,7 @@ from matplotlib import patches
 import matplotlib.pyplot as plt
 import random
 import pylab as pl
-from IPython import display
+import IPython
 import math
 import csv
 import time
@@ -44,7 +44,7 @@ class SARSA_evaluation():
 				if(self.M[k,h]!=0.0):
 					Qway = self.trial_evaluation()
 					if(self.display): time.sleep(2)
-					if(self.display): display.clear_output(wait=True)		
+					if(self.display): IPython.display.clear_output(wait=True)		
 					final = [self.X[len(self.X)-1],self.Y[len(self.Y)-1]]
 					if   (final != self.goal) or (len(Qway) == self.Nn*self.Nn): neverway += 1
 					elif (len(Qway) == self.M[k,h]): fastway += 1
@@ -72,7 +72,7 @@ class SARSA_evaluation():
 		
 
 		Qway = self.trial_evaluation()
-		display.clear_output(wait=True)
+		IPython.display.clear_output(wait=True)
 		self.Way = np.column_stack((self.X, self.Y))
 
 		with open(csv_output_waypoints, 'w') as f:
@@ -215,5 +215,5 @@ class SARSA_evaluation():
 		ax.grid(which='minor', color='k', alpha = 0.2, linestyle='-', linewidth=1)
 
 		# Gridlines based on minor ticks
-		display.clear_output(wait=True)
-		display.display(plt.gcf())
+		IPython.display.clear_output(wait=True)
+		IPython.display.display(plt.gcf())
