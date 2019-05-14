@@ -69,7 +69,6 @@ def display_submission_widget(submission_info):
 
     def button_callback(submission_info):
         def on_button_clicked(b):
-            sm = SubmissionManager(submission_info)
             filepath = str(filepath_widget.value) if filepath_widget.value else submission_info['filepath']
             clear_output()
             print("Downloading %(filepath)s to your Jupyter user space ..." % {'filepath': filepath})
@@ -82,6 +81,7 @@ def display_submission_widget(submission_info):
             filepath_widget.close()
             time.sleep(3)
             clear_output()
+            sm = SubmissionManager(submission_info)
             sm.submit()
         return on_button_clicked
         

@@ -84,7 +84,7 @@ class SubmissionManager(object):
         self.__config = Config()
         check_submission_info(submission_info)
         self.__submission_info = submission_info
-        self.__timeout = 260
+        self.__timeout = 240
         if self.__submission_info['token'] or self.__submission_info['oidc_username']:
             # This will interactively prompt the user for a password in terminal if needed
             if self.__submission_info['oidc_username']:
