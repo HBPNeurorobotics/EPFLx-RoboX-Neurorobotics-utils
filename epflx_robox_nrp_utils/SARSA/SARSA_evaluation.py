@@ -32,10 +32,10 @@ class SARSA_evaluation():
 	# Modes
 	################################################################################
 
-	def run_evaluation(self,video,evafile='lattice.csv'):
-		self.Nn,self.states,self.actions,self.reward,self.goal,self.Q = self.sarsaad.eva_analysis(evafile)
+	def run_evaluation(self,display,csv_input_lattice='lattice.csv'):
+		self.Nn,self.states,self.actions,self.reward,self.goal,self.Q = self.sarsaad.eva_analysis(csv_input_lattice)
 		self.M = self.perfect_map()
-		self.video = video
+		self.display = display
 		fastway = 0; longway = 0; neverway = 0; overway = 0
 
 		for k in range(self.Nn):
@@ -43,8 +43,8 @@ class SARSA_evaluation():
 				self.start = [k,h]
 				if(self.M[k,h]!=0.0):
 					Qway = self.trial_evaluation()
-					if(self.video): time.sleep(2)
-					if(self.video): display.clear_output(wait=True)		
+					if(self.display): time.sleep(2)
+					if(self.display): display.clear_output(wait=True)		
 					final = [self.X[len(self.X)-1],self.Y[len(self.Y)-1]]
 					if   (final != self.goal) or (len(Qway) == self.Nn*self.Nn): neverway += 1
 					elif (len(Qway) == self.M[k,h]): fastway += 1
@@ -52,30 +52,30 @@ class SARSA_evaluation():
 		return fastway, longway, overway, neverway
 
 
-	def test_generation(self):
-		self.Nn,self.states,self.actions,self.reward,self.goal,self.Q = self.sarsaad.eva_analysis('lattice.csv')
+	def generate_waypoints(self, csv_input_lattice='lattice.csv', csv_output_waypoints='waypoints.csv'):
+		self.Nn,self.states,self.actions,self.reward,self.goal,self.Q = self.sarsaad.eva_analysis(csv_input_lattice)
 		self.M = self.perfect_map()
-		self.video = 1; self.test = False
+		self.display = 1; self.test = False
 		self.sarsaad.visualization2(self.states,self.actions,self.test,self.goal)
 		
 		while True:
 			print; print		'==================================================================================================================='
 
 			try:
-				self.start = input('Start coordinate (format = [vertical,horizontal], example = [0,0]):');
+				self.start = input('Start position (format = [vertical,horizontal], example = [0,0]):')
 				print 		 '==================================================================================================================='; print
 				if(self.M[self.start[0],self.start[1]] != 0.0): break
-				print "Goal cannot be in the wall or in the goal. You have to change the start position."
+				print("Goal cannot be in the wall. You have to change the start position.")
 			except: 
 				print 		 '==================================================================================================================='; print
-				print "Input is incorrect, please, use an example to make correct input."
+				print("Input is incorrect, please, use an example to make correct input.")
 		
 
 		Qway = self.trial_evaluation()
 		display.clear_output(wait=True)
 		self.Way = np.column_stack((self.X, self.Y))
 
-		with open('waypoints.csv', 'w') as f:
+		with open(csv_output_waypoints, 'w') as f:
 			writer = csv.writer(f)
 			writer.writerow(['x', 'y'])
 			for i in range(len(self.X)):
@@ -94,7 +94,7 @@ class SARSA_evaluation():
 	def trial_evaluation(self):
 		Qway = []
 		state = [self.start[0],self.start[1]]
-		self.X = [self.start[0]]; self.Y = [self.start[1]];
+		self.X = [self.start[0]]; self.Y = [self.start[1]]
 
 		while(state != self.goal) and (len(Qway) < self.Nn*self.Nn):
 			try: index = np.argmax(self.Q[state[0],state[1],:])
@@ -107,7 +107,7 @@ class SARSA_evaluation():
 			else:             state[1] -= 1
 
 			self.X.append(state[0]); self.Y.append(state[1])
-			if(self.video): self.visualizationE(self.states,self.actions)
+			if(self.display): self.visualizationE(self.states,self.actions)
 		return Qway
 
 	
