@@ -85,12 +85,18 @@ class SubmissionManager(object):
         check_submission_info(submission_info)
         self.__submission_info = submission_info
         self.__timeout = 240
-        if self.__submission_info['token'] or self.__submission_info['oidc_username']:
+        if 'token' in self.__submission_info or 'oidc_username' in self.__submission_info:
+            oidc_username=''
+            token=''
             # This will interactively prompt the user for a password in terminal if needed
-            if self.__submission_info['oidc_username']:
+            if 'oidc_username' in self.__submission_info:
                 logger.info('Logging into OIDC as: %s', self.__submission_info['oidc_username'])
+                oidc_username=self.__submission_info['oidc_username'] 
+            if 'token' in self.__submission_info:
+                token = self.__submission_info['token']
             self.__http_client = OIDCHTTPClient(
-                oidc_username=self.__submission_info['oidc_username'], token=self.__submission_info['token']
+                oidc_username=oidc_username, 
+                token=token
             )
             authorization = self.__http_client.get_auth_header()
             self.__http_headers = {
