@@ -699,7 +699,7 @@ class SARSA_additional():
 		if(csv_file==self.csv_lattice): print("The table below holds the maximum expected reward (Q-value) among possible actions at each state. You should observe that the expected reward is increasing as you move closer to the goal. Black blocks represent unaccessible areas, e.g., walls. As they are not considered as states, they are not assigned any reward. Note also that the expected goal reward should be less than the reward of some neighbouring states. Indeed, if you make one step away from the goal to next state then you will be one step away from goal as step from neighboring state to the goal put you into the goal thus the reward is bigger there.")
 				
 		df = pd.DataFrame(outheat); df.columns.name = 'Q';
-		df = df.style.applymap(border_negative).apply(background_gradient, cmap='PuBu', m=df.min().min(), M=df.max().max(),low=0,high=0.2, goal=gvalue).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important', 'color': 'black !important'});
+		df = df.style.applymap(border_negative).apply(background_gradient, cmap='PuBu', m=0, M=df.max().max(),low=0,high=0.2, goal=gvalue).set_properties(**{'width': '100px', 'border': '3px 1px black solid !important', 'color': 'black !important'});
 		if(csv_file==self.csv_lattice): display.display(df)
 
 			
