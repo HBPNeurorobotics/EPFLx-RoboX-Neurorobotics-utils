@@ -55,12 +55,12 @@ setuptools.setup(
     include_package_data=True,
     package_data={ 'epflx_robox_nrp_utils': [
         'submission_manager/config.json',
-        'graduation/SOM_test1_lattice.csv',
-        'graduation/SOM_test2_lattice.csv',
-        'graduation/SOM_test3_lattice.csv',
-        'graduation/NRP_test1_robot_position.csv',
-        'graduation/NRP_test2_robot_position.csv',
-        'graduation/NRP_test3_robot_position.csv'
+        'grading/SOM_test1_lattice.csv',
+        'grading/SOM_test2_lattice.csv',
+        'grading/SOM_test3_lattice.csv',
+        'grading/NRP_test1_robot_position.csv',
+        'grading/NRP_test2_robot_position.csv',
+        'grading/NRP_test3_robot_position.csv'
     ]},
     classifiers=[
         "Programming Language :: Python :: 2.7",
