@@ -359,7 +359,7 @@ class SARSA_additional():
 			fig1.suptitle('Trial: {}; Episode: {}; Q({},{}): {}'.format(int(self.Trial),\
 						  int(self.Run), self.x_position, self.y_position, self.Qdata.round(4)))
 		else:
-			fig1.suptitle('Adapted SOM for SARSA implementation (Purple nodes are unavailable).')
+			fig1.suptitle('Real environment covered by SOM')
 
 		# --- sub-plot
 		ax = fig1.add_subplot(111)
@@ -451,7 +451,7 @@ class SARSA_additional():
 			fig2.suptitle('Trial: {}; Episode: {}; Q({},{}): {}'.format(int(self.Trial),\
 						  int(self.Run), self.x_position, self.y_position, self.Qdata.round(4)))
 		else:
-			fig2.suptitle('Your maze for SARSA implementation.')
+			fig2.suptitle('Square maze representing real environment.')
 
 		# --- sub-plot
 		ax = fig2.add_subplot(111)
