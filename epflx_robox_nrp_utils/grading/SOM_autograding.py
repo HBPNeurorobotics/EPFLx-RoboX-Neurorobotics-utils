@@ -41,8 +41,9 @@ class SOM_autograding():
 		func, self.user = self.user_function(funcname)
 		self.message = ""
 		
-		try: SOM = self.upload_solution(func,True); load = True
-		except: score = "FAILED uploading..."; load = False
+		#try: 
+		SOM = self.upload_solution(func,True); load = True
+		#except: score = "FAILED uploading..."; load = False
 		
 		if(load):
 			for t in range(3):
