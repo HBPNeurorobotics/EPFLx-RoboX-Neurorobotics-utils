@@ -44,8 +44,9 @@ class SARSA_autograding():
 		self.message = ""
 		
 		# upload solution
-		try: SARSA = self.upload_solution(func,True); load = True
-		except: score = "FAILED uploading..."; load = False
+		#try: 
+		SARSA = self.upload_solution(func,True); load = True
+		#except: score = "FAILED uploading..."; load = False
 		
 		if(load):
 			for t in range(3):
