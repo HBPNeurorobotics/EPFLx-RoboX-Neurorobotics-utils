@@ -17,8 +17,9 @@ class SOM_additional():
 
 	# Self-Organizing Map mapping the environment depending on the positions visited by the robot
     
-	def __init__(self):
+	def __init__(self, csv_output_lattice):
 		import warnings; warnings.filterwarnings('ignore')
+		self.csv_output_lattice = csv_output_lattice 
 
 
 
@@ -112,7 +113,7 @@ class SOM_additional():
 		stacked = pd.Panel(lattice.swapaxes(1,2)).to_frame().stack().reset_index()
 		stacked.columns = ['x', 'y', 'z', 'value']
 		# save to file
-		stacked.to_csv('lattice.csv', index=False)
+		stacked.to_csv(self.csv_output_lattice, index=False)
 
 		
 	def save_lattice(self,lattice,Nn):
@@ -122,7 +123,7 @@ class SOM_additional():
 			for j in range(Nn):
 				output[i*Nn+j][:] = [i,j,lattice[i,j,0],lattice[i,j,1]] 
 		# save to file
-		np.savetxt('lattice.csv', output, delimiter=",", header = "Lattice index X,# Lattice index Y,# Coordinate X,# Coordinate Y")
+		np.savetxt(self.csv_output_lattice, output, delimiter=",", header = "Lattice index X,# Lattice index Y,# Coordinate X,# Coordinate Y")
 
 	def som_preparation(self,trials,Nn,visualization):
 		from IPython import display

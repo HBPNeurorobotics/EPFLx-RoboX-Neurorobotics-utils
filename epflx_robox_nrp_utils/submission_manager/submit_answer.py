@@ -45,7 +45,7 @@ class TimeoutException(Exception):
 def check_submission_info(submission_info):
     assert isinstance(submission_info, (dict))
     assert isinstance(submission_info['token'], (str))
-    assert isinstance(submission_info['filepath'], (str))
+    assert isinstance(submission_info['filename'], (str))
     assert isinstance(submission_info['collab_path'], (str))
     
     no_oidc_username = 'oidc_username' not in submission_info or not submission_info['oidc_username']
@@ -56,9 +56,9 @@ def check_submission_info(submission_info):
             "an oidc_username or a token in order to submit your answer."
         )
 
-    if not os.path.exists(submission_info['filepath']):
-        error_msg = '(Error message) File not found: the file named %(filepath)s does not exist' % \
-            {'filepath': submission_info['filepath']}
+    if not os.path.exists(submission_info['filename']):
+        error_msg = '(Error message) File not found: the file named %(filename)s does not exist' % \
+            {'filename': submission_info['filename']}
         raise Exception('Submission failed! \n %(error_msg)s' % {'error_msg': error_msg})
 
 
@@ -69,12 +69,12 @@ class SubmissionManager(object):
 
     """
     :param submission_info:  A dictionary with the following keys:
-                            subheader, oidc_username (optional), token, filepath, collab_path and
+                            subheader, oidc_username (optional), token, filename, collab_path and
                             clients_storage.
                             subheader is a string describing the submission context, e.g., 'Exercise 3'
                             oidc_username is a string containing the HBP OIDC username (optional)
                             token is a string containing the HBP OIDC token of the user
-                            filepath is a string containing the name of the submitted file
+                            filename is a string containing the name of the submitted file
                             collab_path is the path to the HBP Collab where the submission takes place
                             clients_storage is an object with a download_file method, e.g, clients.storage from bbp_services
 
@@ -112,17 +112,17 @@ class SubmissionManager(object):
         self.init_grading_functions()
 
     def init_grading_functions(self):
-        filepath = self.__submission_info['filepath']
+        filename = self.__submission_info['filename']
 
         def grade_SOM():
             from epflx_robox_nrp_utils.grading.SOM_autograding import SOM_autograding
             som = SOM_autograding()
-            self.__score = som.grade_one_function(filepath)
+            self.__score = som.grade_one_function(filename)
 
         def grade_SARSA():
             from epflx_robox_nrp_utils.grading.SARSA_autograding import SARSA_autograding
             sarsa = SARSA_autograding()
-            self.__score = sarsa.grade_one_function(filepath)
+            self.__score = sarsa.grade_one_function(filename)
 
         def timeoutHandler():
             raise TimeoutException()
@@ -140,12 +140,12 @@ class SubmissionManager(object):
         try: # try grading
             self.grade()
         except TimeoutException:
-            print('Submission Timeout: the time to execute %(filepath)s exceeds %(timeout)d minutes' % 
-                { 'filepath': self.__submission_info['filepath'], 'timeout': self.__timeout / 60 }
+            print('Submission Timeout: the time to execute %(filename)s exceeds %(timeout)d minutes' % 
+                { 'filename': self.__submission_info['filename'], 'timeout': self.__timeout / 60 }
             )
             raise Exception('Submission failed.')
         except Exception as e:
-            print('Python error when executing %(filepath)s' % {'filepath': self.__submission_info['filepath']})
+            print('Python error when executing %(filename)s' % {'filename': self.__submission_info['filename']})
             print('Submission failed because of an error raised by your code.'
                 'Please test and fix your code before your next submission.'
             )
@@ -161,14 +161,14 @@ class SubmissionManager(object):
             logger.info('Congratulations, your submission is successful!')
 
     def create_submission_form(self):
-        with open(self.__submission_info['filepath'], 'r') as submitted_file:
+        with open(self.__submission_info['filename'], 'r') as submitted_file:
             file_str = submitted_file.read()
         submission_form = {
             "submissionInfo": {
                 'header': self.__config['submission-header'],
                 'subheader': self.__submission_info['subheader']
             },
-            'fileName': os.path.basename(self.__submission_info['filepath']),
+            'fileName': os.path.basename(self.__submission_info['filename']),
             'fileContent': file_str
         }
         submission_form['answer'] = dict()
