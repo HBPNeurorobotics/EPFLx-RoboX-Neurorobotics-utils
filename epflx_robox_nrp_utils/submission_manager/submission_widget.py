@@ -43,23 +43,23 @@ logger = logging.getLogger('submission_widget')
 """
 
 :param submission_info:  A dictionary with the following keys:
-                        subheader, oidc_username (optional), token, filepath, collab_path and
+                        subheader, oidc_username (optional), token, filename, collab_path and
                         clients_storage.
                         subheader is a string describing the submission context, e.g., 'Exercise 3'
                         oidc_username is a string containing the HBP OIDC username (optional)
                         token is a string containing the HBP OIDC token of the user
-                        filepath is a string containing the name of the submitted file
+                        filename is a string containing the name of the submitted file
                         collab_path is the path to the HBP Collab where the submission takes place
                         clients_storage is an object with a download_file method, e.g, clients.storage from bbp_services
 
 """
 def display_submission_widget(submission_info):
-    filepath_widget = widgets.Text(
-        description='Filepath', 
-        placeholder='%(filepath)s (default)' % {'filepath': submission_info['filepath']},
+    filename_widget = widgets.Text(
+        description='filename', 
+        placeholder='%(filename)s (default)' % {'filename': submission_info['filename']},
         layout=widgets.Layout(width='50%')
     )
-    display(filepath_widget)
+    display(filename_widget)
     submission_button = widgets.Button(
         description="Submit", 
         layout=widgets.Layout(width='50%', height='35px')
@@ -69,16 +69,16 @@ def display_submission_widget(submission_info):
 
     def button_callback(submission_info):
         def on_button_clicked(b):
-            filepath = str(filepath_widget.value) if filepath_widget.value else submission_info['filepath']
+            filename = str(filename_widget.value) if filename_widget.value else submission_info['filename']
             clear_output()
-            print("Downloading %(filepath)s to your Jupyter user space ..." % {'filepath': filepath})
+            print("Downloading %(filename)s to your Jupyter user space ..." % {'filename': filename})
             submission_info['clients_storage'].download_file(
-                path.join(submission_info['collab_path'], filepath), 
-                submission_info['filepath']
+                path.join(submission_info['collab_path'], filename), 
+                submission_info['filename']
             )
             print("Download completed.")
             submission_button.close()
-            filepath_widget.close()
+            filename_widget.close()
             time.sleep(3)
             clear_output()
             sm = SubmissionManager(submission_info)
