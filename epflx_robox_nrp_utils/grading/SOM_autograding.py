@@ -52,7 +52,7 @@ class SOM_autograding():
 				script_path = os.path.dirname(os.path.abspath( __file__ ))
 				test = os.path.join(script_path,test)
 				text = 'Grading process: Test '+str(t+1)+'/3...'
-				print text #test
+				print(text) #test
 			
 			
 				variF = 2000.0
@@ -78,7 +78,7 @@ class SOM_autograding():
 					T = time.time()
 					
 					# run simulation of test
-					try: som.run_som()
+					try: som.run()
 					except Exception, exc: inlim = False
 					signal.alarm(0) # disable alarm
 				
@@ -92,7 +92,7 @@ class SOM_autograding():
 						# Estimate SOM by test
 						from epflx_robox_nrp_utils.SOM.SOM_evaluation import SOM_evaluation
 						somev = SOM_evaluation(test)
-						vF, Nn = somev.run_evaluation()
+						vF, Nn = somev.run()
 						if(Nn==self.L): variF = min(vF,variF)
 						else: variF = 1212.0
 					else:         # Script doesn't work / doesn't work properly

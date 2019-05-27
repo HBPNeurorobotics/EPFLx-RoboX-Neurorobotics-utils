@@ -8,16 +8,17 @@ import csv
 
 class SOM_evaluation():
     
-    def __init__(self, csv_file='robot_positions.csv'):
+    def __init__(self, cvs_input_positions='robot_positions.csv', csv_input_lattice='lattice.csv'):
     
         self.Nn = {}
         self.lattice = {}
         self.pos = {}
-        self.csv_file = csv_file
+        self.cvs_input_positions = cvs_input_positions
+        self.csv_input_lattice = csv_input_lattice
         import warnings; warnings.filterwarnings('ignore')
 
         
-    def run_evaluation(self):
+    def run(self):
         self.load_lattice()
         var = self.variation()
         return var, self.Nn
@@ -47,14 +48,14 @@ class SOM_evaluation():
     
     def load_lattice(self):
         # extract and transform data
-        states = pd.read_csv(self.csv_file, delimiter=',',header=0).values
+        states = pd.read_csv(self.cvs_input_positions, delimiter=',',header=0).values
         positions = np.array([pd.to_numeric(states[:,0], errors='coerce'), pd.to_numeric(states[:,1], errors='coerce')]).T
         # Reduce the number of data points
         self.pos = positions[slice(0,positions.shape[0],1000),:]
         N = self.pos.shape[0]
 
         # load data of som-lattice from csv 
-        with open("lattice.csv") as f:
+        with open(self.csv_input_lattice) as f:
             reader = csv.reader(f)
             next(reader) # skip header
             data = [r for r in reader]

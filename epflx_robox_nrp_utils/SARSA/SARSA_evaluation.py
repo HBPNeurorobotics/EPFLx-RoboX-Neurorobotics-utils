@@ -32,7 +32,7 @@ class SARSA_evaluation():
 	# Modes
 	################################################################################
 
-	def run_evaluation(self,display,csv_input_lattice='lattice.csv'):
+	def run(self,display,csv_input_lattice='lattice.csv'):
 		self.Nn,self.states,self.actions,self.reward,self.goal,self.Q = self.sarsaad.eva_analysis(csv_input_lattice)
 		self.M = self.perfect_map()
 		self.display = display
