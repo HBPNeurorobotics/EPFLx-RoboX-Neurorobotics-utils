@@ -153,12 +153,14 @@ class SubmissionManager(object):
         
         # submit answer to a database
         body = self.create_submission_form()
+        import pprint as pprint
+        pprint(body)
         environment = self.__config['environment']
         status_code, content = self.__http_client.post(self.__config['grading-server'][environment], body=body)
         if status_code != 200:
             raise Exception('Submission failed, Status Code: %s' % status_code)
         else:
-            logger.info('Congratulations, your submission is successful!')
+            logger.info('Your solution has been submitted.')
 
     def create_submission_form(self):
         with open(self.__submission_info['filename'], 'r') as submitted_file:
@@ -168,7 +170,7 @@ class SubmissionManager(object):
                 'header': self.__config['submission-header'],
                 'subheader': self.__submission_info['subheader']
             },
-            'fileName': os.path.basename(self.__submission_info['filename']),
+            'fileName': self.__submission_info['filename'],
             'fileContent': file_str
         }
         submission_form['answer'] = dict()
