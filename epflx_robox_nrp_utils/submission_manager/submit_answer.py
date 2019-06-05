@@ -33,8 +33,6 @@ import logging
 import os
 import signal
 
-from pprint import pprint
-
 logger_format = '%(levelname)s: [%(asctime)s - %(name)s] %(message)s'
 logging.basicConfig(format=logger_format, level=logging.INFO)
 logger = logging.getLogger('SubmissionManager')
@@ -125,8 +123,6 @@ class SubmissionManager(object):
             from epflx_robox_nrp_utils.grading.SARSA_autograding import SARSA_autograding
             sarsa = SARSA_autograding()
             self.__score = sarsa.grade_one_function(filename)
-            print('score')
-            pprint(self.__score)
 
         def timeoutHandler():
             raise TimeoutException()
@@ -158,7 +154,6 @@ class SubmissionManager(object):
         
         # submit answer to database
         body = self.create_submission_form()
-        pprint(body)
         environment = self.__config['environment']
         status_code, content = self.__http_client.post(self.__config['grading-server'][environment], body=body)
         if status_code != 200:
