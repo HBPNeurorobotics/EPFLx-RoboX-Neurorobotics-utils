@@ -27,6 +27,7 @@ Functions dedicated to the susbmission process of users'answers to the grading s
 
 from config import Config
 from oidc_http_client import OIDCHTTPClient
+from urllib2 import HTTPError
 import json
 import requests
 import logging
@@ -41,21 +42,37 @@ logger = logging.getLogger('SubmissionManager')
 class TimeoutException(Exception):
     pass
 
+class EdxTokenException(Exception):
+    pass
+
+class RequestException(Exception):
+    pass
+
+class UserCodeException(Exception):
+    pass
+
 
 def check_submission_info(submission_info):
     assert isinstance(submission_info, (dict))
-    assert isinstance(submission_info['token'], (str))
+    assert isinstance(submission_info['oidc_token'], (str))
+    assert isinstance(submission_info['edx_token'], (str))
+    assert isinstance(submission_info['header'], (str))
+    assert isinstance(submission_info['subheader'], (str))
     assert isinstance(submission_info['filename'], (str))
     assert isinstance(submission_info['collab_path'], (str))
     
     no_oidc_username = 'oidc_username' not in submission_info or not submission_info['oidc_username']
-    no_token = 'token' not in submission_info or not submission_info['token']
-    if no_oidc_username and no_token:
+    no_oidc_token = 'oidc_token' not in submission_info or not submission_info['oidc_token']
+    if no_oidc_username and no_oidc_token:
         raise ValueError(
             "You need to specify either " 
-            "an oidc_username or a token in order to submit your answer."
+            "an oidc_username or an oidc_token in order to submit your answer."
         )
-
+    no_edx_token = 'edx_token' not in submission_info or not submission_info['edx_token']
+    if no_edx_token:
+        raise ValueError(
+            "You need to specify an edx_token in order to submit your answer."
+        )
     if not os.path.exists(submission_info['filename']):
         error_msg = '(Error message) File not found: the file named %(filename)s does not exist' % \
             {'filename': submission_info['filename']}
@@ -73,30 +90,26 @@ class SubmissionManager(object):
                             clients_storage.
                             subheader is a string describing the submission context, e.g., 'Exercise 3'
                             oidc_username is a string containing the HBP OIDC username (optional)
-                            token is a string containing the HBP OIDC token of the user
+                            oidc_token is a string containing the HBP OIDC token of the user
                             filename is a string containing the name of the submitted file
                             collab_path is the path to the HBP Collab where the submission takes place
                             clients_storage is an object with a download_file method, e.g, clients.storage from bbp_services
 
     """
-    def __init__(self, submission_info):
-        # Parse and load the config file before any OIDC actions
-        self.__config = Config()
-        check_submission_info(submission_info)
-        self.__submission_info = submission_info
-        self.__timeout = 240
-        if 'token' in self.__submission_info or 'oidc_username' in self.__submission_info:
+    
+    def set_oidc_http_client(self):
+        if 'oidc_token' in self.__submission_info or 'oidc_username' in self.__submission_info:
             oidc_username=''
-            token=''
+            oidc_token=''
             # This will interactively prompt the user for a password in terminal if needed
             if 'oidc_username' in self.__submission_info:
                 logger.info('Logging into OIDC as: %s', self.__submission_info['oidc_username'])
                 oidc_username=self.__submission_info['oidc_username'] 
-            if 'token' in self.__submission_info:
-                token = self.__submission_info['token']
+            if 'oidc_token' in self.__submission_info:
+                oidc_token = self.__submission_info['oidc_token']
             self.__http_client = OIDCHTTPClient(
                 oidc_username=oidc_username, 
-                token=token
+                token=oidc_token
             )
             authorization = self.__http_client.get_auth_header()
             self.__http_headers = {
@@ -107,7 +120,43 @@ class SubmissionManager(object):
         else:
             raise Exception('No valid credentials - Submission failed.')
 
-        # If the config is valid and the login doesn't fail, we're ready
+    def check_edx_token(self):
+        # Get the Edx token from the grading server
+        url = self.__config['grading-server'][self.__environment] + '/check-token'
+        if 'edx_token' not in self.__submission_info or not self.__submission_info['edx_token']:
+            raise EdxTokenException('Submission failed: the edX token is missing')
+        edx_token = self.__submission_info['edx_token']
+        status_code = None
+        content = None
+        # bbp_client throws an exception when a request fails
+        try:
+          status_code, content = self.__http_client.get(url, params={'token': edx_token})
+        except HTTPError as e:
+            raise RequestException(e)
+
+        if status_code != 200:
+            raise EdxTokenException('Token verification failed: %s' % status_code)
+        else:
+            content_obj = json.loads(content)
+            if (content_obj['custom_header'] == self.__submission_info['header']) and \
+                (content_obj['custom_subheader'] == self.__submission_info['subheader']):
+                logger.info('edX token verification succesfully completed.')
+            else:
+                raise EdxTokenException('Your edX token is not valid for this exercise')
+
+    def __init__(self, submission_info, environment=None):
+        # Parse and load the config file before any OIDC actions
+        self.__config = Config(environment)
+        self.__environment = self.__config['environment']
+        # Check sanity of submission information
+        check_submission_info(submission_info)
+        self.__submission_info = submission_info
+        self.__timeout = 240
+        # Check HBP OIDC credentials
+        self.set_oidc_http_client()
+        # Check edX token
+        self.check_edx_token()
+        # If the OIDC and edX tokens are both valid, we're ready
         logger.info('Ready to submit.')
         self.init_grading_functions()
 
@@ -125,7 +174,7 @@ class SubmissionManager(object):
             self.__score = sarsa.grade_one_function(filename)
 
         def timeoutHandler():
-            raise TimeoutException()
+            raise TimeoutException('Time is out')
 
 
         self.__grading_functions = {'Exercise 2': grade_SOM, 'Exercise 3': grade_SARSA}
@@ -140,24 +189,24 @@ class SubmissionManager(object):
         # try grading
         try:
             self.grade()
-        except TimeoutException:
-            print('Submission Timeout: the time to execute %(filename)s exceeds %(timeout)d minutes' % 
+        except TimeoutException as e:
+            logger.error('Submission Timeout: the time to execute %(filename)s exceeds %(timeout)d minutes' % 
                 { 'filename': self.__submission_info['filename'], 'timeout': self.__timeout / 60 }
             )
-            raise Exception('Submission failed.')
+            raise e
         except Exception as e:
-            print('Python error when executing %(filename)s' % {'filename': self.__submission_info['filename']})
-            print('Submission failed because of an error raised by your code.'
+            logger.error('Python error when executing %(filename)s' % {'filename': self.__submission_info['filename']})
+            logger.error('Submission failed because of an error raised by your code.'
                 'Please test and fix your code before your next submission.'
             )
-            raise e
+            raise UserCodeException(e)
         
         # submit answer to database
         body = self.create_submission_form()
-        environment = self.__config['environment']
-        status_code, content = self.__http_client.post(self.__config['grading-server'][environment], body=body)
+        url = self.__config['grading-server'][self.__environment] + '/submission'
+        status_code, content = self.__http_client.post(url, body=body)
         if status_code != 200:
-            raise Exception('Submission failed, Status Code: %s' % status_code)
+            raise RequestException('Submission failed, Status Code: %s' % status_code)
         else:
             logger.info('Your solution has been submitted.')
 

@@ -51,15 +51,22 @@ logger = logging.getLogger('submission_widget')
                         filename is a string containing the name of the submitted file
                         collab_path is the path to the HBP Collab where the submission takes place
                         clients_storage is an object with a download_file method, e.g, clients.storage from bbp_services
+:environment:           Environment of the grading server: local, dev or staging. (Optional)
 
 """
-def display_submission_widget(submission_info):
+def display_submission_widget(submission_info, environment=None):
     filename_widget = widgets.Text(
         description='filename', 
         placeholder='%(filename)s (default)' % {'filename': submission_info['filename']},
         layout=widgets.Layout(width='50%')
     )
+    edx_token_widget = widgets.Text(
+        description='token', 
+        placeholder='Paste your token copied from edX',
+        layout=widgets.Layout(width='50%')
+    )
     display(filename_widget)
+    display(edx_token_widget)
     submission_button = widgets.Button(
         description="Submit", 
         layout=widgets.Layout(width='50%', height='35px')
@@ -69,19 +76,28 @@ def display_submission_widget(submission_info):
 
     def button_callback(submission_info):
         def on_button_clicked(b):
+            assert isinstance(submission_info, (dict))
             filename = str(filename_widget.value) if filename_widget.value else submission_info['filename']
+            edx_token = str(edx_token_widget.value)
+            submission_info['filename'] = filename
+            submission_info['edx_token'] = edx_token
             clear_output()
             print("Downloading %(filename)s to your Jupyter user space ..." % {'filename': filename})
             submission_info['clients_storage'].download_file(
                 path.join(submission_info['collab_path'], filename), 
-                submission_info['filename']
+                filename
             )
             print("Download completed.")
             submission_button.close()
             filename_widget.close()
             time.sleep(3)
             clear_output()
-            sm = SubmissionManager(submission_info)
+            sm = None
+            try:
+              sm = SubmissionManager(submission_info, environment)
+            except Exception as e:
+              logger.error(e)
+              return 'Submission early failure: submission_info may be incorrect or incomplete'
             sm.submit()
         return on_button_clicked
         

@@ -38,7 +38,7 @@ class Config(dict):
     parameters are defined.
     """
 
-    def __init__(self):
+    def __init__(self, environment):
         """
         Load and validate the configuration file. Update all proxy service parameters to use
         the given environment.
@@ -66,6 +66,10 @@ class Config(dict):
 
             self.update(conf)
 
+        if environment in ['local', 'dev', 'staging']:
+            self.update({'environment': environment })
+        elif environment is not None:
+          raise ValueError('[config] Invalid argument: environment should be local, dev or staging')
 
         # validate required sections of the config, except if any values are missing
         self.__validate('oidc', ['user'])
