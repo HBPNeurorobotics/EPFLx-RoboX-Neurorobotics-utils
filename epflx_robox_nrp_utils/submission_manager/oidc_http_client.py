@@ -22,13 +22,13 @@ class OIDCHTTPClient(HTTPClient):
             self.__oidc_client = BBPOIDCClient.bearer_auth(oauth_url=None, token=token)
         self.__headers = None
 
-    def get(self, url):
+    def get(self, url, params):
         """
         :param url: The url to do a request on
         :return: the status of the get request and the content
         :rtype: integer, string
         """
-        response, content = self.__oidc_client.request(url, headers=self.__headers)
+        response, content = self.__oidc_client.request(url, params=params, headers=self.__headers)
         return int(response['status']), content
 
     def post(self, url, body):
