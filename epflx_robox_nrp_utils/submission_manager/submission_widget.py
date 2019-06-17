@@ -61,7 +61,7 @@ def display_submission_widget(submission_info, environment=None):
         layout=widgets.Layout(width='50%')
     )
     edx_token_widget = widgets.Text(
-        description='token', 
+        description='edX token', 
         placeholder='Paste your token copied from edX',
         layout=widgets.Layout(width='50%')
     )
@@ -94,11 +94,20 @@ def display_submission_widget(submission_info, environment=None):
             clear_output()
             sm = None
             try:
+              print('submitting')
               sm = SubmissionManager(submission_info, environment)
             except Exception as e:
+              print('excpt error')
+              print(e)
               logger.error(e)
-              return 'Submission early failure: submission_info may be incorrect or incomplete'
-            sm.submit()
+              logger.error('Submission early failure: submission_info may be incorrect or incomplete')
+              return
+            
+            try:
+              sm.submit()
+            except Exception as e:
+                print('submit error')
+                print(e)
         return on_button_clicked
         
 
