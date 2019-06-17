@@ -82,32 +82,29 @@ def display_submission_widget(submission_info, environment=None):
             submission_info['filename'] = filename
             submission_info['edx_token'] = edx_token
             clear_output()
-            print("Downloading %(filename)s to your Jupyter user space ..." % {'filename': filename})
+            logger.info("Downloading %(filename)s to your Jupyter user space ..." % {'filename': filename})
             submission_info['clients_storage'].download_file(
                 path.join(submission_info['collab_path'], filename), 
                 filename
             )
-            print("Download completed.")
+            logger.info("Download completed.")
             submission_button.close()
             filename_widget.close()
             time.sleep(3)
             clear_output()
             sm = None
             try:
-              print('submitting')
               sm = SubmissionManager(submission_info, environment)
             except Exception as e:
-              print('excpt error')
-              print(e)
-              logger.error(e)
               logger.error('Submission early failure: submission_info may be incorrect or incomplete')
+              logger.error(e)
               return
             
             try:
               sm.submit()
             except Exception as e:
-                print('submit error')
-                print(e)
+              logger.error('Submission failure. Check the content of the error message.')
+              logger.error(e)
         return on_button_clicked
         
 

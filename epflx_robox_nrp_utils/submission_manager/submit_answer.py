@@ -132,8 +132,6 @@ class SubmissionManager(object):
         try:
           status_code, content = self.__http_client.get(url, params={'token': edx_token})
         except HTTPError as e:
-            print('http error')
-            print(e)
             raise RequestException(e)
 
         if status_code != 200:
@@ -199,8 +197,6 @@ class SubmissionManager(object):
             )
             raise e
         except Exception as e:
-            print('user code grading error')
-            print(e)
             logger.error('Python error when executing %(filename)s' % {'filename': self.__submission_info['filename']})
             logger.error('Submission failed because of an error raised by your code.'
                 'Please test and fix your code before your next submission.'
@@ -210,17 +206,14 @@ class SubmissionManager(object):
         # submit answer to database
         body = self.create_submission_form()
         url = self.__config['grading-server'][self.__environment] + '/submission'
-        print('posting the answer')
-        status_code, content = self.__http_client.post(url, body=body)
-        print('answer posted')
-        if status_code != 200:
-            print('submission error')
-            raise RequestException('Submission failed, Status Code: %s' % status_code)
+        try:
+            status_code, content = self.__http_client.post(url, body=body)
+        except HTTPError as e:
+            raise RequestException(e)
         else:
             logger.info('Your solution has been submitted.')
 
     def create_submission_form(self):
-        print('creating form')
         with open(self.__submission_info['filename'], 'r') as submitted_file:
             file_str = submitted_file.read()
         submission_form = {
@@ -229,11 +222,10 @@ class SubmissionManager(object):
                 'subheader': self.__submission_info['subheader']
             },
             'fileName': self.__submission_info['filename'],
-            'fileContent': file_str
+            'fileContent': file_str,
+            'token': self.__submission_info['edx_token']
         }
-        print('file attached')
         submission_form['answer'] = dict()
         for i in range(0, 3):
             submission_form['answer'][str(i + 1)] = self.__score[i]
-        print('form created')
         return submission_form
