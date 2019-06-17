@@ -190,6 +190,8 @@ class SubmissionManager(object):
         try:
             self.grade()
         except TimeoutException as e:
+            print('timeout grading error')
+            print(e)
             logger.error('Submission Timeout: the time to execute %(filename)s exceeds %(timeout)d minutes' % 
                 { 'filename': self.__submission_info['filename'], 'timeout': self.__timeout / 60 }
             )
@@ -204,9 +206,10 @@ class SubmissionManager(object):
         # submit answer to database
         body = self.create_submission_form()
         url = self.__config['grading-server'][self.__environment] + '/submission'
-        status_code, content = self.__http_client.post(url, body=body)
-        if status_code != 200:
-            raise RequestException('Submission failed, Status Code: %s' % status_code)
+        try:
+            status_code, content = self.__http_client.post(url, body=body)
+        except HTTPError as e:
+            raise RequestException(e)
         else:
             logger.info('Your solution has been submitted.')
 
@@ -219,7 +222,8 @@ class SubmissionManager(object):
                 'subheader': self.__submission_info['subheader']
             },
             'fileName': self.__submission_info['filename'],
-            'fileContent': file_str
+            'fileContent': file_str,
+            'token': self.__submission_info['edx_token']
         }
         submission_form['answer'] = dict()
         for i in range(0, 3):
