@@ -137,12 +137,15 @@ class SubmissionManager(object):
         if status_code != 200:
             raise EdxTokenException('Token verification failed: %s' % status_code)
         else:
-            content_obj = json.loads(content)
-            if (content_obj['custom_header'] == self.__submission_info['header']) and \
-                (content_obj['custom_subheader'] == self.__submission_info['subheader']):
-                logger.info('edX token verification succesfully completed.')
-            else:
-                raise EdxTokenException('Your edX token is not valid for this exercise')
+            try:
+              content_obj = json.loads(content)['request']['body']
+              if (content_obj['custom_header'] == self.__submission_info['header']) and \
+                  (content_obj['custom_subheader'] == self.__submission_info['subheader']):
+                  logger.info('edX token verification succesfully completed.')
+              else:
+                  raise EdxTokenException('Your edX token is not valid for this exercise')
+            except AttributeError as e:
+                raise  EdxTokenException('Token verification failed: %s' % repr(e))
 
     def __init__(self, submission_info, environment=None):
         # Parse and load the config file before any OIDC actions
