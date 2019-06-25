@@ -43,7 +43,7 @@ print(setuptools.find_packages())
 
 setuptools.setup(
     name="epflx_robox_nrp_utils",
-    version="0.0.3",
+    version="0.0.4",
     author="Ihor Kuras",
     author_email="ihor.kuras@epfl.ch",
     description="Functions and classes for SOM and SARSA algorithms (EPFLx-Robox-Neurorobotics)",
