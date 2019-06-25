@@ -138,13 +138,13 @@ class SubmissionManager(object):
             raise EdxTokenException('Token verification failed: %s' % status_code)
         else:
             try:
-              content_obj = json.loads(content)['request']['body']
+              content_obj = json.loads(content)
               if (content_obj['custom_header'] == self.__submission_info['header']) and \
                   (content_obj['custom_subheader'] == self.__submission_info['subheader']):
                   logger.info('edX token verification succesfully completed.')
               else:
                   raise EdxTokenException('Your edX token is not valid for this exercise')
-            except AttributeError as e:
+            except KeyError as e:
                 raise  EdxTokenException('Token verification failed: %s' % repr(e))
 
     def __init__(self, submission_info, environment=None):
