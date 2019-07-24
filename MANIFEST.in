@@ -1,0 +1,8 @@
+include epflx_robox_nrp_utils/README.md
+include epflx_robox_nrp_utils/submission_manager/config.json
+include epflx_robox_nrp_utils/graduation/SOM_test1_lattice.csv
+include epflx_robox_nrp_utils/graduation/SOM_test2_lattice.csv
+include epflx_robox_nrp_utils/graduation/SOM_test3_lattice.csv
+include epflx_robox_nrp_utils/graduation/NRP_test1_robot_position.csv
+include epflx_robox_nrp_utils/graduation/NRP_test2_robot_position.csv
+include epflx_robox_nrp_utils/graduation/NRP_test3_robot_position.csv

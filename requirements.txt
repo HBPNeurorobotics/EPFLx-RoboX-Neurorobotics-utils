@@ -1,0 +1,10 @@
+IPython
+ipywidgets
+matplotlib
+numpy
+seaborn
+six
+pandas
+requests
+wheel
+pyarmor
